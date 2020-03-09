@@ -10,7 +10,7 @@
 
     <!--Description-->
     
-        <meta name="description" content="自由软件
+        <meta name="description" content="Chapter 1自由软件
 使用的自由
 研究的自由
 散布的自由
@@ -26,7 +26,7 @@ Linux 操作系统特点
 安全性高
 良好的可移植性
 
-开发语言  C C++ Java Python Assembly Kylix Fortran PHP">
+开发语言  C C++ Java Python Assembly Kylix Fortran">
     
 
     <!--Author-->
@@ -167,13 +167,13 @@ Linux 操作系统特点
 
     <div class="post-header">
         <h1 class="title">
-            <a href="/2020/03/04/linux/">
+            <a href="/2020/03/10/linux/">
                 linux
             </a>
         </h1>
         <div class="post-info">
             
-                <span class="date">2020-03-04</span>
+                <span class="date">2020-03-10</span>
             
             
             
@@ -186,13 +186,13 @@ Linux 操作系统特点
         
 
         <!-- Post Content -->
-        <h1 id="自由软件"><a href="#自由软件" class="headerlink" title="自由软件"></a>自由软件</h1><ul>
+        <h1 id="Chapter-1"><a href="#Chapter-1" class="headerlink" title="Chapter 1"></a>Chapter 1</h1><h2 id="自由软件"><a href="#自由软件" class="headerlink" title="自由软件"></a>自由软件</h2><ul>
 <li>使用的自由</li>
 <li>研究的自由</li>
 <li>散布的自由</li>
 <li>改良的自由</li>
 </ul>
-<h1 id="Linux-操作系统特点"><a href="#Linux-操作系统特点" class="headerlink" title="Linux 操作系统特点"></a>Linux 操作系统特点</h1><ul>
+<h2 id="Linux-操作系统特点"><a href="#Linux-操作系统特点" class="headerlink" title="Linux 操作系统特点"></a>Linux 操作系统特点</h2><ul>
 <li>开放性</li>
 <li>高效性</li>
 <li>多用户多任务</li>
@@ -202,7 +202,70 @@ Linux 操作系统特点
 <li>安全性高</li>
 <li>良好的可移植性</li>
 </ul>
-<h2 id="开发语言"><a href="#开发语言" class="headerlink" title="开发语言"></a>开发语言</h2><p>  C C++ Java Python Assembly Kylix Fortran PHP</p>
+<h3 id="开发语言"><a href="#开发语言" class="headerlink" title="开发语言"></a>开发语言</h3><p>  C C++ Java Python Assembly Kylix Fortran PHP</p>
+<h1 id="Chapter-2"><a href="#Chapter-2" class="headerlink" title="Chapter 2"></a>Chapter 2</h1><h1 id="Chapter-3-Linux操作基础"><a href="#Chapter-3-Linux操作基础" class="headerlink" title="Chapter 3 Linux操作基础"></a>Chapter 3 Linux操作基础</h1><h2 id="Shell与OS的关系"><a href="#Shell与OS的关系" class="headerlink" title="Shell与OS的关系"></a>Shell与OS的关系</h2><ul>
+<li>Shell为OS的外壳，为用户提供使用OS的接口。</li>
+<li>Shell的功能<ol>
+<li>命令解释器</li>
+<li>高级程序语言</li>
+</ol>
+</li>
+</ul>
+<h2 id="Linux的shell（Terminal）：Bash"><a href="#Linux的shell（Terminal）：Bash" class="headerlink" title="Linux的shell（Terminal）：Bash"></a>Linux的shell（Terminal）：Bash</h2><ul>
+<li>用户<ul>
+<li>[fuxc@local]$ 普通用户<br>   ↓</li>
+<li>su root<br>   ↓</li>
+<li>[root@local]#  超级用户</li>
+</ul>
+</li>
+</ul>
+<h2 id="Bash命令"><a href="#Bash命令" class="headerlink" title="Bash命令"></a>Bash命令</h2><ul>
+<li>一般格式：<strong>命令名 [选项] [参数1] [参数2] …</strong></li>
+<li>注意事项<ol>
+<li>命令名必须是小写的英文字母。</li>
+<li>一般格式中由方括号括起来的部分是可选的。</li>
+<li>选项以“-”开始，多个选项可用“-”连起来。</li>
+<li>命令行的参数提供命令运行的信息或者命令执行过程中所使用的文件名。</li>
+<li>命令在正常执行后返回一个0值，表示执行成功。</li>
+<li>Linux操作系统的联机帮助对每个命令的准确语法都做了说明。</li>
+</ol>
+</li>
+<li>部分命令<ol>
+<li>pwd(print working diretory):显示工作路径。</li>
+<li>date：显示日期。</li>
+<li>who：显示登录到系统的 <strong>所有</strong> 用户名，终端名称及时间。</li>
+<li>cal（calendar）：显示日历。</li>
+<li>uname:显示OS信息。</li>
+<li>wc（word count）：统计行，字，字符数。</li>
+<li>clear：清屏。</li>
+<li>man(manual):帮助命令。</li>
+<li>ls:显示当前目录的所有文件。</li>
+</ol>
+</li>
+</ul>
+<h2 id="Bash进阶"><a href="#Bash进阶" class="headerlink" title="Bash进阶"></a>Bash进阶</h2><ul>
+<li>命令补全：Tab</li>
+<li>历史命令：↑↓</li>
+<li>重定向：<ol>
+<li><blockquote>
+<p>　　直接输出</p>
+</blockquote>
+</li>
+<li><blockquote>
+<blockquote>
+<p>　附加输出</p>
+</blockquote>
+</blockquote>
+</li>
+<li>2&gt;　出错（将错误信息）输出</li>
+<li>&lt;　　输入</li>
+</ol>
+</li>
+<li>管道：<strong>i1|i2|i3</strong>(i为命令)<ul>
+<li>i1&gt;i2&gt;i3</li>
+</ul>
+</li>
+</ul>
 
     </div>
 
@@ -240,7 +303,7 @@ Linux 操作系统特点
         <ul>
             
             <li>
-                <a class="footer-post" href="/2020/03/04/linux/">linux</a>
+                <a class="footer-post" href="/2020/03/10/linux/">linux</a>
             </li>
             
         </ul>
