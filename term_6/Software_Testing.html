@@ -10,15 +10,27 @@
 
     <!--Description-->
     
-        <meta name="description" content="Welcome to Lozio’s GitBlog此博客已于2020年1月14日开始运营！
+        <meta name="description" content="Chapter 1软件可靠性
+定义：系统在特定的环境下，在给定的时间内无故障运行的概率。
 
-更换语言:JP ENG
+影响因素
 
-更新
-[2020/03/04]追加了「新学期」。
-[2020/02/03]增设了「一个改善家用Wi-Fi的方法」。
-[2020/02/04]「病毒应急战线 OTK」更新。
-[20">
+需求错误
+设计错误
+编码错误
+测试错误
+文档错误
+
+
+
+软件测试基本理论
+定义
+为了发现错误而执行程序的过程。
+
+
+测试用例
+为特定目的而设计的一组（多个） 测试输入、执行条件和预期的结果。
+为执">
     
 
     <!--Author-->
@@ -28,7 +40,7 @@
 
     <!--Open Graph Title-->
     
-        <meta property="og:title" content="CHS/Welcome"/>
+        <meta property="og:title" content="Software_Testing"/>
     
 
     <!--Open Graph Description-->
@@ -53,7 +65,7 @@
 
     <!-- Title -->
     
-    <title>CHS/Welcome - Lozio&#39;s GitBlog</title>
+    <title>Software_Testing - Lozio&#39;s GitBlog</title>
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css" integrity="sha384-y3tfxAZXuh4HwSYylfB+J125MxIs6mR5FOHamPBG064zB+AFeWH94NdvaCBm8qnd" crossorigin="anonymous">
@@ -102,7 +114,7 @@
             
             <li class="menu-item">
                 <a href="/archives">
-                    Recently Post
+                    Archives
                 </a>
             </li>
             
@@ -159,13 +171,13 @@
 
     <div class="post-header">
         <h1 class="title">
-            <a href="/2020/03/10/CHS/Welcome/">
-                CHS/Welcome
+            <a href="/2020/03/12/Software_Testing/">
+                Software_Testing
             </a>
         </h1>
         <div class="post-info">
             
-                <span class="date">2020-03-10</span>
+                <span class="date">2020-03-12</span>
             
             
             
@@ -178,37 +190,64 @@
         
 
         <!-- Post Content -->
-        <h1 id="Welcome-to-Lozio’s-GitBlog"><a href="#Welcome-to-Lozio’s-GitBlog" class="headerlink" title="Welcome to Lozio’s GitBlog"></a>Welcome to Lozio’s GitBlog</h1><p>此博客已于2020年1月14日<strong>开始运营</strong>！</p>
-        <p>本学期的课程笔记将会陆续登载，登载时间视4班课程和个人心情而定 = =|||</p>
-<ul>
-<li>更换语言:<a href="../JP/Welcome.html">JP</a> <a href="../ENG/Welcome.html">ENG</a></li>
+        <h1 id="Chapter-1"><a href="#Chapter-1" class="headerlink" title="Chapter 1"></a>Chapter 1</h1><h2 id="软件可靠性"><a href="#软件可靠性" class="headerlink" title="软件可靠性"></a>软件可靠性</h2><ul>
+<li><p>定义：系统在<strong>特定的环境</strong>下，在<strong>给定的时间</strong>内<strong>无故障运行的概率</strong>。</p>
+</li>
+<li><p>影响因素</p>
+<ol>
+<li>需求错误</li>
+<li>设计错误</li>
+<li>编码错误</li>
+<li>测试错误</li>
+<li>文档错误</li>
+</ol>
+</li>
 </ul>
-<h1 id="更新"><a href="#更新" class="headerlink" title="更新"></a>更新</h1><ul>
-<li>[2020/03/04]追加了「新学期」。</li>
-<li>[2020/02/03]增设了「一个改善家用Wi-Fi的方法」。</li>
-<li>[2020/02/04]「病毒应急战线 OTK」更新。</li>
-<li>[2020/02/04~07]博客进行了<a href="update/20200207.html">大型更新</a>。</li>
+<h2 id="软件测试基本理论"><a href="#软件测试基本理论" class="headerlink" title="软件测试基本理论"></a>软件测试基本理论</h2><ul>
+<li>定义<ul>
+<li>为了发现错误而执行程序的过程。</li>
 </ul>
-<h1 id="Event-in-寒假-2020"><a href="#Event-in-寒假-2020" class="headerlink" title="Event in 寒假 ~2020"></a>Event in 寒假 <strong>~2020</strong></h1><ul>
-<li><input checked="" disabled="" type="checkbox"> 01/14:开始运营该GitBlog</li>
-<li><input checked="" disabled="" type="checkbox"> 01/17:<a href="../casual/0117C.html">试卷家一日游</a></li>
-<li><input checked="" disabled="" type="checkbox"> 01/25:<del>春节</del><a href="../news/nCoV.html">病毒应急战线 OTK</a></li>
-<li><input checked="" disabled="" type="checkbox"> 02/01:EDIO生日</li>
-<li><input checked="" disabled="" type="checkbox"> 02/04:<a href="../Happy-Birthday.html">生日</a></li>
-<li><input checked="" disabled="" type="checkbox"> 03/09:新学期</li>
+</li>
+<li>测试用例<ol>
+<li>为特定目的而设计的<strong>一组</strong>（多个） <strong>测试输入</strong>、<strong>执行条件</strong>和<strong>预期的结果</strong>。</li>
+<li>为执行测试的最小实体。</li>
+</ol>
+</li>
+<li>对象<ol>
+<li>需求规格说明</li>
+<li>概要设计规格说明</li>
+<li>详细设计规格说明</li>
+<li>源程序</li>
+</ol>
+</li>
+<li>目标<ul>
+<li>最大可能地找出最多的错误。</li>
+<li>不能证明程序的正确性。</li>
 </ul>
-<h1 id="新学期-2020"><a href="#新学期-2020" class="headerlink" title="新学期 ~2020"></a>新学期 ~2020</h1><ul>
-<li><a href="../term_6/linux.html">LINUX操作系统</a></li>
-<li><a href="../term_6/Software-Engineering.html">软件工程</a></li>
-<li><a href="../term_6/Software_Testing.html">软件测试</a></li>
-<li><a href="../term_6/Andoroid.html">Android移动开发</a></li>
-<li><a href="../term_6/Multimedia.html">计算机多媒体技术</a></li>
-<li><a href="../term_6/AI.html">人工智能导论</a></li>
-<li><a href="../term_6/Embedded_System.html">嵌入式系统原理</a></li>
+</li>
+<li>分类<ul>
+<li>测试用例的测试方法<ol>
+<li>黑盒测试（使用侧角度）</li>
+<li>白盒测试（开发侧角度）</li>
+</ol>
+</li>
+<li>测试策略和过程<ol>
+<li>单元测试</li>
+<li>集成测试</li>
+<li>系统测试</li>
+<li>验证测试</li>
+</ol>
+</li>
 </ul>
-<h1 id="总之先放点东西以后可能有用"><a href="#总之先放点东西以后可能有用" class="headerlink" title="总之先放点东西以后可能有用"></a>总之先放点东西以后可能有用</h1><ul>
-<li><a href="../learning.html">日语学习笔记</a></li>
-<li><a href="../casual/0203C.html">一个改善家用Wi-Fi的方法</a></li>
+</li>
+<li>停止测试依据<ol>
+<li>超过了预定时间。</li>
+<li>执行了所有测试用例，并无发现错误。</li>
+<li>使用特殊测试用例判断测试停止。</li>
+<li>正面指出停止测试具体要求。</li>
+<li>单位时间内检查出故障的数量。</li>
+</ol>
+</li>
 </ul>
 
     </div>
@@ -247,7 +286,7 @@
         <ul>
             
             <li>
-                <a class="footer-post" href="/2020/03/10/CHS/Welcome/">CHS/Welcome</a>
+                <a class="footer-post" href="/2020/03/12/Software_Testing/">Software_Testing</a>
             </li>
             
         </ul>
