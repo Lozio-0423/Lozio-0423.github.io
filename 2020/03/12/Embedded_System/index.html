@@ -10,23 +10,25 @@
 
     <!--Description-->
     
-        <meta name="description" content="Chapter 1自由软件
-使用的自由
-研究的自由
-散布的自由
-改良的自由
+        <meta name="description" content="Chapter1嵌入式系统
+定义  
+以应用为中心，以计算机技术为基础，软件，硬件可裁剪，功能、可靠性、成本、体积、功耗严格要求的专用计算机系统。  
 
-Linux 操作系统特点
-开放性
-高效性
-多用户多任务
-良好的用户界面
-设备的独立性
-丰富的网络功能
-安全性高
-良好的可移植性
+发展趋势
 
-开发语言  C C++ Java Python Assembly Kylix Fortran">
+小型化
+可靠性
+稳定性
+高速度
+实时性
+智能性
+实用性
+
+
+
+嵌入式处理器
+嵌入式微控制器（MCU）：应用于单片机。
+嵌入式数字信号处">
     
 
     <!--Author-->
@@ -36,7 +38,7 @@ Linux 操作系统特点
 
     <!--Open Graph Title-->
     
-        <meta property="og:title" content="linux"/>
+        <meta property="og:title" content="Embedded_System"/>
     
 
     <!--Open Graph Description-->
@@ -61,7 +63,7 @@ Linux 操作系统特点
 
     <!-- Title -->
     
-    <title>linux - Lozio&#39;s GitBlog</title>
+    <title>Embedded_System - Lozio&#39;s GitBlog</title>
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css" integrity="sha384-y3tfxAZXuh4HwSYylfB+J125MxIs6mR5FOHamPBG064zB+AFeWH94NdvaCBm8qnd" crossorigin="anonymous">
@@ -167,13 +169,13 @@ Linux 操作系统特点
 
     <div class="post-header">
         <h1 class="title">
-            <a href="/2020/03/10/linux/">
-                linux
+            <a href="/2020/03/12/Embedded_System/">
+                Embedded_System
             </a>
         </h1>
         <div class="post-info">
             
-                <span class="date">2020-03-10</span>
+                <span class="date">2020-03-12</span>
             
             
             
@@ -186,81 +188,43 @@ Linux 操作系统特点
         
 
         <!-- Post Content -->
-        <h1 id="Chapter-1"><a href="#Chapter-1" class="headerlink" title="Chapter 1"></a>Chapter 1</h1><h2 id="自由软件"><a href="#自由软件" class="headerlink" title="自由软件"></a>自由软件</h2><ul>
-<li>使用的自由</li>
-<li>研究的自由</li>
-<li>散布的自由</li>
-<li>改良的自由</li>
-</ul>
-<h2 id="Linux-操作系统特点"><a href="#Linux-操作系统特点" class="headerlink" title="Linux 操作系统特点"></a>Linux 操作系统特点</h2><ul>
-<li>开放性</li>
-<li>高效性</li>
-<li>多用户多任务</li>
-<li>良好的用户界面</li>
-<li>设备的独立性</li>
-<li>丰富的网络功能</li>
-<li>安全性高</li>
-<li>良好的可移植性</li>
-</ul>
-<h3 id="开发语言"><a href="#开发语言" class="headerlink" title="开发语言"></a>开发语言</h3><p>  C C++ Java Python Assembly Kylix Fortran PHP</p>
-<h1 id="Chapter-2"><a href="#Chapter-2" class="headerlink" title="Chapter 2"></a>Chapter 2</h1><h1 id="Chapter-3-Linux操作基础"><a href="#Chapter-3-Linux操作基础" class="headerlink" title="Chapter 3 Linux操作基础"></a>Chapter 3 Linux操作基础</h1><h2 id="Shell与OS的关系"><a href="#Shell与OS的关系" class="headerlink" title="Shell与OS的关系"></a>Shell与OS的关系</h2><ul>
-<li>Shell为OS的外壳，为用户提供使用OS的接口。</li>
-<li>Shell的功能<ol>
-<li>命令解释器</li>
-<li>高级程序语言</li>
-</ol>
+        <h1 id="Chapter1"><a href="#Chapter1" class="headerlink" title="Chapter1"></a>Chapter1</h1><h2 id="嵌入式系统"><a href="#嵌入式系统" class="headerlink" title="嵌入式系统"></a>嵌入式系统</h2><ul>
+<li><p>定义  </p>
+<p>以应用为中心，以计算机技术为基础，软件，硬件可裁剪，功能、可靠性、成本、体积、功耗严格要求的专用计算机系统。  </p>
 </li>
-</ul>
-<h2 id="Linux的shell（Terminal）：Bash"><a href="#Linux的shell（Terminal）：Bash" class="headerlink" title="Linux的shell（Terminal）：Bash"></a>Linux的shell（Terminal）：Bash</h2><ul>
-<li>用户<ul>
-<li>[fuxc@local]$ 普通用户<br>   ↓</li>
-<li>su root<br>   ↓</li>
-<li>[root@local]#  超级用户</li>
-</ul>
-</li>
-</ul>
-<h2 id="Bash命令"><a href="#Bash命令" class="headerlink" title="Bash命令"></a>Bash命令</h2><ul>
-<li>一般格式：<strong>命令名 [选项] [参数1] [参数2] …</strong></li>
-<li>注意事项<ol>
-<li>命令名必须是小写的英文字母。</li>
-<li>一般格式中由方括号括起来的部分是可选的。</li>
-<li>选项以“-”开始，多个选项可用“-”连起来。</li>
-<li>命令行的参数提供命令运行的信息或者命令执行过程中所使用的文件名。</li>
-<li>命令在正常执行后返回一个0值，表示执行成功。</li>
-<li>Linux操作系统的联机帮助对每个命令的准确语法都做了说明。</li>
-</ol>
-</li>
-<li>部分命令<ol>
-<li>pwd(print working diretory):显示工作路径。</li>
-<li>date：显示日期。</li>
-<li>who：显示登录到系统的 <strong>所有</strong> 用户名，终端名称及时间。</li>
-<li>cal（calendar）：显示日历。</li>
-<li>uname:显示OS信息。</li>
-<li>wc（word count）：统计行，字，字符数。</li>
-<li>clear：清屏。</li>
-<li>man(manual):帮助命令。</li>
-<li>ls:显示当前目录的所有文件。</li>
-</ol>
-</li>
-</ul>
-<h2 id="Bash进阶"><a href="#Bash进阶" class="headerlink" title="Bash进阶"></a>Bash进阶</h2><ul>
-<li><p>命令补全：Tab</p>
-</li>
-<li><p>历史命令：↑↓</p>
-</li>
-<li><p>重定向：</p>
+<li><p>发展趋势</p>
 <ol>
-<li>“&gt;”　　直接输出</li>
-<li>“&gt;&gt;”　附加输出</li>
-<li>“2&gt;”　出错（将错误信息）输出</li>
-<li>“&lt;”　　输入</li>
+<li>小型化</li>
+<li>可靠性</li>
+<li>稳定性</li>
+<li>高速度</li>
+<li>实时性</li>
+<li>智能性</li>
+<li>实用性</li>
 </ol>
 </li>
-<li><p>管道：<strong>i1|i2|i3</strong>(i为命令)</p>
-<ul>
-<li>i1&gt;i2&gt;i3</li>
+</ul>
+<h2 id="嵌入式处理器"><a href="#嵌入式处理器" class="headerlink" title="嵌入式处理器"></a>嵌入式处理器</h2><ul>
+<li>嵌入式微控制器（MCU）：应用于单片机。</li>
+<li>嵌入式数字信号处理器（DSP）：应用于信号处理，通信，军事……</li>
+<li>嵌入式微处理器（MPU）：由CPU演变而来。</li>
+<li>嵌入式片上系统（System ON Chip，SOC）：All in one （chip）.应用于ZipBee网络。</li>
+</ul>
+<h2 id="存储体系和存储层次"><a href="#存储体系和存储层次" class="headerlink" title="存储体系和存储层次"></a>存储体系和存储层次</h2><ul>
+<li>体系结构<ol>
+<li>冯·诺依曼结构</li>
+<li>哈佛结构</li>
+</ol>
+</li>
+<li>存储层次<ul>
+<li>金字塔型。</li>
 </ul>
 </li>
+</ul>
+<h2 id="采用技术"><a href="#采用技术" class="headerlink" title="采用技术"></a>采用技术</h2><ul>
+<li>RISC(精简指令系统计算机)</li>
+<li>流水线技术</li>
+<li>总线和总线桥</li>
 </ul>
 
     </div>
@@ -299,7 +263,19 @@ Linux 操作系统特点
         <ul>
             
             <li>
-                <a class="footer-post" href="/2020/03/10/linux/">linux</a>
+                <a class="footer-post" href="/2020/03/12/Embedded_System/">Embedded_System</a>
+            </li>
+            
+            <li>
+                <a class="footer-post" href="/2020/03/12/linux/">linux</a>
+            </li>
+            
+            <li>
+                <a class="footer-post" href="/2020/03/12/Software-Engineering/">Software-Engineering</a>
+            </li>
+            
+            <li>
+                <a class="footer-post" href="/2020/03/12/Multimedia/">Multimedia</a>
             </li>
             
         </ul>
