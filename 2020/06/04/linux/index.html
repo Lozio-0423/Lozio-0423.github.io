@@ -175,13 +175,13 @@ Fortran
 
     <div class="post-header">
         <h1 class="title">
-            <a href="/2020/03/16/linux/">
+            <a href="/2020/06/04/linux/">
                 linux
             </a>
         </h1>
         <div class="post-info">
             
-                <span class="date">2020-03-16</span>
+                <span class="date">2020-06-04</span>
             
             
             
@@ -265,6 +265,23 @@ Fortran
 <li>comm：对两个有序文件进行比较。</li>
 <li>diff：对两个文件文本文件，列出其不同之处。</li>
 <li>chmod {a,u,g,o}{+,-,=}{r,w,x} [filename]:修改文件权限。</li>
+<li>chgrp:更改文件或目录的组。</li>
+<li>chown：更改文件的所有者。</li>
+<li>ps：查询进程信息。</li>
+<li>gzip:解压操作<ul>
+<li>-d：解压</li>
+<li>-l:显示每个压缩文件详细信息</li>
+<li>-v:显示文件名和压缩比</li>
+<li>-r：陆续压缩目录内文件</li>
+</ul>
+</li>
+<li>chkconfig：开机自启服务设定</li>
+<li>wc（统计字数）<ul>
+<li>-c(字节数)</li>
+<li>-l(行数)</li>
+<li>-w(字数)</li>
+</ul>
+</li>
 </ol>
 </li>
 </ul>
@@ -300,7 +317,65 @@ Fortran
 <li>同组用户（group）</li>
 <li>其他用户（other）</li>
 </ul>
-<h3 id="m模式"><a href="#m模式" class="headerlink" title="m模式"></a>m模式</h3>
+<h3 id="m模式"><a href="#m模式" class="headerlink" title="m模式"></a>m模式</h3><h1 id="Chapter-5"><a href="#Chapter-5" class="headerlink" title="Chapter 5"></a>Chapter 5</h1><h2 id="用户"><a href="#用户" class="headerlink" title="用户"></a>用户</h2><ul>
+<li>用户文件：/etc/passwd</li>
+</ul>
+<h2 id="组"><a href="#组" class="headerlink" title="组"></a>组</h2><ul>
+<li>组文件：/etc/group</li>
+</ul>
+<h1 id="Chapter-6-VI编辑器"><a href="#Chapter-6-VI编辑器" class="headerlink" title="Chapter 6 VI编辑器"></a>Chapter 6 VI编辑器</h1><h1 id="Chapter-10"><a href="#Chapter-10" class="headerlink" title="Chapter 10"></a>Chapter 10</h1><h2 id="Linux运行级别"><a href="#Linux运行级别" class="headerlink" title="Linux运行级别"></a>Linux运行级别</h2><ul>
+<li>使用init命令转换状态</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Lv</th>
+<th>解释</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>0</td>
+<td>停机</td>
+</tr>
+<tr>
+<td>1</td>
+<td>单用户</td>
+</tr>
+<tr>
+<td>2</td>
+<td>多用户；不能使用NFS</td>
+</tr>
+<tr>
+<td>3</td>
+<td>完全多用户</td>
+</tr>
+<tr>
+<td>4</td>
+<td>（未分配）</td>
+</tr>
+<tr>
+<td>5</td>
+<td>图形登录的多用户</td>
+</tr>
+<tr>
+<td>6</td>
+<td>重启</td>
+</tr>
+</tbody></table>
+<h2 id="独立服务程序"><a href="#独立服务程序" class="headerlink" title="独立服务程序"></a>独立服务程序</h2><ul>
+<li>Snn（开始）</li>
+<li>Knn（结束）</li>
+</ul>
+<h1 id="Chapter-11"><a href="#Chapter-11" class="headerlink" title="Chapter 11"></a>Chapter 11</h1><h2 id="安装应用"><a href="#安装应用" class="headerlink" title="安装应用"></a>安装应用</h2><ul>
+<li>rpm -ivh（Red Hat专用）</li>
+<li>tar<ol>
+<li>解包解压缩</li>
+<li>配置，编译，安装</li>
+</ol>
+</li>
+<li>apt （Ubuntu可用）</li>
+</ul>
+
     </div>
 
     
@@ -337,7 +412,7 @@ Fortran
         <ul>
             
             <li>
-                <a class="footer-post" href="/2020/03/16/linux/">linux</a>
+                <a class="footer-post" href="/2020/06/04/linux/">linux</a>
             </li>
             
         </ul>
