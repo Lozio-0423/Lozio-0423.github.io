@@ -459,7 +459,13 @@ OS
 <h2 id="对象模型"><a href="#对象模型" class="headerlink" title="对象模型"></a>对象模型</h2><ul>
 <li>用例图<ul>
 <li>执行者</li>
-<li>用例与用例之间的关系（include/extend）</li>
+<li>用例与用例之间的关系(类间关系)<ol>
+<li>关联（实线黑心）</li>
+<li>泛化（实线空心）</li>
+<li>包含（虚线黑心+&lt;<include>&gt;）</li>
+<li>扩展（虚线黑心+&lt;<extend>&gt;）</li>
+</ol>
+</li>
 </ul>
 </li>
 <li>类图<ul>
@@ -469,15 +475,19 @@ OS
 </ul>
 </li>
 </ul>
-<h2 id="类间关系"><a href="#类间关系" class="headerlink" title="类间关系"></a>类间关系</h2><ol>
-<li>关联</li>
-<li>泛化</li>
-<li>依赖</li>
-</ol>
 <h1 id="Chapter-6-面向对象的设计"><a href="#Chapter-6-面向对象的设计" class="headerlink" title="Chapter 6 面向对象的设计"></a>Chapter 6 面向对象的设计</h1><ul>
 <li>强内聚</li>
 <li>弱耦合</li>
 <li>可重用</li>
+</ul>
+<h2 id="系统分解"><a href="#系统分解" class="headerlink" title="系统分解"></a>系统分解</h2><ul>
+<li>问题域子系统</li>
+<li>人机交互子系统</li>
+<li>任务管理子系统</li>
+<li>数据管理子系统</li>
+<li>类中的服务</li>
+<li>关联</li>
+<li>优化</li>
 </ul>
 <h1 id="Chapter-7-软件测试技术"><a href="#Chapter-7-软件测试技术" class="headerlink" title="Chapter 7 软件测试技术"></a>Chapter 7 <a href="Software_Testing.html">软件测试技术</a></h1>
     </div>
