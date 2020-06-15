@@ -248,7 +248,7 @@ CCITT对媒体的分类
 <li>颜色空间<ul>
 <li>RGB(红绿蓝)</li>
 <li>YUV(亮度、色差)</li>
-<li>HSI(色调、饱和度、强度)</li>
+<li>HSI(色调Hue、饱和度Saturation、强度Intensity)</li>
 </ul>
 </li>
 <li>帧速<ul>
@@ -280,7 +280,7 @@ CCITT对媒体的分类
 </ul>
 </li>
 </ul>
-<h1 id="Chapter-3-压缩技术"><a href="#Chapter-3-压缩技术" class="headerlink" title="Chapter 3 压缩技术"></a>Chapter 3 压缩技术</h1><h2 id="数据压缩编码的必要性和可能性"><a href="#数据压缩编码的必要性和可能性" class="headerlink" title="数据压缩编码的必要性和可能性"></a>数据压缩编码的必要性和可能性</h2><ul>
+<h1 id="Chapter-3-压缩技术"><a href="#Chapter-3-压缩技术" class="headerlink" title="Chapter 3 压缩技术"></a>Chapter 3 压缩技术</h1><h2 id="★数据压缩编码的必要性和可能性"><a href="#★数据压缩编码的必要性和可能性" class="headerlink" title="★数据压缩编码的必要性和可能性"></a>★数据压缩编码的必要性和可能性</h2><ul>
 <li>必要性<ol>
 <li>多媒体数据包括文本，声音，动画，图形，图像以及视频（编码必要性）；</li>
 <li>多媒体数字化后的海量性；</li>
@@ -300,6 +300,9 @@ CCITT对媒体的分类
 </li>
 </ul>
 </li>
+</ul>
+<h2 id="信息熵"><a href="#信息熵" class="headerlink" title="信息熵"></a>信息熵</h2><ul>
+<li>H(U) = E[-㏒<em>p[i]<em>] = -∑</em>p[i]<em>㏒</em>p[i]</em></li>
 </ul>
 <h2 id="压缩方法和分类"><a href="#压缩方法和分类" class="headerlink" title="压缩方法和分类"></a>压缩方法和分类</h2><ul>
 <li>解压后是否与原始数据一致<ul>
@@ -324,9 +327,9 @@ CCITT对媒体的分类
 </ol>
 </li>
 <li>消零编码</li>
-<li>行程编码</li>
 <li>统计编码<ul>
 <li>Huffman编码</li>
+<li>行程编码</li>
 </ul>
 </li>
 </ul>
@@ -335,7 +338,7 @@ CCITT对媒体的分类
 <li>变换编码</li>
 <li>向量量化</li>
 </ul>
-<h2 id="压缩性能和指标"><a href="#压缩性能和指标" class="headerlink" title="压缩性能和指标"></a>压缩性能和指标</h2><ul>
+<h2 id="★压缩性能和指标"><a href="#★压缩性能和指标" class="headerlink" title="★压缩性能和指标"></a>★压缩性能和指标</h2><ul>
 <li>关键参数<ul>
 <li>压缩比(压缩性能)<ul>
 <li>输入：输出</li>
@@ -346,10 +349,132 @@ CCITT对媒体的分类
 </ul>
 </li>
 </ul>
-<h2 id="预测编码-对实际值和预测值的差进行编码"><a href="#预测编码-对实际值和预测值的差进行编码" class="headerlink" title="预测编码(对实际值和预测值的差进行编码)"></a>预测编码(对实际值和预测值的<em>差</em>进行编码)</h2><ul>
+<h2 id="★预测编码-对实际值和预测值的差进行编码"><a href="#★预测编码-对实际值和预测值的差进行编码" class="headerlink" title="★预测编码(对实际值和预测值的差进行编码)"></a>★预测编码(对实际值和预测值的<em>差</em>进行编码)</h2><ul>
 <li><strong>D</strong>PCM(<strong>差分</strong>脉码调制)</li>
 <li><strong>A</strong>DPCM(<strong>自适应</strong>差分脉码调制)</li>
+<li>DCT编码(离散余弦变换)</li>
 </ul>
+<h2 id="★统计编码"><a href="#★统计编码" class="headerlink" title="★统计编码"></a>★统计编码</h2><h6 id="行程编码"><a href="#行程编码" class="headerlink" title="行程编码"></a>行程编码</h6><ul>
+<li>方法<ul>
+<li>检测重复的比特或字符序列，并用它们的出现次数取而代之。</li>
+</ul>
+</li>
+</ul>
+<h6 id="Huffman编码"><a href="#Huffman编码" class="headerlink" title="Huffman编码"></a>Huffman编码</h6><ul>
+<li>方法<ol>
+<li>对给定的数据流，计算其每个字节的出现频率；</li>
+<li>根据频率表，运用哈夫曼算法可确定分配各字符的最小位数，给出一个最优的编码；</li>
+<li>代码字存入代码表中。</li>
+</ol>
+</li>
+</ul>
+<h6 id="小波变换编码"><a href="#小波变换编码" class="headerlink" title="小波变换编码"></a>小波变换编码</h6><ul>
+<li>方法<ul>
+<li>通过平移和伸缩等运算，实现空间（时间）和频率的局部变换，因此能有效地提取信息。</li>
+</ul>
+</li>
+</ul>
+<h2 id="音频压缩"><a href="#音频压缩" class="headerlink" title="音频压缩"></a>音频压缩</h2><ul>
+<li>不同音频的带宽<ul>
+<li>电话：200Hz-3.4kHz</li>
+<li>调幅广播：50Hz-7kHz</li>
+<li>调频广播：20Hz-15kHz</li>
+<li>宽带音响：20Hz-20kHz</li>
+</ul>
+</li>
+</ul>
+<h6 id="ITU-TS建议标准"><a href="#ITU-TS建议标准" class="headerlink" title="ITU-TS建议标准"></a>ITU-TS建议标准</h6><table>
+<thead>
+<tr>
+<th>标准</th>
+<th>编码</th>
+<th>采样频率</th>
+<th>量化位数</th>
+<th>kbps</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>G.711</td>
+<td>PCM</td>
+<td>8kHz</td>
+<td>8</td>
+<td>64</td>
+</tr>
+<tr>
+<td>G.721</td>
+<td>ADPCM</td>
+<td>8kHz</td>
+<td>8</td>
+<td>32</td>
+</tr>
+<tr>
+<td>G.723(有损)</td>
+<td>ADPCM</td>
+<td>8kHz</td>
+<td>8</td>
+<td>24</td>
+</tr>
+<tr>
+<td>G.728(有损，低延迟)</td>
+<td>向量量化</td>
+<td>3.4kHz</td>
+<td>8</td>
+<td>16</td>
+</tr>
+<tr>
+<td>CELP(语音压缩)</td>
+<td>LPC-10E(线性预测编码)</td>
+<td>—</td>
+<td>—</td>
+<td>4.8</td>
+</tr>
+<tr>
+<td>MPEG</td>
+<td>变换编码，子带编码</td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+</tr>
+</tbody></table>
+<h2 id="图片压缩"><a href="#图片压缩" class="headerlink" title="图片压缩"></a>图片压缩</h2><ul>
+<li>标准：JPEG</li>
+</ul>
+<h2 id="视频压缩"><a href="#视频压缩" class="headerlink" title="视频压缩"></a>视频压缩</h2><ul>
+<li>标准<ul>
+<li>MPEG</li>
+<li>H系列</li>
+<li>运动JPEG</li>
+</ul>
+</li>
+<li>主要的数据冗余<ul>
+<li>时间冗余</li>
+<li>空间冗余</li>
+</ul>
+</li>
+<li>压缩方法<ul>
+<li>帧间压缩</li>
+<li>帧内压缩</li>
+</ul>
+</li>
+</ul>
+<h1 id="Chapter-4-多媒体硬件环境"><a href="#Chapter-4-多媒体硬件环境" class="headerlink" title="Chapter 4 多媒体硬件环境"></a>Chapter 4 多媒体硬件环境</h1><h2 id="存储设备"><a href="#存储设备" class="headerlink" title="存储设备"></a>存储设备</h2><h6 id="光盘读写"><a href="#光盘读写" class="headerlink" title="光盘读写"></a>光盘读写</h6><ul>
+<li>检验<br>-EFM编码</li>
+</ul>
+<h2 id="音频接口"><a href="#音频接口" class="headerlink" title="音频接口"></a>音频接口</h2><h6 id="MIDI-Music-Instrument-Digital-Interface"><a href="#MIDI-Music-Instrument-Digital-Interface" class="headerlink" title="MIDI(Music Instrument Digital Interface)"></a>MIDI(Music Instrument Digital Interface)</h6><h2 id="视频接口"><a href="#视频接口" class="headerlink" title="视频接口"></a>视频接口</h2><h1 id="Chapter-5-多媒体软件基础"><a href="#Chapter-5-多媒体软件基础" class="headerlink" title="Chapter 5 多媒体软件基础"></a>Chapter 5 多媒体软件基础</h1><h2 id="多媒体素材制作软件"><a href="#多媒体素材制作软件" class="headerlink" title="多媒体素材制作软件"></a>多媒体素材制作软件</h2><ul>
+<li>PS</li>
+<li>PR</li>
+<li>Audition</li>
+</ul>
+<h2 id="多媒体著作软件"><a href="#多媒体著作软件" class="headerlink" title="多媒体著作软件"></a>多媒体著作软件</h2><ul>
+<li>PowerPoint</li>
+<li>电子相册</li>
+</ul>
+<h2 id="多媒体程序设计基础"><a href="#多媒体程序设计基础" class="headerlink" title="多媒体程序设计基础"></a>多媒体程序设计基础</h2><ul>
+<li>mciSendString()</li>
+<li>mciGetErrorString()</li>
+<li>mciExcute()</li>
+</ul>
+<p><img src="mmedia/send_str.png" alt="send_str"><br><img src="mmedia/get_err.png" alt="get_err"><br><img src="mmedia/excute.png" alt="excute"></p>
 
     </div>
 
