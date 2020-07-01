@@ -168,13 +168,13 @@
 
     <div class="post-header">
         <h1 class="title">
-            <a href="/2020/06/30/Embedded_System/">
+            <a href="/2020/07/01/Embedded_System/">
                 Embedded_System
             </a>
         </h1>
         <div class="post-info">
             
-                <span class="date">2020-06-30</span>
+                <span class="date">2020-07-01</span>
             
             
             
@@ -496,10 +496,10 @@
 <li>逐次逼近型转换</li>
 </ul>
 <p><img src="embedded/ad1.png" alt="a_d1"></p>
-<h2 id="显示屏"><a href="#显示屏" class="headerlink" title="显示屏"></a>显示屏</h2><h4 id="LED"><a href="#LED" class="headerlink" title="LED"></a>LED</h4><ul>
+<h4 id="显示屏"><a href="#显示屏" class="headerlink" title="显示屏"></a>显示屏</h4><h6 id="LED"><a href="#LED" class="headerlink" title="LED"></a>LED</h6><ul>
 <li>使用二极管</li>
 </ul>
-<h4 id="LCD"><a href="#LCD" class="headerlink" title="LCD"></a>LCD</h4><ul>
+<h6 id="LCD"><a href="#LCD" class="headerlink" title="LCD"></a>LCD</h6><ul>
 <li>使用液晶</li>
 <li>控制器结构<ul>
 <li>时序发生器</li>
@@ -511,23 +511,186 @@
 </ul>
 </li>
 </ul>
-<h1 id="Chapter-7"><a href="#Chapter-7" class="headerlink" title="Chapter 7"></a>Chapter 7</h1><ul>
-<li>Linux内核<ul>
-<li>进程调度</li>
-<li>内存管理</li>
-<li>虚拟文件系统<ol>
-<li>文件</li>
-<li>设备</li>
+<h4 id="触摸屏"><a href="#触摸屏" class="headerlink" title="触摸屏"></a>触摸屏</h4><ul>
+<li>电阻式<ul>
+<li>要求点击位置精确，按压力度较大</li>
+</ul>
+</li>
+<li>电容式<ul>
+<li>点击位置模糊，只需触碰</li>
+</ul>
+</li>
+<li>表面声波触摸屏</li>
+</ul>
+<h6 id="FM7843"><a href="#FM7843" class="headerlink" title="FM7843"></a>FM7843</h6><p><img src="embedded/fm7843.png" alt="fm7843"></p>
+<h2 id="串行通信"><a href="#串行通信" class="headerlink" title="串行通信"></a>串行通信</h2><h4 id="通用异步接收发送器-UART"><a href="#通用异步接收发送器-UART" class="headerlink" title="通用异步接收发送器 UART"></a>通用异步接收发送器 UART</h4><ul>
+<li>作用<ul>
+<li>将并行转为串行</li>
+<li>自动生成起、止位的帧数据格式</li>
+<li>自动进行奇偶校验</li>
+</ul>
+</li>
+</ul>
+<h4 id="标准总线"><a href="#标准总线" class="headerlink" title="标准总线"></a>标准总线</h4><h6 id="I²C-Inter-IC-内部集成电路总线"><a href="#I²C-Inter-IC-内部集成电路总线" class="headerlink" title="I²C (Inter IC,内部集成电路总线)"></a>I²C (Inter IC,内部集成电路总线)</h6><ul>
+<li>全双工通信</li>
+<li>数据线上信号定义<ul>
+<li>空闲：时钟信号和数据信号都是高电平</li>
+<li>起始信号：时钟信号高电平，数据信号下降沿</li>
+<li>停止信号：时钟信号高电平，数据信号上升沿</li>
+</ul>
+</li>
+</ul>
+<h6 id="SPI-通用外设接口"><a href="#SPI-通用外设接口" class="headerlink" title="SPI (通用外设接口)"></a>SPI (通用外设接口)</h6><ul>
+<li>传输时高位先传，低位后传</li>
+</ul>
+<h6 id="RS-232"><a href="#RS-232" class="headerlink" title="RS-232"></a>RS-232</h6><ul>
+<li>缺点<ul>
+<li>信号电平值较高，易损坏接口</li>
+<li>与TTL电平不兼容</li>
+<li>单端驱动，单端接收，一条线路传输一种信号</li>
+<li>传输速率低(19200bps)</li>
+<li>传输距离有限(30m)</li>
+</ul>
+</li>
+</ul>
+<h6 id="USB-通用串行总线"><a href="#USB-通用串行总线" class="headerlink" title="USB (通用串行总线)"></a>USB (通用串行总线)</h6><ul>
+<li>半双工通信</li>
+<li>特点<ul>
+<li>单极性、差分、不归零NRZI编码</li>
+<li>即插即用</li>
+<li>传输速率高</li>
+<li>连接方便，易扩展</li>
+<li>独立供电</li>
+</ul>
+</li>
+<li>信息传输方式<ul>
+<li>同步传输</li>
+<li>中断传输</li>
+<li>批量传输</li>
+<li>控制传输</li>
+</ul>
+</li>
+</ul>
+<h6 id="CAN总线-Controller-Area-Network"><a href="#CAN总线-Controller-Area-Network" class="headerlink" title="CAN总线 (Controller Area Network)"></a>CAN总线 (Controller Area Network)</h6><ul>
+<li>特点<ul>
+<li>抗干扰能力强</li>
+<li>实时性好</li>
+<li>系统错误检测</li>
+<li>隔离能力强</li>
+</ul>
+</li>
+<li>信息传输方式<ul>
+<li>同步传输</li>
+</ul>
+</li>
+</ul>
+<h2 id="无线通信技术"><a href="#无线通信技术" class="headerlink" title="无线通信技术"></a>无线通信技术</h2><ul>
+<li>物理层<ul>
+<li>红外通道(IR)</li>
+<li>射频通道(RF)<ol>
+<li>蓝牙</li>
+<li>Wi-Fi(无线保真技术)</li>
+<li>ZigBee</li>
+<li>GSM</li>
+<li>GPRS</li>
+<li>CDMA</li>
 </ol>
 </li>
-<li>网络接口(NET)</li>
-<li>进程间通信(IPC)<ol>
+</ul>
+</li>
+</ul>
+<h4 id="蓝牙"><a href="#蓝牙" class="headerlink" title="蓝牙"></a>蓝牙</h4><ul>
+<li>特点<ul>
+<li>适用设备多</li>
+<li>工作频段全球通用</li>
+<li>使用方便(Plonk and Play)</li>
+<li>安全加密，抗干扰能力强</li>
+</ul>
+</li>
+</ul>
+<h4 id="Wi-Fi"><a href="#Wi-Fi" class="headerlink" title="Wi-Fi"></a>Wi-Fi</h4><ul>
+<li>特点<ul>
+<li>覆盖范围理论值为100m</li>
+<li>传输速度快</li>
+<li>应用方便</li>
+<li>无需布线</li>
+</ul>
+</li>
+</ul>
+<h4 id="GPRS-通用无线业务系统"><a href="#GPRS-通用无线业务系统" class="headerlink" title="GPRS (通用无线业务系统)"></a>GPRS (通用无线业务系统)</h4><ul>
+<li>特点<ul>
+<li>始终在线且传输速率高</li>
+<li>成本低</li>
+<li>覆盖范围广</li>
+</ul>
+</li>
+</ul>
+<h4 id="CDMA-码分多址"><a href="#CDMA-码分多址" class="headerlink" title="CDMA (码分多址)"></a>CDMA (码分多址)</h4><ul>
+<li>特点<ul>
+<li>大容量通信</li>
+<li>大范围通信</li>
+<li>高质量</li>
+<li>支持综合业务</li>
+<li>支持软切换</li>
+</ul>
+</li>
+</ul>
+<h4 id="ZipBee-3G-5G"><a href="#ZipBee-3G-5G" class="headerlink" title="ZipBee (3G-5G)"></a>ZipBee (3G-5G)</h4><ul>
+<li>特点<ul>
+<li>声音和数据传输速度提升</li>
+<li>全球范围内无线漫游</li>
+<li>提供流媒体形式</li>
+</ul>
+</li>
+</ul>
+<h4 id="GPS"><a href="#GPS" class="headerlink" title="GPS"></a>GPS</h4><ul>
+<li>组成<ol>
+<li>宇宙空间部分</li>
+<li>地面监控部分</li>
+<li>用户设备部分</li>
+</ol>
+</li>
+</ul>
+<h1 id="Chapter-6-μC-OS-II-操作系统"><a href="#Chapter-6-μC-OS-II-操作系统" class="headerlink" title="Chapter 6 μC/OS-II 操作系统"></a>Chapter 6 μC/OS-II 操作系统</h1><ul>
+<li>特点<ul>
+<li>基于ROM运行</li>
+<li>抢占式实时多任务内核</li>
+<li>高度可移植</li>
+<li>源代码开放</li>
+<li>可固化</li>
+<li>可裁剪</li>
+</ul>
+</li>
+</ul>
+<h2 id="内核结构"><a href="#内核结构" class="headerlink" title="内核结构"></a>内核结构</h2><ol>
+<li>应用软件层</li>
+<li>核心代码层</li>
+<li>系统设置与移植层</li>
+</ol>
+<h1 id="Chapter-7-嵌入式Linux"><a href="#Chapter-7-嵌入式Linux" class="headerlink" title="Chapter 7 嵌入式Linux"></a>Chapter 7 嵌入式Linux</h1><h2 id="内核组成及其功能"><a href="#内核组成及其功能" class="headerlink" title="内核组成及其功能"></a>内核组成及其功能</h2><ul>
+<li>进程调度<ul>
+<li>负责进程对CPU访问</li>
+<li>基于优先级的进程调度</li>
+</ul>
+</li>
+<li>内存管理<ul>
+<li>硬件无关部分：提供进程的映射和逻辑内存的对换</li>
+<li>硬件有关部分：为内存管理硬件提供了虚拟接口 </li>
+</ul>
+</li>
+<li>虚拟文件系统<ul>
+<li>为文件和设备提供统一接口</li>
+</ul>
+</li>
+<li>网络接口(NET)<ul>
+<li>提供对各种网络标准的存取和网络硬件的支持</li>
+</ul>
+</li>
+<li>进程间通信(IPC)<ul>
 <li>管道和fifo</li>
 <li>信号量</li>
 <li>消息队列</li>
 <li>共享内存</li>
-</ol>
-</li>
 </ul>
 </li>
 </ul>
@@ -546,6 +709,15 @@
 <li>读写操作比ext2好</li>
 <li>提供了安全保护(可回滚)</li>
 <li>提供了更好的闪存管理</li>
+</ul>
+<h1 id="Chapter-8-Android操作系统"><a href="#Chapter-8-Android操作系统" class="headerlink" title="Chapter 8 Android操作系统"></a>Chapter 8 Android操作系统</h1><ul>
+<li>特点<ul>
+<li>价格低性能高</li>
+<li>应用程序发展迅速</li>
+<li>手机厂家和运营商的鼎力支持</li>
+<li>系统开源，易于创新</li>
+</ul>
+</li>
 </ul>
 
     </div>
@@ -584,7 +756,7 @@
         <ul>
             
             <li>
-                <a class="footer-post" href="/2020/06/30/Embedded_System/">Embedded_System</a>
+                <a class="footer-post" href="/2020/07/01/Embedded_System/">Embedded_System</a>
             </li>
             
         </ul>
