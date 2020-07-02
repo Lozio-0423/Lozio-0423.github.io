@@ -1,0 +1,994 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!--Description-->
+    
+        <meta name="description" content="Chapter 1 嵌入式系统概况嵌入式系统
+定义  
+  以应用为中心，以计算机技术为基础，软件，硬件可裁剪，功能、可靠性、成本、体积、功耗严格要求的专用计算机系统。  
+
+发展趋势
+
+小型化
+可靠性
+稳定性
+高速度
+实时性
+智能性
+实用性
+
+
+
+嵌入式处理器
+嵌入式微控制器(MCU)：应用于单片">
+    
+
+    <!--Author-->
+    
+        <meta name="author" content="Kasumi">
+    
+
+    <!--Open Graph Title-->
+    
+        <meta property="og:title" content="Embedded_System"/>
+    
+
+    <!--Open Graph Description-->
+    
+
+    <!--Open Graph Site Name-->
+    <meta property="og:site_name" content="Lozio&#39;s GitBlog"/>
+
+    <!--Type page-->
+    
+        <meta property="og:type" content="article" />
+    
+
+    <!--Page Cover-->
+    
+
+    
+        <meta name="twitter:card" content="summary" />
+    
+    
+    
+
+    <!-- Title -->
+    
+    <title>Embedded_System - Lozio&#39;s GitBlog</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css" integrity="sha384-y3tfxAZXuh4HwSYylfB+J125MxIs6mR5FOHamPBG064zB+AFeWH94NdvaCBm8qnd" crossorigin="anonymous">
+
+    <!-- Custom Fonts -->
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="//oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="//oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- Gallery -->
+    <link href="//cdnjs.cloudflare.com/ajax/libs/featherlight/1.3.5/featherlight.min.css" type="text/css" rel="stylesheet" />
+
+    <!-- Custom CSS -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+
+    <!-- Google Analytics -->
+    
+
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+
+<body>
+
+<div class="bg-gradient"></div>
+<div class="bg-pattern"></div>
+
+<!-- Menu -->
+<!--Menu Links and Overlay-->
+<div class="menu-bg">
+    <div class="menu-container">
+        <ul>
+            
+            <li class="menu-item">
+                <a href="/">
+                    Home
+                </a>
+            </li>
+            
+            <li class="menu-item">
+                <a href="/archives">
+                    Archives
+                </a>
+            </li>
+            
+            <li class="menu-item">
+                <a href="/about">
+                    About
+                </a>
+            </li>
+            
+            <li class="menu-item">
+                <a href="/tags">
+                    Tags
+                </a>
+            </li>
+            
+            <li class="menu-item">
+                <a href="/categories">
+                    Categories
+                </a>
+            </li>
+            
+            <li class="menu-item">
+                <a href="/contact">
+                    Contact
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+</div>
+
+<!--Hamburger Icon-->
+<nav>
+    <a href="#menu"></a>
+</nav>
+
+<div class="container">
+
+    <!-- Main Content -->
+    <div class="row">
+    <div class="col-sm-12">
+
+        <!--Title and Logo-->
+        <header>
+    <div class="logo">
+        <a href="/"><i class="logo-icon fa fa-cube" aria-hidden="true"></i></a>
+        
+    </div>
+</header>
+
+        <section class="main">
+            
+<div class="post">
+
+    <div class="post-header">
+        <h1 class="title">
+            <a href="/2020/07/02/Embedded_System/">
+                Embedded_System
+            </a>
+        </h1>
+        <div class="post-info">
+            
+                <span class="date">2020-07-02</span>
+            
+            
+            
+        </div>
+    </div>
+
+    <div class="content">
+
+        <!-- Gallery -->
+        
+
+        <!-- Post Content -->
+        <h1 id="Chapter-1-嵌入式系统概况"><a href="#Chapter-1-嵌入式系统概况" class="headerlink" title="Chapter 1 嵌入式系统概况"></a>Chapter 1 嵌入式系统概况</h1><h2 id="嵌入式系统"><a href="#嵌入式系统" class="headerlink" title="嵌入式系统"></a>嵌入式系统</h2><ul>
+<li><p>定义  </p>
+<p>  以<strong>应用为中心</strong>，以计算机技术为基础，软件，硬件可裁剪，<strong>功能、可靠性、成本、体积、功耗严格要求</strong>的专用计算机系统。  </p>
+</li>
+<li><p>发展趋势</p>
+<ol>
+<li>小型化</li>
+<li>可靠性</li>
+<li>稳定性</li>
+<li>高速度</li>
+<li>实时性</li>
+<li>智能性</li>
+<li>实用性</li>
+</ol>
+</li>
+</ul>
+<h3 id="嵌入式处理器"><a href="#嵌入式处理器" class="headerlink" title="嵌入式处理器"></a>嵌入式处理器</h3><ul>
+<li>嵌入式微控制器(MCU)：应用于单片机，工业控制。</li>
+<li>嵌入式数字信号处理器(DSP)：应用于高等计算，信号处理，通信，军事……</li>
+<li>嵌入式微处理器(MPU)：由CPU演变而来。</li>
+<li>嵌入式片上系统(System ON Chip，SOC)：All in one (chip).应用于ZipBee网络。</li>
+</ul>
+<h3 id="存储体系和存储层次"><a href="#存储体系和存储层次" class="headerlink" title="存储体系和存储层次"></a>存储体系和存储层次</h3><ul>
+<li>体系结构<ol>
+<li>冯·诺依曼结构：指令与数据位于同一存储器，统一编址，不能同时访问指令与数据。</li>
+<li>哈佛结构：指令与数据位于不同存储器，可以同时访问指令与数据。</li>
+</ol>
+</li>
+<li>存储层次<ul>
+<li>金字塔型<ol>
+<li>Cache</li>
+<li>SDRAM(主存)</li>
+<li>Flash(内部存储):NOR型、NAND型</li>
+</ol>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="采用技术"><a href="#采用技术" class="headerlink" title="采用技术"></a>采用技术</h2><ul>
+<li>RISC(精简指令系统计算机)</li>
+<li>流水线技术</li>
+<li>总线和总线桥</li>
+</ul>
+<h6 id="RISC"><a href="#RISC" class="headerlink" title="RISC"></a>RISC</h6><ul>
+<li>特点是所有指令的格式都是一致的，所有指令的指令周期也是相同的，并且采用流水线技术。</li>
+</ul>
+<h2 id="嵌入式软件系统"><a href="#嵌入式软件系统" class="headerlink" title="嵌入式软件系统"></a>嵌入式软件系统</h2><h3 id="概述-结构"><a href="#概述-结构" class="headerlink" title="概述(结构)"></a>概述(结构)</h3><ul>
+<li>驱动层</li>
+<li>操作系统层</li>
+<li>中间件层</li>
+<li>应用层</li>
+</ul>
+<h3 id="软件运行流程"><a href="#软件运行流程" class="headerlink" title="软件运行流程"></a>软件运行流程</h3><ul>
+<li>上电复位</li>
+<li>板级初始化</li>
+<li>引导/升级系统<ul>
+<li>远程升级</li>
+<li>本地升级</li>
+</ul>
+</li>
+<li>系统初始化</li>
+<li>应用程序初始化</li>
+<li>多任务应用</li>
+</ul>
+<h3 id="操作系统"><a href="#操作系统" class="headerlink" title="操作系统"></a>操作系统</h3><ul>
+<li>实时(RTOS)：实时为首位，效率为其次<ul>
+<li>硬实时</li>
+<li>软实时</li>
+</ul>
+</li>
+<li>非实时</li>
+</ul>
+<h4 id="RTOS"><a href="#RTOS" class="headerlink" title="RTOS"></a>RTOS</h4><ul>
+<li>任务调度<ul>
+<li>抢占式</li>
+<li>非抢占式</li>
+</ul>
+</li>
+</ul>
+<p>eg.  </p>
+<ul>
+<li>μC/OS-II</li>
+<li>RT-Linux</li>
+<li>VxWorks</li>
+<li>Android</li>
+</ul>
+<h1 id="Chapter-2-微处理器"><a href="#Chapter-2-微处理器" class="headerlink" title="Chapter 2 微处理器"></a>Chapter 2 微处理器</h1><h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><h3 id="ARM处理器"><a href="#ARM处理器" class="headerlink" title="ARM处理器"></a>ARM处理器</h3><ol>
+<li>使用大量32位寄存器(EAX,EBX…)，采用RISC</li>
+<li>具有很强的存储区保护功能</li>
+<li>可扩展</li>
+<li>小体积、低功耗、成本低、高性能</li>
+</ol>
+<h6 id="版本"><a href="#版本" class="headerlink" title="版本"></a>版本</h6><ul>
+<li>V1-V6</li>
+<li>Cortex-M：只支持Thump-2指令集(16位)</li>
+<li>Cortex-R(Realtime)：可支持16，32位指令集，侧重于实时系统</li>
+<li>Cortex-A(Application)：可支持16，32位指令集，侧重于复杂操作系统与应用</li>
+<li>V8：支持64位指令集</li>
+</ul>
+<h6 id="ARM指令集命名规则"><a href="#ARM指令集命名规则" class="headerlink" title="ARM指令集命名规则"></a>ARM指令集命名规则</h6><p><img src="embedded/arm_i.png" alt="arm_instruction"></p>
+<ul>
+<li><p>Thump指令集  </p>
+<p>  thumb指令集是arm指令集的一个子集，是针对代码密度问题而提出的，它具有16位的代码宽度。与等价的32位代码相比较，thumb指令集在保留32位代码优势的同时，大大的节省了系统的存储空间。thumb不是一个完整的体系结构，不能指望处理器只执行thumb指令集而不支持arm指令集。</p>
+</li>
+</ul>
+<h3 id="ARM微处理器-MPU"><a href="#ARM微处理器-MPU" class="headerlink" title="ARM微处理器(MPU)"></a>ARM微处理器(MPU)</h3><ul>
+<li>①ARM架构处理器<ol>
+<li>处理器内核：只保持最基本的组织架构</li>
+<li>处理器核(内核+Cache+MMU(内存管理单元)+etc.)</li>
+</ol>
+</li>
+<li>②集成电路厂商的外围处理部件</li>
+<li><strong>①+②=MPU</strong></li>
+</ul>
+<h6 id="部分ARM对比"><a href="#部分ARM对比" class="headerlink" title="部分ARM对比"></a>部分ARM对比</h6><ul>
+<li>7代：3级流水线</li>
+<li>9代：5级流水线</li>
+<li>11代：8级流水线<br><img src="embedded/arm_7&9.png" alt="arm_7&amp;9"></li>
+</ul>
+<h2 id="组成结构与工作原理-以ARM7为例"><a href="#组成结构与工作原理-以ARM7为例" class="headerlink" title="组成结构与工作原理(以ARM7为例)"></a>组成结构与工作原理(以ARM7为例)</h2><ul>
+<li>32位ALU</li>
+<li>30个32位通用寄存器</li>
+<li>6个状态寄存器(1个记录当前状态，5个备用)</li>
+<li>1个程序计数器PC</li>
+<li>32位桶型移位寄存器</li>
+<li>指令译码&amp;控制逻辑</li>
+<li>指令流水线</li>
+<li>数据/地址寄存器</li>
+</ul>
+<h3 id="工作状态"><a href="#工作状态" class="headerlink" title="工作状态"></a>工作状态</h3><ul>
+<li>ARM状态(执行32位的字对齐的ARM指令)</li>
+<li>Thumb状态(执行16位的半字对齐的Thumb指令)</li>
+</ul>
+<h3 id="运行模式"><a href="#运行模式" class="headerlink" title="运行模式"></a>运行模式</h3><ul>
+<li>用户模式(USR)</li>
+<li>快速中断模式(FIQ)</li>
+<li>外部中断模式(IRQ)</li>
+<li>特权模式/管理员模式(SVE)</li>
+<li>数据访问中止模式(ABT)</li>
+<li>未定义指令中止模式(UND)</li>
+<li>系统模式(SYS)</li>
+</ul>
+<h1 id="Chapter-3-嵌入式系统开发环境及技术"><a href="#Chapter-3-嵌入式系统开发环境及技术" class="headerlink" title="Chapter 3 嵌入式系统开发环境及技术"></a>Chapter 3 嵌入式系统开发环境及技术</h1><h2 id="嵌入式软件系统的分类"><a href="#嵌入式软件系统的分类" class="headerlink" title="嵌入式软件系统的分类"></a>嵌入式软件系统的分类</h2><ul>
+<li>运行在开发平台上的软件</li>
+<li>运行在嵌入式系统上的软件</li>
+</ul>
+<h2 id="开发环境"><a href="#开发环境" class="headerlink" title="开发环境"></a>开发环境</h2><h4 id="包含"><a href="#包含" class="headerlink" title="包含"></a>包含</h4><ul>
+<li>编辑程序</li>
+<li>编译程序</li>
+<li>汇编程序</li>
+<li>链接程序</li>
+<li>调试程序</li>
+<li>工程管理</li>
+<li>函数库</li>
+</ul>
+<h4 id="市面上的IDE"><a href="#市面上的IDE" class="headerlink" title="市面上的IDE"></a>市面上的IDE</h4><ul>
+<li>IAR EWARM</li>
+</ul>
+<h2 id="开发工具"><a href="#开发工具" class="headerlink" title="开发工具"></a>开发工具</h2><h4 id="分类"><a href="#分类" class="headerlink" title="分类"></a>分类</h4><ul>
+<li>需求分析工具</li>
+<li>软件设计工具</li>
+<li>编码调试工具</li>
+<li>测试工具</li>
+<li>配置管理工具</li>
+<li>维护工具</li>
+</ul>
+<h4 id="开发工具举例"><a href="#开发工具举例" class="headerlink" title="开发工具举例"></a>开发工具举例</h4><ul>
+<li>ARM公司推出<ul>
+<li>ADS/SDT</li>
+<li>RealView MDK</li>
+</ul>
+</li>
+<li>Linux自带<ul>
+<li>GNU</li>
+</ul>
+</li>
+</ul>
+<h2 id="开发过程"><a href="#开发过程" class="headerlink" title="开发过程"></a>开发过程</h2><ul>
+<li>生成</li>
+<li>调试</li>
+<li>固化</li>
+</ul>
+<h2 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h2><ul>
+<li>测试方法<ul>
+<li>指令集仿真程序</li>
+<li>硬件仿真器</li>
+<li>直接下载至开发板</li>
+</ul>
+</li>
+<li>测试工具<ul>
+<li>内存分析工具</li>
+<li>性能分析工具</li>
+<li>覆盖分析工具</li>
+<li>缺陷追踪工具</li>
+</ul>
+</li>
+</ul>
+<h4 id="JTAG"><a href="#JTAG" class="headerlink" title="JTAG"></a>JTAG</h4><ul>
+<li>联合测试行动小组，是一种国际标准测试协议，主要用于芯片内部测试及对系统仿真、调试。</li>
+</ul>
+<h2 id="引导程序-BootLoader"><a href="#引导程序-BootLoader" class="headerlink" title="引导程序(BootLoader)"></a>引导程序(BootLoader)</h2><ul>
+<li>嵌入式的BIOS</li>
+<li>通电后首先运行的一段代码</li>
+</ul>
+<h4 id="主要任务"><a href="#主要任务" class="headerlink" title="主要任务"></a>主要任务</h4><ol>
+<li>硬件初始化</li>
+<li>建立内存映射图</li>
+<li>将操作系统和应用程序从FLASH加载到SDRAM</li>
+</ol>
+<h6 id="阶段1"><a href="#阶段1" class="headerlink" title="阶段1"></a>阶段1</h6><ul>
+<li>使用汇编语言编写，不需要有太复杂的功能<ul>
+<li>硬件初始化</li>
+<li>为阶段2准备RAM空间</li>
+</ul>
+</li>
+</ul>
+<h6 id="阶段2"><a href="#阶段2" class="headerlink" title="阶段2"></a>阶段2</h6><ul>
+<li>使用C编写，可实现较复杂的功能<ul>
+<li>初始化要用到的设备</li>
+<li>检测系统内核映射</li>
+<li>加载内核映象和根文件系统映像(FLASH –&gt; SDRAM)</li>
+<li>设置内核启动参数</li>
+<li>跳转到内核映像入口并执行内核程序</li>
+<li>系统软件设置，更新系统(system.bin)</li>
+</ul>
+</li>
+</ul>
+<h1 id="Chapter-4-指令系统与程序设计"><a href="#Chapter-4-指令系统与程序设计" class="headerlink" title="Chapter 4 指令系统与程序设计"></a>Chapter 4 指令系统与程序设计</h1><ul>
+<li>机器指令<ul>
+<li>ARM指令(32b)</li>
+<li>Thump指令(16b,ARM指令的压缩)</li>
+<li>Jazelle</li>
+</ul>
+</li>
+<li>伪指令</li>
+<li>宏指令</li>
+</ul>
+<h2 id="ARM指令及功能描述"><a href="#ARM指令及功能描述" class="headerlink" title="ARM指令及功能描述"></a>ARM指令及功能描述</h2><p><img src="embedded/arm_ess.png" alt="arm_ess"><br><img src="embedded/arm_ess_2.png" alt="arm_ess_2"></p>
+<ul>
+<li>后缀名：”xxx.s”</li>
+</ul>
+<h2 id="ARM指令集和Thumb指令集的区别"><a href="#ARM指令集和Thumb指令集的区别" class="headerlink" title="ARM指令集和Thumb指令集的区别"></a>ARM指令集和Thumb指令集的区别</h2><table>
+<thead>
+<tr>
+<th>区别</th>
+<th>ARM</th>
+<th>Thumb</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>CPSR的T位</td>
+<td>0</td>
+<td>1</td>
+</tr>
+<tr>
+<td>操作数寻址地址数</td>
+<td>大多数为3地址</td>
+<td>2地址</td>
+</tr>
+<tr>
+<td>指令长度</td>
+<td>32位</td>
+<td>16位</td>
+</tr>
+<tr>
+<td>内核指令</td>
+<td>58条</td>
+<td>30条</td>
+</tr>
+<tr>
+<td>条件执行</td>
+<td>大部分指令</td>
+<td>只有分支指令</td>
+</tr>
+<tr>
+<td>数据处理指令</td>
+<td>访问桶形移位器和ALU</td>
+<td>独立的桶形移位器和ALU指令</td>
+</tr>
+<tr>
+<td>寄存器使用</td>
+<td>15个通用寄存器和PC（R15）</td>
+<td>8个通用低寄存器+7个高寄存器+PC（R15）</td>
+</tr>
+<tr>
+<td>程序状态寄存器</td>
+<td>特权模式下可读可写</td>
+<td>不能直接访问</td>
+</tr>
+<tr>
+<td>异常处理</td>
+<td>能够全盘处理</td>
+<td>不能处理</td>
+</tr>
+</tbody></table>
+<h1 id="Chapter-5-嵌入式系统设计与应用"><a href="#Chapter-5-嵌入式系统设计与应用" class="headerlink" title="Chapter 5 嵌入式系统设计与应用"></a>Chapter 5 嵌入式系统设计与应用</h1><h2 id="嵌入式系统设计的一般步骤"><a href="#嵌入式系统设计的一般步骤" class="headerlink" title="嵌入式系统设计的一般步骤"></a>嵌入式系统设计的一般步骤</h2><ol>
+<li>需求分析<ul>
+<li>分析用户需求</li>
+<li>确定硬件软件</li>
+<li>检查分析的结果</li>
+<li>确定项目约束条件</li>
+<li>概要设计</li>
+</ul>
+</li>
+<li>体系结构设计</li>
+<li>软硬件设计</li>
+<li>系统集成与测试</li>
+</ol>
+<h2 id="电源管理与时钟信号设计"><a href="#电源管理与时钟信号设计" class="headerlink" title="电源管理与时钟信号设计"></a>电源管理与时钟信号设计</h2><h4 id="电源管理"><a href="#电源管理" class="headerlink" title="电源管理"></a>电源管理</h4><ul>
+<li>使用电源管理器<ul>
+<li>可以为每个模块提供相应的电源管理</li>
+<li>可以使系统在重启，正常运行，空闲和挂起的电源状态下保存RAM中系统文件</li>
+<li>与三种客户端程序打交道<ol>
+<li>相关的驱动程序</li>
+<li>改变电源状态 或 改变设备性能 的应用程序</li>
+<li>与电源改变有关的程序</li>
+</ol>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="时钟电路"><a href="#时钟电路" class="headerlink" title="时钟电路"></a>时钟电路</h4><h6 id="时间管理"><a href="#时间管理" class="headerlink" title="时间管理"></a>时间管理</h6><ul>
+<li>功能<ul>
+<li>维持日历时间</li>
+<li>任务计时</li>
+<li>软定时器的定时管理</li>
+<li><strong>维持时间片的轮转调度</strong></li>
+</ul>
+</li>
+<li>时钟源<ul>
+<li>实时时钟</li>
+<li>定时器/计数器</li>
+</ul>
+</li>
+</ul>
+<h6 id="S3C2440定时器"><a href="#S3C2440定时器" class="headerlink" title="S3C2440定时器"></a>S3C2440定时器</h6><ul>
+<li>组成<ul>
+<li>5个16位定时器，定时器组成：<ul>
+<li>减法计数器</li>
+<li>初值寄存器</li>
+<li>比较寄存器</li>
+<li>观察寄存器</li>
+<li>逻辑控制</li>
+</ul>
+</li>
+<li>2个8位预分频器，2个4位分频器</li>
+<li>可编程PWM输出占空比</li>
+<li>初值自动重装连续输出模式，单脉冲输出模式</li>
+<li>死区生成器</li>
+</ul>
+</li>
+</ul>
+<p><img src="embedded/s3c2440.png" alt="s3c2440"></p>
+<h2 id="存储管理"><a href="#存储管理" class="headerlink" title="存储管理"></a>存储管理</h2><ul>
+<li>ARM结构的存储器最大寻址空间：4GB</li>
+<li>ARM的总线接口信号分类<ul>
+<li>时钟信号和时钟控制信号</li>
+<li>地址类信号</li>
+<li>存储器请求信号</li>
+<li>数据时序信号</li>
+</ul>
+</li>
+<li>一般采用的接口电路<ul>
+<li>SDRAM</li>
+<li>NAND Flash</li>
+</ul>
+</li>
+</ul>
+<h2 id="系统接口电路"><a href="#系统接口电路" class="headerlink" title="系统接口电路"></a>系统接口电路</h2><h4 id="通用接口GPIO"><a href="#通用接口GPIO" class="headerlink" title="通用接口GPIO"></a>通用接口GPIO</h4><ul>
+<li>用于输入/输出的电子原件，主要功能是对输入/输出进行扩展帮助。</li>
+<li>工作过程<ul>
+<li>I/O系统初始化<ul>
+<li>设备管理初始化</li>
+<li>驱动逻辑初始化</li>
+<li>硬件抽象初始化</li>
+</ul>
+</li>
+<li>设备打开</li>
+<li>读/写/控制</li>
+<li>设备关闭</li>
+</ul>
+</li>
+<li>ARM采用I/O与存储器统一编址的方式</li>
+</ul>
+<h2 id="中断处理"><a href="#中断处理" class="headerlink" title="中断处理"></a>中断处理</h2><ol>
+<li>中断响应，确定中断源</li>
+<li>中断处理</li>
+<li>中断返回</li>
+</ol>
+<h4 id="实例-S3C2440"><a href="#实例-S3C2440" class="headerlink" title="实例(S3C2440)"></a>实例(S3C2440)</h4><ul>
+<li>保存当前状态寄存器CPSR(Current Program Status Register)至SPSR(Saved Program Status Register)</li>
+<li>进入特定模式，屏蔽中断</li>
+<li>设置连接寄存器LR</li>
+<li>设置程序计数器PC</li>
+<li>处理中断</li>
+<li>将保存在中断模式中的SPSR值赋给CPSR</li>
+<li>将返回地址赋给PC</li>
+</ul>
+<h2 id="A-D转换"><a href="#A-D转换" class="headerlink" title="A/D转换"></a>A/D转换</h2><ul>
+<li>逐次逼近型转换</li>
+</ul>
+<p><img src="embedded/ad1.png" alt="a_d1"></p>
+<h4 id="显示屏"><a href="#显示屏" class="headerlink" title="显示屏"></a>显示屏</h4><h6 id="LED"><a href="#LED" class="headerlink" title="LED"></a>LED</h6><ul>
+<li>使用二极管</li>
+</ul>
+<h6 id="LCD"><a href="#LCD" class="headerlink" title="LCD"></a>LCD</h6><ul>
+<li>使用液晶</li>
+<li>控制器结构<ul>
+<li>时序发生器</li>
+<li>LCD主控制器</li>
+<li>DMA</li>
+<li>视频信号混合器</li>
+<li>数据格式转换器</li>
+<li>控制逻辑</li>
+</ul>
+</li>
+</ul>
+<h4 id="触摸屏"><a href="#触摸屏" class="headerlink" title="触摸屏"></a>触摸屏</h4><ul>
+<li>电阻式<ul>
+<li>要求点击位置精确，按压力度较大</li>
+</ul>
+</li>
+<li>电容式<ul>
+<li>点击位置模糊，只需触碰</li>
+</ul>
+</li>
+<li>表面声波触摸屏</li>
+</ul>
+<h6 id="FM7843"><a href="#FM7843" class="headerlink" title="FM7843"></a>FM7843</h6><p><img src="embedded/fm7843.png" alt="fm7843"></p>
+<h2 id="串行通信"><a href="#串行通信" class="headerlink" title="串行通信"></a>串行通信</h2><h4 id="通用异步接收发送器-UART"><a href="#通用异步接收发送器-UART" class="headerlink" title="通用异步接收发送器 UART"></a>通用异步接收发送器 UART</h4><ul>
+<li>一种异步收发传输器，是电脑硬件的一部分。将资料由串行通信与并行通信间作传输转换，作为并行输入成为串行输出的芯片</li>
+<li>作用<ul>
+<li>将并行转为串行</li>
+<li>自动生成起、止位的帧数据格式</li>
+<li>自动进行奇偶校验</li>
+</ul>
+</li>
+</ul>
+<h4 id="标准总线"><a href="#标准总线" class="headerlink" title="标准总线"></a>标准总线</h4><h6 id="I²C-Inter-IC-内部集成电路总线"><a href="#I²C-Inter-IC-内部集成电路总线" class="headerlink" title="I²C (Inter IC,内部集成电路总线)"></a>I²C (Inter IC,内部集成电路总线)</h6><ul>
+<li>全双工通信</li>
+<li>数据线上信号定义<ul>
+<li>空闲：时钟信号和数据信号都是高电平</li>
+<li>起始信号：时钟信号高电平，数据信号下降沿</li>
+<li>停止信号：时钟信号高电平，数据信号上升沿</li>
+</ul>
+</li>
+</ul>
+<h6 id="SPI-通用外设接口"><a href="#SPI-通用外设接口" class="headerlink" title="SPI (通用外设接口)"></a>SPI (通用外设接口)</h6><ul>
+<li>传输时高位先传，低位后传</li>
+</ul>
+<h6 id="RS-232"><a href="#RS-232" class="headerlink" title="RS-232"></a>RS-232</h6><ul>
+<li>缺点<ul>
+<li>信号电平值较高，易损坏接口</li>
+<li>与TTL电平不兼容</li>
+<li>单端驱动，单端接收，一条线路传输一种信号</li>
+<li>传输速率低(19200bps)</li>
+<li>传输距离有限(30m)</li>
+</ul>
+</li>
+</ul>
+<h6 id="USB-通用串行总线"><a href="#USB-通用串行总线" class="headerlink" title="USB (通用串行总线)"></a>USB (通用串行总线)</h6><ul>
+<li>半双工通信</li>
+<li>特点<ul>
+<li>单极性、差分、不归零NRZI编码</li>
+<li>即插即用</li>
+<li>传输速率高</li>
+<li>连接方便，易扩展</li>
+<li>独立供电</li>
+</ul>
+</li>
+<li>信息传输方式<ul>
+<li>同步传输</li>
+<li>中断传输</li>
+<li>批量传输</li>
+<li>控制传输</li>
+</ul>
+</li>
+</ul>
+<h6 id="CAN总线-Controller-Area-Network"><a href="#CAN总线-Controller-Area-Network" class="headerlink" title="CAN总线 (Controller Area Network)"></a>CAN总线 (Controller Area Network)</h6><ul>
+<li>特点<ul>
+<li>抗干扰能力强</li>
+<li>实时性好</li>
+<li>系统错误检测</li>
+<li>隔离能力强</li>
+</ul>
+</li>
+<li>信息传输方式<ul>
+<li>同步传输</li>
+</ul>
+</li>
+</ul>
+<h2 id="无线通信技术"><a href="#无线通信技术" class="headerlink" title="无线通信技术"></a>无线通信技术</h2><ul>
+<li>物理层<ul>
+<li>红外通道(IR)</li>
+<li>射频通道(RF)<ol>
+<li>蓝牙</li>
+<li>Wi-Fi(无线保真技术)</li>
+<li>ZigBee</li>
+<li>GSM</li>
+<li>GPRS</li>
+<li>CDMA</li>
+</ol>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="蓝牙"><a href="#蓝牙" class="headerlink" title="蓝牙"></a>蓝牙</h4><ul>
+<li>特点<ul>
+<li>适用设备多</li>
+<li>工作频段全球通用</li>
+<li>使用方便(Plonk and Play)</li>
+<li>安全加密，抗干扰能力强</li>
+</ul>
+</li>
+</ul>
+<h4 id="Wi-Fi"><a href="#Wi-Fi" class="headerlink" title="Wi-Fi"></a>Wi-Fi</h4><ul>
+<li>特点<ul>
+<li>覆盖范围理论值为100m</li>
+<li>传输速度快</li>
+<li>应用方便</li>
+<li>无需布线</li>
+</ul>
+</li>
+</ul>
+<h4 id="GPRS-通用无线业务系统"><a href="#GPRS-通用无线业务系统" class="headerlink" title="GPRS (通用无线业务系统)"></a>GPRS (通用无线业务系统)</h4><ul>
+<li>特点<ul>
+<li>始终在线且传输速率高</li>
+<li>成本低</li>
+<li>覆盖范围广</li>
+</ul>
+</li>
+</ul>
+<h4 id="CDMA-码分多址"><a href="#CDMA-码分多址" class="headerlink" title="CDMA (码分多址)"></a>CDMA (码分多址)</h4><ul>
+<li>特点<ul>
+<li>大容量通信</li>
+<li>大范围通信</li>
+<li>高质量</li>
+<li>支持综合业务</li>
+<li>支持软切换</li>
+</ul>
+</li>
+</ul>
+<h4 id="ZipBee-3G-5G"><a href="#ZipBee-3G-5G" class="headerlink" title="ZipBee (3G-5G)"></a>ZipBee (3G-5G)</h4><ul>
+<li>特点<ul>
+<li>声音和数据传输速度提升</li>
+<li>全球范围内无线漫游</li>
+<li>提供流媒体形式</li>
+</ul>
+</li>
+</ul>
+<h4 id="GPS"><a href="#GPS" class="headerlink" title="GPS"></a>GPS</h4><ul>
+<li>组成<ol>
+<li>宇宙空间部分</li>
+<li>地面监控部分</li>
+<li>用户设备部分</li>
+</ol>
+</li>
+</ul>
+<h1 id="Chapter-6-μC-OS-II-操作系统"><a href="#Chapter-6-μC-OS-II-操作系统" class="headerlink" title="Chapter 6 μC/OS-II 操作系统"></a>Chapter 6 μC/OS-II 操作系统</h1><ul>
+<li>特点<ul>
+<li>基于ROM运行</li>
+<li>抢占式实时多任务内核</li>
+<li>高度可移植</li>
+<li>源代码开放</li>
+<li>可固化</li>
+<li>可裁剪</li>
+</ul>
+</li>
+</ul>
+<h2 id="内核结构"><a href="#内核结构" class="headerlink" title="内核结构"></a>内核结构</h2><ol>
+<li>应用软件层</li>
+<li>核心代码层</li>
+<li>系统设置与移植层</li>
+</ol>
+<h1 id="Chapter-7-嵌入式Linux"><a href="#Chapter-7-嵌入式Linux" class="headerlink" title="Chapter 7 嵌入式Linux"></a>Chapter 7 嵌入式Linux</h1><h2 id="内核组成及其功能"><a href="#内核组成及其功能" class="headerlink" title="内核组成及其功能"></a>内核组成及其功能</h2><ul>
+<li>进程调度<ul>
+<li>负责进程对CPU访问</li>
+<li>基于优先级的进程调度</li>
+</ul>
+</li>
+<li>内存管理<ul>
+<li>硬件无关部分：提供进程的映射和逻辑内存的对换</li>
+<li>硬件有关部分：为内存管理硬件提供了虚拟接口 </li>
+</ul>
+</li>
+<li>虚拟文件系统<ul>
+<li>为文件和设备提供统一接口</li>
+</ul>
+</li>
+<li>网络接口(NET)<ul>
+<li>提供对各种网络标准的存取和网络硬件的支持</li>
+</ul>
+</li>
+<li>进程间通信(IPC)<ul>
+<li>管道和fifo</li>
+<li>信号量</li>
+<li>消息队列</li>
+<li>共享内存</li>
+</ul>
+</li>
+</ul>
+<h4 id="VFS"><a href="#VFS" class="headerlink" title="VFS"></a>VFS</h4><ul>
+<li>虚拟文件系统。采用标准的Unix系统调用读写位于不同物理介质上的不同文件系统,即为各类文件系统提供了一个统一的操作界面和应用编程接口。</li>
+</ul>
+<h2 id="生成新系统文件命令8步"><a href="#生成新系统文件命令8步" class="headerlink" title="生成新系统文件命令8步"></a>生成新系统文件命令8步</h2><ol>
+<li>cd/usr/src/linux 转到源代码目录</li>
+<li>make menuconfig 根据具体需要</li>
+<li>make dep 建立从属文件</li>
+<li>make clean 删除临时文件</li>
+<li>make lib_only 编译库文件</li>
+<li>make user_only 编译用户应用程序文件</li>
+<li>make jffs2 生成jffs2文件系统</li>
+<li>make image 生成新的文件系统(镜像)</li>
+</ol>
+<h2 id="JFFS2"><a href="#JFFS2" class="headerlink" title="JFFS2"></a>JFFS2</h2><ul>
+<li>日志结构化</li>
+<li>读写操作比ext2好</li>
+<li>提供了安全保护(可回滚)</li>
+<li>提供了更好的闪存管理</li>
+</ul>
+<h1 id="Chapter-8-Android操作系统"><a href="#Chapter-8-Android操作系统" class="headerlink" title="Chapter 8 Android操作系统"></a>Chapter 8 Android操作系统</h1><ul>
+<li>特点<ul>
+<li>价格低性能高</li>
+<li>应用程序发展迅速</li>
+<li>手机厂家和运营商的鼎力支持</li>
+<li>系统开源，易于创新</li>
+</ul>
+</li>
+</ul>
+
+    </div>
+
+    
+
+    
+
+    <!-- Comments -->
+    
+
+</div>
+        </section>
+
+    </div>
+</div>
+
+
+</div>
+
+<!-- Footer -->
+<div class="push"></div>
+
+<footer class="footer-content">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 footer-about">
+                <h2>About</h2>
+                <p>
+                    This theme was developed by <a href="https://github.com/klugjo" target="_blank" rel="noopener">Jonathan Klughertz</a>. The source code is available on Github. Create Websites. Make Magic.
+                </p>
+            </div>
+            
+    <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3 recent-posts">
+        <h2>Recent Posts</h2>
+        <ul>
+            
+            <li>
+                <a class="footer-post" href="/2020/07/02/Embedded_System/">Embedded_System</a>
+            </li>
+            
+        </ul>
+    </div>
+
+
+
+            
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <ul class="list-inline footer-social-icons">
+                    
+                    <li class="list-inline-item">
+                        <a href="https://github.com/Lozio-0423/Lozio-0423.github.io" target="_blank" rel="noopener">
+                            <span class="footer-icon-container">
+                                <i class="fa fa-github"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="list-inline-item">
+                        <a href="https://twitter.com/Lozio62146286" target="_blank" rel="noopener">
+                            <span class="footer-icon-container">
+                                <i class="fa fa-twitter"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="list-inline-item">
+                        <a href="https://www.facebook.com/" target="_blank" rel="noopener">
+                            <span class="footer-icon-container">
+                                <i class="fa fa-facebook"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="list-inline-item">
+                        <a href="https://www.instagram.com/" target="_blank" rel="noopener">
+                            <span class="footer-icon-container">
+                                <i class="fa fa-instagram"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="list-inline-item">
+                        <a href="https://dribbble.com/" target="_blank" rel="noopener">
+                            <span class="footer-icon-container">
+                                <i class="fa fa-dribbble"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="list-inline-item">
+                        <a href="https://plus.google.com/" target="_blank" rel="noopener">
+                            <span class="footer-icon-container">
+                                <i class="fa fa-google-plus"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="list-inline-item">
+                        <a href="https://www.behance.net/" target="_blank" rel="noopener">
+                            <span class="footer-icon-container">
+                                <i class="fa fa-behance"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="list-inline-item">
+                        <a href="https://500px.com/" target="_blank" rel="noopener">
+                            <span class="footer-icon-container">
+                                <i class="fa fa-500px"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="list-inline-item">
+                        <a href="mailto:shalock4@gmail.com">
+                            <span class="footer-icon-container">
+                                <i class="fa fa-envelope-o"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="list-inline-item">
+                        <a href="\#">
+                            <span class="footer-icon-container">
+                                <i class="fa fa-rss"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                </ul>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <div class="footer-copyright">
+                    Lozio·H·Kasumi All right reserved | Design & Hexo <a href=\"http://www.codeblocq.com/\">Jonathan Klughertz</a>"
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- After footer scripts -->
+
+<!-- jQuery -->
+<script src="//code.jquery.com/jquery-2.1.4.min.js"></script>
+
+<!-- Tween Max -->
+<script src="//cdnjs.cloudflare.com/ajax/libs/gsap/1.18.5/TweenMax.min.js"></script>
+
+<!-- Gallery -->
+<script src="//cdnjs.cloudflare.com/ajax/libs/featherlight/1.3.5/featherlight.min.js" type="text/javascript" charset="utf-8"></script>
+
+<!-- Custom JavaScript -->
+
+<script src="/js/main.js"></script>
+
+
+<!-- Disqus Comments -->
+
+
+
+</body>
+
+</html>
