@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>日本語チャット練習 - さくら光ネット</title>
+    <title>日本語チャット練習 - さくら光ネット (API Key版)</title>
     
     <!-- React & Babel -->
     <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
@@ -29,11 +29,11 @@
         /* Chat Bubbles */
         .chat-bubble {
             position: relative;
-            max-width: 80%;
+            max-width: 85%;
             padding: 10px 14px;
-            border-radius: 12px;
+            border-radius: 14px;
             font-size: 0.95rem;
-            line-height: 1.5;
+            line-height: 1.6;
             word-wrap: break-word;
         }
         .chat-bubble.user {
@@ -48,6 +48,14 @@
             border-bottom-left-radius: 2px;
             margin-right: auto;
             box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+        }
+        .chat-bubble.system {
+            background-color: #fff3cd;
+            color: #856404;
+            font-size: 0.85rem;
+            margin: 0 auto;
+            text-align: center;
+            border: 1px solid #ffeeba;
         }
 
         /* Typing Animation */
@@ -83,9 +91,11 @@
         const { useState, useEffect, useRef } = React;
 
         // --- API Handling ---
-        const apiKey = ""; // The environment will inject the key here.
+        async function generateAIResponse(history, userLevel, apiKey) {
+            if (!apiKey) {
+                throw new Error("APIキーが設定されていません。右上の設定ボタンからAPIキーを入力してください。");
+            }
 
-        async function generateAIResponse(history, userLevel) {
             const systemPrompt = `
             あなたは日本のインターネットプロバイダー「さくら光ネット」のカスタマーサポート担当者「佐藤」です。
             相手は日本語学習者です。
@@ -130,33 +140,43 @@
                 });
 
                 const data = await response.json();
-                if (data.error) throw new Error(data.error.message);
+                
+                if (data.error) {
+                    console.error("API detailed error:", data.error);
+                    throw new Error(data.error.message || "APIエラーが発生しました。");
+                }
+                
+                if (!data.candidates || !data.candidates[0] || !data.candidates[0].content) {
+                    throw new Error("予期しないレスポンス形式です。");
+                }
+
                 return data.candidates[0].content.parts[0].text;
             } catch (error) {
-                console.error("API Error:", error);
-                return "申し訳ありません。システムエラーが発生しました。もう一度お試しください。";
+                console.error("API Call Failed:", error);
+                throw error; // 上位コンポーネントで処理させる
             }
         }
 
         // --- Components ---
 
+        // Modal for Reset Confirmation
         const Modal = ({ isOpen, onClose, onConfirm, title, message }) => {
             if (!isOpen) return null;
             return (
-                <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 px-4">
-                    <div className="bg-white rounded-lg p-6 max-w-sm w-full shadow-xl transform transition-all">
+                <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 px-4 animate-fade-in">
+                    <div className="bg-white rounded-xl p-6 max-w-sm w-full shadow-2xl transform transition-all scale-100">
                         <h3 className="text-lg font-bold text-gray-900 mb-2">{title}</h3>
-                        <p className="text-gray-600 mb-6">{message}</p>
+                        <p className="text-gray-600 mb-6 text-sm">{message}</p>
                         <div className="flex justify-end space-x-3">
                             <button 
                                 onClick={onClose}
-                                className="px-4 py-2 rounded text-gray-600 hover:bg-gray-100 font-medium transition-colors"
+                                className="px-4 py-2 rounded-lg text-gray-600 hover:bg-gray-100 font-medium transition-colors text-sm"
                             >
                                 キャンセル
                             </button>
                             <button 
                                 onClick={onConfirm}
-                                className="px-4 py-2 rounded bg-red-500 text-white hover:bg-red-600 font-medium transition-colors"
+                                className="px-4 py-2 rounded-lg bg-red-500 text-white hover:bg-red-600 font-medium transition-colors text-sm shadow-md"
                             >
                                 リセット
                             </button>
@@ -166,7 +186,62 @@
             );
         };
 
-        const Header = ({ level, setLevel, onResetRequest }) => (
+        // Settings Modal for API Key
+        const SettingsModal = ({ isOpen, onClose, apiKey, setApiKey }) => {
+            const [tempKey, setTempKey] = useState(apiKey);
+            
+            // Update local state when prop changes
+            useEffect(() => {
+                setTempKey(apiKey);
+            }, [apiKey]);
+
+            const handleSave = () => {
+                setApiKey(tempKey);
+                onClose();
+            };
+
+            if (!isOpen) return null;
+            return (
+                <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 px-4">
+                    <div className="bg-white rounded-xl p-6 max-w-md w-full shadow-2xl">
+                        <div className="flex justify-between items-center mb-4">
+                            <h3 className="text-lg font-bold text-gray-900">設定</h3>
+                            <button onClick={onClose} className="text-gray-400 hover:text-gray-600">
+                                <i className="fa-solid fa-xmark text-xl"></i>
+                            </button>
+                        </div>
+                        
+                        <div className="mb-4">
+                            <label className="block text-sm font-medium text-gray-700 mb-1">Gemini API Key</label>
+                            <input 
+                                type="password" 
+                                value={tempKey}
+                                onChange={(e) => setTempKey(e.target.value)}
+                                placeholder="AIzaSy..."
+                                className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-blue-500 outline-none"
+                            />
+                            <p className="text-xs text-gray-500 mt-2">
+                                ※ キーはブラウザ内にのみ保存され、外部に送信されることはありません。<br/>
+                                <a href="https://aistudio.google.com/app/apikey" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">
+                                    APIキーの取得はこちら (Google AI Studio)
+                                </a>
+                            </p>
+                        </div>
+
+                        <div className="flex justify-end">
+                            <button 
+                                onClick={handleSave}
+                                className="px-4 py-2 rounded-lg bg-blue-600 text-white hover:bg-blue-700 font-medium transition-colors text-sm shadow-md"
+                            >
+                                保存して閉じる
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            );
+        };
+
+        const Header = ({ level, setLevel, onResetRequest, onOpenSettings }) => (
             <div className="bg-white border-b border-gray-200 p-3 md:p-4 sticky top-0 z-10 shadow-sm flex justify-between items-center">
                 <div className="flex items-center gap-3">
                     <div className="w-10 h-10 rounded-full bg-pink-100 flex items-center justify-center text-pink-600 shadow-sm">
@@ -176,12 +251,12 @@
                         <h1 className="font-bold text-gray-800 text-sm md:text-base">さくら光ネット</h1>
                         <div className="flex items-center text-xs text-green-500 font-medium">
                             <span className="w-2 h-2 bg-green-500 rounded-full mr-1 animate-pulse"></span>
-                            サポート担当：佐藤
+                            オンライン
                         </div>
                     </div>
                 </div>
                 <div className="flex items-center gap-2">
-                    <div className="relative">
+                    <div className="relative hidden md:block">
                         <select 
                             value={level} 
                             onChange={(e) => setLevel(e.target.value)}
@@ -193,6 +268,15 @@
                         </select>
                         <i className="fa-solid fa-chevron-down absolute right-2 top-1/2 transform -translate-y-1/2 text-gray-400 text-xs pointer-events-none"></i>
                     </div>
+                    
+                    <button 
+                        onClick={onOpenSettings}
+                        className="w-8 h-8 flex items-center justify-center rounded-full text-gray-500 hover:bg-gray-100 transition-colors"
+                        title="設定"
+                    >
+                        <i className="fa-solid fa-gear"></i>
+                    </button>
+
                     <button 
                         onClick={onResetRequest} 
                         className="w-8 h-8 flex items-center justify-center rounded-full text-gray-400 hover:bg-gray-100 hover:text-red-500 transition-colors"
@@ -211,12 +295,13 @@
                         本日
                     </span>
                     <p className="text-xs text-gray-400 mt-2">
-                        本日はさくら光ネットにお問い合わせいただき<br/>ありがとうございます。ご用件を入力してください。
+                        担当：佐藤 (AI)<br/>
+                        お気軽にご相談ください
                     </p>
                 </div>
                 
                 {messages.map((msg, index) => (
-                    <div key={index} className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}>
+                    <div key={index} className={`flex ${msg.role === 'user' ? 'justify-end' : (msg.role === 'system' ? 'justify-center' : 'justify-start')}`}>
                         {msg.role === 'ai' && (
                             <div className="w-8 h-8 rounded-full bg-pink-100 flex-shrink-0 mr-2 flex items-center justify-center text-pink-600 text-xs overflow-hidden border border-white shadow-sm">
                                 <img src="https://api.dicebear.com/9.x/avataaars/svg?seed=Sato&backgroundColor=ffdfbf" alt="Sato" className="w-full h-full transform scale-110"/>
@@ -281,8 +366,29 @@
             const [input, setInput] = useState('');
             const [isTyping, setIsTyping] = useState(false);
             const [level, setLevel] = useState('Intermediate');
-            const [isModalOpen, setIsModalOpen] = useState(false);
+            
+            // API Key Management
+            const [apiKey, setApiKey] = useState(() => {
+                return localStorage.getItem('gemini_api_key') || '';
+            });
+            
+            const [isResetModalOpen, setIsResetModalOpen] = useState(false);
+            const [isSettingsModalOpen, setIsSettingsModalOpen] = useState(false);
             const messagesEndRef = useRef(null);
+
+            // Check for API key on first load
+            useEffect(() => {
+                if (!apiKey) {
+                    setIsSettingsModalOpen(true);
+                }
+            }, []);
+
+            // Save API key when changed
+            useEffect(() => {
+                if (apiKey) {
+                    localStorage.setItem('gemini_api_key', apiKey);
+                }
+            }, [apiKey]);
 
             const scrollToBottom = () => {
                 messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -295,6 +401,11 @@
             const handleSend = async () => {
                 if (!input.trim()) return;
 
+                if (!apiKey) {
+                    setIsSettingsModalOpen(true);
+                    return;
+                }
+
                 const userText = input;
                 setInput('');
                 
@@ -302,36 +413,62 @@
                 setMessages(newMessages);
                 setIsTyping(true);
 
-                // 履歴は直近のやり取りのみ送信してトークン節約
-                const contextHistory = newMessages.slice(-8); 
-                const aiText = await generateAIResponse(contextHistory, level);
-
-                setIsTyping(false);
-                setMessages(prev => [...prev, { role: 'ai', text: aiText }]);
+                try {
+                    // 履歴は直近のやり取りのみ送信
+                    const contextHistory = newMessages.slice(-8).filter(m => m.role !== 'system'); 
+                    const aiText = await generateAIResponse(contextHistory, level, apiKey);
+                    
+                    setMessages(prev => [...prev, { role: 'ai', text: aiText }]);
+                } catch (error) {
+                    const errorMessage = error.message.includes("API key") 
+                        ? "APIキーが無効か、設定されていません。設定を確認してください。" 
+                        : `エラー: ${error.message}`;
+                    
+                    setMessages(prev => [...prev, { role: 'system', text: errorMessage }]);
+                    if (error.message.includes("API key") || !apiKey) {
+                        setIsSettingsModalOpen(true);
+                    }
+                } finally {
+                    setIsTyping(false);
+                }
             };
 
             const requestReset = () => {
-                setIsModalOpen(true);
+                setIsResetModalOpen(true);
             };
 
             const confirmReset = () => {
                 setMessages([initialMessage]);
                 setInput('');
-                setIsModalOpen(false);
+                setIsResetModalOpen(false);
             };
 
             return (
                 <div className="flex flex-col h-screen max-w-md mx-auto bg-white shadow-2xl overflow-hidden md:my-0 border-x border-gray-200 relative">
-                    <Header level={level} setLevel={setLevel} onResetRequest={requestReset} />
+                    <Header 
+                        level={level} 
+                        setLevel={setLevel} 
+                        onResetRequest={requestReset} 
+                        onOpenSettings={() => setIsSettingsModalOpen(true)}
+                    />
                     <MessageList messages={messages} isTyping={isTyping} messagesEndRef={messagesEndRef} />
                     <InputArea input={input} setInput={setInput} onSend={handleSend} isTyping={isTyping} />
                     
+                    {/* Reset Confirmation Modal */}
                     <Modal 
-                        isOpen={isModalOpen} 
-                        onClose={() => setIsModalOpen(false)} 
+                        isOpen={isResetModalOpen} 
+                        onClose={() => setIsResetModalOpen(false)} 
                         onConfirm={confirmReset}
                         title="会話のリセット"
                         message="これまでの会話の内容をすべて消去して、最初からやり直しますか？"
+                    />
+
+                    {/* Settings (API Key) Modal */}
+                    <SettingsModal
+                        isOpen={isSettingsModalOpen}
+                        onClose={() => setIsSettingsModalOpen(false)}
+                        apiKey={apiKey}
+                        setApiKey={setApiKey}
                     />
                 </div>
             );
@@ -342,5 +479,4 @@
     </script>
 </body>
 </html>
-
 
