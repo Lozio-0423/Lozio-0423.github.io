@@ -4,18 +4,29 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>日本語チャット練習 - さくら光ネット</title>
+    
+    <!-- React & Babel -->
     <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
     <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
+    
     <!-- Icons -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    
+    <!-- Google Fonts -->
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap');
         body {
             font-family: 'Noto Sans JP', sans-serif;
             background-color: #f0f2f5;
+            margin: 0;
+            padding: 0;
         }
+        
+        /* Chat Bubbles */
         .chat-bubble {
             position: relative;
             max-width: 80%;
@@ -38,6 +49,8 @@
             margin-right: auto;
             box-shadow: 0 1px 2px rgba(0,0,0,0.1);
         }
+
+        /* Typing Animation */
         .typing-dot {
             width: 6px;
             height: 6px;
@@ -52,6 +65,7 @@
             0%, 80%, 100% { transform: scale(0); }
             40% { transform: scale(1); }
         }
+
         /* Custom scrollbar */
         .scrollbar-hide::-webkit-scrollbar {
             display: none;
@@ -69,12 +83,9 @@
         const { useState, useEffect, useRef } = React;
 
         // --- API Handling ---
-        const apiKey = ""; // Running in environment with key injection
+        const apiKey = ""; // The environment will inject the key here.
 
         async function generateAIResponse(history, userLevel) {
-            // Exponential backoff logic is handled in the caller or simple retry here if needed, 
-            // but for this snippet we'll assume standard call.
-            
             const systemPrompt = `
             あなたは日本のインターネットプロバイダー「さくら光ネット」のカスタマーサポート担当者「佐藤」です。
             相手は日本語学習者です。
@@ -84,20 +95,20 @@
             
             【重要：言語レベルの調整】
             相手の日本語レベル（${userLevel}）に合わせて、あなたの言葉遣いを調整してください。
-            - 初級 (Beginner): 漢字を減らし、非常に簡単な言葉を使ってください。敬語は「です・ます」のみに留め、尊敬語・謙譲語は避けてください。
-            - 中級 (Intermediate): 一般的な丁寧語を使ってください。難しい専門用語は避けてください。
+            - 初級 (Beginner): 漢字を減らし、非常に簡単な言葉を使ってください。難しい敬語は避け、「です・ます」のみに留めてください。
+            - 中級 (Intermediate): 一般的な丁寧語を使ってください。日常会話レベルです。
             - 上級 (Advanced): 日本のビジネスシーンとして自然な、正しい敬語（尊敬語・謙譲語）を使ってください。
 
             【重要：エラーへの反応】
-            相手の日本語が文法的に間違っていたり、意味が通じない場合、絶対に「なんとなく察して」返事をしないでください。
-            困った様子を見せたり、聞き返したりしてください。
+            相手の日本語が文法的に間違っていたり、文脈がおかしい場合、絶対に「なんとなく察して」流さないでください。
+            学習者のために、困った様子を見せたり、聞き返したりしてください。
             例：「申し訳ありません、電波が悪かったようです。もう一度お願いできますか？」
             例：「『〜』というのは、XXのことでしょうか？」
-            例：「すみません、よく分かりませんでした。」
+            例：「すみません、その言葉の意味がよく分かりませんでした。」
 
-            【振る舞い】
-            - 常に丁寧ですが、相手が間違っているときは優しく指摘するか、困ったふりをしてください。
-            - 1回の返答は長すぎないように（スマホチャットなので）。
+            【制約】
+            - 返答は簡潔に（チャットなので）。
+            - Markdownは使用せず、プレーンテキストで返してください。
             `;
 
             const contents = [
@@ -129,32 +140,65 @@
 
         // --- Components ---
 
-        const Header = ({ level, setLevel, onReset }) => (
-            <div className="bg-white border-b border-gray-200 p-4 sticky top-0 z-10 shadow-sm flex justify-between items-center">
+        const Modal = ({ isOpen, onClose, onConfirm, title, message }) => {
+            if (!isOpen) return null;
+            return (
+                <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 px-4">
+                    <div className="bg-white rounded-lg p-6 max-w-sm w-full shadow-xl transform transition-all">
+                        <h3 className="text-lg font-bold text-gray-900 mb-2">{title}</h3>
+                        <p className="text-gray-600 mb-6">{message}</p>
+                        <div className="flex justify-end space-x-3">
+                            <button 
+                                onClick={onClose}
+                                className="px-4 py-2 rounded text-gray-600 hover:bg-gray-100 font-medium transition-colors"
+                            >
+                                キャンセル
+                            </button>
+                            <button 
+                                onClick={onConfirm}
+                                className="px-4 py-2 rounded bg-red-500 text-white hover:bg-red-600 font-medium transition-colors"
+                            >
+                                リセット
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            );
+        };
+
+        const Header = ({ level, setLevel, onResetRequest }) => (
+            <div className="bg-white border-b border-gray-200 p-3 md:p-4 sticky top-0 z-10 shadow-sm flex justify-between items-center">
                 <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-full bg-pink-100 flex items-center justify-center text-pink-600">
+                    <div className="w-10 h-10 rounded-full bg-pink-100 flex items-center justify-center text-pink-600 shadow-sm">
                         <i className="fa-solid fa-headset text-xl"></i>
                     </div>
                     <div>
-                        <h1 className="font-bold text-gray-800 text-sm md:text-base">さくら光ネット サポート</h1>
-                        <div className="flex items-center text-xs text-green-500">
-                            <span className="w-2 h-2 bg-green-500 rounded-full mr-1"></span>
-                            オンライン (佐藤)
+                        <h1 className="font-bold text-gray-800 text-sm md:text-base">さくら光ネット</h1>
+                        <div className="flex items-center text-xs text-green-500 font-medium">
+                            <span className="w-2 h-2 bg-green-500 rounded-full mr-1 animate-pulse"></span>
+                            サポート担当：佐藤
                         </div>
                     </div>
                 </div>
                 <div className="flex items-center gap-2">
-                    <select 
-                        value={level} 
-                        onChange={(e) => setLevel(e.target.value)}
-                        className="text-xs bg-gray-50 border border-gray-300 rounded px-2 py-1 outline-none focus:border-pink-400"
+                    <div className="relative">
+                        <select 
+                            value={level} 
+                            onChange={(e) => setLevel(e.target.value)}
+                            className="text-xs bg-gray-50 border border-gray-300 rounded-lg px-2 py-1.5 pr-6 outline-none focus:border-pink-400 focus:ring-1 focus:ring-pink-400 appearance-none cursor-pointer"
+                        >
+                            <option value="Beginner">初級 (N4-N5)</option>
+                            <option value="Intermediate">中級 (N3)</option>
+                            <option value="Advanced">上級 (N1-N2)</option>
+                        </select>
+                        <i className="fa-solid fa-chevron-down absolute right-2 top-1/2 transform -translate-y-1/2 text-gray-400 text-xs pointer-events-none"></i>
+                    </div>
+                    <button 
+                        onClick={onResetRequest} 
+                        className="w-8 h-8 flex items-center justify-center rounded-full text-gray-400 hover:bg-gray-100 hover:text-red-500 transition-colors"
+                        title="チャットをリセット"
                     >
-                        <option value="Beginner">初級 (N4-N5)</option>
-                        <option value="Intermediate">中級 (N3)</option>
-                        <option value="Advanced">上級 (N1-N2)</option>
-                    </select>
-                    <button onClick={onReset} className="text-gray-400 hover:text-gray-600 px-2">
-                        <i className="fa-solid fa-rotate-right"></i>
+                        <i className="fa-solid fa-trash-can"></i>
                     </button>
                 </div>
             </div>
@@ -162,16 +206,20 @@
 
         const MessageList = ({ messages, isTyping, messagesEndRef }) => (
             <div className="flex-1 overflow-y-auto p-4 space-y-4 bg-[#eef0f3]">
-                <div className="text-center text-xs text-gray-400 my-4">
-                    本日はさくら光ネットにお問い合わせいただきありがとうございます。<br/>
-                    ご用件を入力してください。
+                <div className="text-center my-6">
+                    <span className="bg-gray-200 text-gray-500 text-xs px-3 py-1 rounded-full">
+                        本日
+                    </span>
+                    <p className="text-xs text-gray-400 mt-2">
+                        本日はさくら光ネットにお問い合わせいただき<br/>ありがとうございます。ご用件を入力してください。
+                    </p>
                 </div>
                 
                 {messages.map((msg, index) => (
                     <div key={index} className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}>
                         {msg.role === 'ai' && (
-                            <div className="w-8 h-8 rounded-full bg-pink-100 flex-shrink-0 mr-2 flex items-center justify-center text-pink-600 text-xs overflow-hidden">
-                                <img src="https://api.dicebear.com/9.x/micah/svg?seed=Sato&backgroundColor=ffd5dc" alt="Sato" className="w-full h-full"/>
+                            <div className="w-8 h-8 rounded-full bg-pink-100 flex-shrink-0 mr-2 flex items-center justify-center text-pink-600 text-xs overflow-hidden border border-white shadow-sm">
+                                <img src="https://api.dicebear.com/9.x/avataaars/svg?seed=Sato&backgroundColor=ffdfbf" alt="Sato" className="w-full h-full transform scale-110"/>
                             </div>
                         )}
                         <div className={`chat-bubble ${msg.role} shadow-sm`}>
@@ -182,10 +230,10 @@
                 
                 {isTyping && (
                     <div className="flex justify-start">
-                        <div className="w-8 h-8 rounded-full bg-pink-100 flex-shrink-0 mr-2 flex items-center justify-center text-pink-600 text-xs overflow-hidden">
-                            <img src="https://api.dicebear.com/9.x/micah/svg?seed=Sato&backgroundColor=ffd5dc" alt="Sato" className="w-full h-full"/>
+                        <div className="w-8 h-8 rounded-full bg-pink-100 flex-shrink-0 mr-2 flex items-center justify-center text-pink-600 text-xs overflow-hidden border border-white shadow-sm">
+                            <img src="https://api.dicebear.com/9.x/avataaars/svg?seed=Sato&backgroundColor=ffdfbf" alt="Sato" className="w-full h-full transform scale-110"/>
                         </div>
-                        <div className="chat-bubble ai flex items-center h-10">
+                        <div className="chat-bubble ai flex items-center h-10 w-16 justify-center">
                             <div className="typing-dot"></div>
                             <div className="typing-dot"></div>
                             <div className="typing-dot"></div>
@@ -197,43 +245,43 @@
         );
 
         const InputArea = ({ input, setInput, onSend, isTyping }) => (
-            <div className="bg-white p-3 border-t border-gray-200">
+            <div className="bg-white p-3 md:p-4 border-t border-gray-200">
                 <form 
                     onSubmit={(e) => { e.preventDefault(); onSend(); }}
-                    className="flex items-end gap-2 max-w-4xl mx-auto"
+                    className="flex items-end gap-2 max-w-4xl mx-auto relative"
                 >
-                    <div className="flex-1 bg-gray-100 rounded-2xl px-4 py-2 focus-within:bg-white focus-within:ring-2 focus-within:ring-pink-100 transition-all">
+                    <div className="flex-1 bg-gray-100 rounded-2xl px-4 py-3 focus-within:bg-white focus-within:ring-2 focus-within:ring-pink-100 focus-within:shadow-sm transition-all">
                         <input
                             type="text"
                             value={input}
                             onChange={(e) => setInput(e.target.value)}
                             placeholder="メッセージを入力..."
-                            className="w-full bg-transparent border-none outline-none text-sm md:text-base py-1"
+                            className="w-full bg-transparent border-none outline-none text-sm md:text-base placeholder-gray-400"
                             disabled={isTyping}
                         />
                     </div>
                     <button 
                         type="submit" 
                         disabled={!input.trim() || isTyping}
-                        className={`w-10 h-10 rounded-full flex items-center justify-center transition-colors ${
+                        className={`w-12 h-12 rounded-full flex items-center justify-center transition-all duration-200 ${
                             !input.trim() || isTyping 
                                 ? 'bg-gray-200 text-gray-400 cursor-not-allowed' 
-                                : 'bg-blue-500 text-white hover:bg-blue-600 shadow-md'
+                                : 'bg-blue-500 text-white hover:bg-blue-600 shadow-md hover:shadow-lg hover:scale-105'
                         }`}
                     >
-                        <i className="fa-solid fa-paper-plane text-sm"></i>
+                        <i className="fa-solid fa-paper-plane text-lg"></i>
                     </button>
                 </form>
             </div>
         );
 
         const App = () => {
-            const [messages, setMessages] = useState([
-                { role: 'ai', text: 'お電話ありがとうございます、さくら光ネットの佐藤です。本日はどのようなご用件でしょうか？' }
-            ]);
+            const initialMessage = { role: 'ai', text: 'お電話ありがとうございます、さくら光ネットの佐藤です。本日はどのようなご用件でしょうか？' };
+            const [messages, setMessages] = useState([initialMessage]);
             const [input, setInput] = useState('');
             const [isTyping, setIsTyping] = useState(false);
             const [level, setLevel] = useState('Intermediate');
+            const [isModalOpen, setIsModalOpen] = useState(false);
             const messagesEndRef = useRef(null);
 
             const scrollToBottom = () => {
@@ -254,27 +302,37 @@
                 setMessages(newMessages);
                 setIsTyping(true);
 
-                // Generate AI response
-                // We only send the last few messages to save context window and keep focus relevant
-                const contextHistory = newMessages.slice(-6); 
+                // 履歴は直近のやり取りのみ送信してトークン節約
+                const contextHistory = newMessages.slice(-8); 
                 const aiText = await generateAIResponse(contextHistory, level);
 
                 setIsTyping(false);
                 setMessages(prev => [...prev, { role: 'ai', text: aiText }]);
             };
 
-            const handleReset = () => {
-                if(confirm("チャットをリセットしますか？")) {
-                    setMessages([{ role: 'ai', text: 'お電話ありがとうございます、さくら光ネットの佐藤です。本日はどのようなご用件でしょうか？' }]);
-                    setInput('');
-                }
+            const requestReset = () => {
+                setIsModalOpen(true);
+            };
+
+            const confirmReset = () => {
+                setMessages([initialMessage]);
+                setInput('');
+                setIsModalOpen(false);
             };
 
             return (
-                <div className="flex flex-col h-screen max-w-md mx-auto bg-white shadow-xl overflow-hidden md:rounded-xl md:my-4 md:h-[95vh] border border-gray-200">
-                    <Header level={level} setLevel={setLevel} onReset={handleReset} />
+                <div className="flex flex-col h-screen max-w-md mx-auto bg-white shadow-2xl overflow-hidden md:my-0 border-x border-gray-200 relative">
+                    <Header level={level} setLevel={setLevel} onResetRequest={requestReset} />
                     <MessageList messages={messages} isTyping={isTyping} messagesEndRef={messagesEndRef} />
                     <InputArea input={input} setInput={setInput} onSend={handleSend} isTyping={isTyping} />
+                    
+                    <Modal 
+                        isOpen={isModalOpen} 
+                        onClose={() => setIsModalOpen(false)} 
+                        onConfirm={confirmReset}
+                        title="会話のリセット"
+                        message="これまでの会話の内容をすべて消去して、最初からやり直しますか？"
+                    />
                 </div>
             );
         };
@@ -284,4 +342,5 @@
     </script>
 </body>
 </html>
+
 
