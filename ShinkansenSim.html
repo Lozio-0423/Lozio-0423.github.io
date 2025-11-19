@@ -1,0 +1,748 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>新幹線券売機シミュレーター V5</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- React & ReactDOM -->
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <!-- Babel for JSX -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    
+    <style>
+        /* カスタムアニメーション */
+        @keyframes slide-up {
+            from { transform: translateY(20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        .animate-slide-up {
+            animation: slide-up 0.5s ease-out forwards;
+        }
+        @keyframes pulse-slow {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+        .animate-pulse-slow {
+            animation: pulse-slow 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+        /* スクロールバー調整 */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1; 
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #888; 
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #555; 
+        }
+    </style>
+</head>
+<body class="bg-zinc-300">
+    <div id="root"></div>
+
+    <script type="text/babel">
+        const { useState, useEffect, useRef } = React;
+
+        // --- アイコンコンポーネント (Lucide Iconsの代用) ---
+        const IconBase = ({ size = 24, className = "", children }) => (
+            <svg 
+                xmlns="http://www.w3.org/2000/svg" 
+                width={size} 
+                height={size} 
+                viewBox="0 0 24 24" 
+                fill="none" 
+                stroke="currentColor" 
+                strokeWidth="2" 
+                strokeLinecap="round" 
+                strokeLinejoin="round" 
+                className={className}
+            >
+                {children}
+            </svg>
+        );
+
+        const Train = (props) => (
+            <IconBase {...props}>
+                <rect width="16" height="16" x="4" y="4" rx="2"/>
+                <path d="M4 10h16"/><path d="M12 4v8"/>
+                <path d="m8 22-1-2"/><path d="m17 22-1-2"/>
+            </IconBase>
+        );
+        const CreditCard = (props) => (
+            <IconBase {...props}>
+                <rect width="20" height="14" x="2" y="5" rx="2"/>
+                <line x1="2" x2="22" y1="10" y2="10"/>
+            </IconBase>
+        );
+        const Armchair = (props) => (
+            <IconBase {...props}>
+                <path d="M19 9v11a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V9"/>
+                <path d="M5 18h14"/><path d="M2 16v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5"/>
+            </IconBase>
+        );
+        const CheckCircle = (props) => (
+            <IconBase {...props}>
+                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                <polyline points="22 4 12 14.01 9 11.01"/>
+            </IconBase>
+        );
+        const AlertCircle = (props) => (
+            <IconBase {...props}>
+                <circle cx="12" cy="12" r="10"/>
+                <line x1="12" x2="12" y1="8" y2="12"/>
+                <line x1="12" x2="12.01" y1="16" y2="16"/>
+            </IconBase>
+        );
+        const ArrowRight = (props) => (
+            <IconBase {...props}>
+                <path d="M5 12h14"/><path d="m12 5 7 7-7 7"/>
+            </IconBase>
+        );
+        const Calendar = (props) => (
+            <IconBase {...props}>
+                <rect width="18" height="18" x="3" y="4" rx="2" ry="2"/>
+                <line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/>
+                <line x1="3" x2="21" y1="10" y2="10"/>
+            </IconBase>
+        );
+        const Clock = (props) => (
+            <IconBase {...props}>
+                <circle cx="12" cy="12" r="10"/>
+                <polyline points="12 6 12 12 16 14"/>
+            </IconBase>
+        );
+        const MapPin = (props) => (
+            <IconBase {...props}>
+                <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/>
+                <circle cx="12" cy="10" r="3"/>
+            </IconBase>
+        );
+        const Disc = (props) => (
+            <IconBase {...props}>
+                <circle cx="12" cy="12" r="10"/>
+                <circle cx="12" cy="12" r="3"/>
+            </IconBase>
+        );
+
+
+        // --- データ定義 ---
+        const TRAIN_DATA = [
+            {
+                id: 'tokaido',
+                name: '東海道・山陽新幹線',
+                color: 'bg-blue-600',
+                lightColor: 'bg-blue-50',
+                textColor: 'text-blue-700',
+                trainNames: ['のぞみ', 'ひかり', 'こだま'],
+                stations: [
+                { name: '東京', price: 0, isHub: true },
+                { name: '品川', price: 1000 },
+                { name: '新横浜', price: 1380 },
+                { name: '熱海', price: 3740 },
+                { name: '名古屋', price: 10560 },
+                { name: '京都', price: 13320 },
+                { name: '新大阪', price: 13870 },
+                { name: '新神戸', price: 14420 },
+                { name: '姫路', price: 15400 },
+                { name: '岡山', price: 16600 },
+                { name: '広島', price: 18380 },
+                { name: '博多', price: 22220 },
+                ]
+            },
+            {
+                id: 'tohoku',
+                name: '東北・北海道・山形・秋田',
+                color: 'bg-green-600',
+                lightColor: 'bg-green-50',
+                textColor: 'text-green-700',
+                trainNames: ['はやぶさ', 'やまびこ', 'なすの'],
+                stations: [
+                { name: '東京', price: 0, isHub: true },
+                { name: '上野', price: 800 },
+                { name: '大宮', price: 1200 },
+                { name: '宇都宮', price: 4490 },
+                { name: '福島', price: 8580 },
+                { name: '仙台', price: 10890 },
+                { name: '盛岡', price: 14000 },
+                { name: '山形', price: 10640 }, 
+                { name: '秋田', price: 17020 },
+                { name: '新青森', price: 17670 },
+                { name: '新函館北斗', price: 23430 },
+                ]
+            },
+            {
+                id: 'joetsu_hokuriku',
+                name: '上越・北陸新幹線',
+                color: 'bg-pink-600',
+                lightColor: 'bg-pink-50',
+                textColor: 'text-pink-700',
+                trainNames: ['かがやき', 'はくたか', 'とき'],
+                stations: [
+                { name: '東京', price: 0, isHub: true },
+                { name: '上野', price: 800 },
+                { name: '大宮', price: 1200 },
+                { name: '高崎', price: 4490 },
+                { name: '越後湯沢', price: 6260 },
+                { name: '新潟', price: 10230 },
+                { name: '軽井沢', price: 5490 },
+                { name: '長野', price: 7810 },
+                { name: '富山', price: 12430 },
+                { name: '金沢', price: 13850 },
+                { name: '敦賀', price: 15610 },
+                ]
+            }
+        ];
+
+        const WEEKDAYS = ['日', '月', '火', '水', '木', '金', '土'];
+
+        // --- メインコンポーネント ---
+        const ShinkansenTicketMachine = () => {
+            const [screen, setScreen] = useState('home');
+            const [queueCount, setQueueCount] = useState(5);
+            
+            const [selectedDate, setSelectedDate] = useState(null);
+            const [seatType, setSeatType] = useState(''); 
+            const [depStation, setDepStation] = useState(null);
+            const [arrStation, setArrStation] = useState(null);
+            const [selectedTrain, setSelectedTrain] = useState(null);
+            
+            const [totalPrice, setTotalPrice] = useState(0);
+            const [routeLineName, setRouteLineName] = useState('');
+            const [routeLineId, setRouteLineId] = useState('');
+
+            const scrollRef = useRef(null);
+
+            useEffect(() => {
+                const interval = setInterval(() => {
+                setQueueCount((prev) => prev + 1);
+                }, 15000);
+                return () => clearInterval(interval);
+            }, []);
+
+            // Helper Functions
+            const getAvailableDates = () => {
+                const dates = [];
+                const today = new Date();
+                for (let i = 0; i < 7; i++) {
+                const d = new Date(today);
+                d.setDate(today.getDate() + i);
+                dates.push(d);
+                }
+                return dates;
+            };
+
+            const getTrainSchedule = () => {
+                if (!selectedDate || !depStation || !routeLineId) return [];
+                
+                const schedule = [];
+                const startHour = 6;
+                const endHour = 23;
+                const lineInfo = TRAIN_DATA.find(l => l.id === routeLineId);
+                const now = new Date();
+                const isToday = selectedDate.getDate() === now.getDate() && selectedDate.getMonth() === now.getMonth();
+                
+                let trainCount = 1;
+                for (let h = startHour; h <= endHour; h++) {
+                for (let m = 0; m < 60; m += 20) {
+                    if (isToday) {
+                    if (h < now.getHours() || (h === now.getHours() && m < now.getMinutes())) continue;
+                    }
+                    const trainNameBase = lineInfo ? lineInfo.trainNames[trainCount % 3] : '新幹線';
+                    const arrH = (h + 2) % 24;
+                    const arrM = (m + 30) % 60;
+                    schedule.push({
+                    name: `${trainNameBase} ${trainCount * 2 + 100}号`,
+                    depTime: `${h.toString().padStart(2, '0')}:${m.toString().padStart(2, '0')}`,
+                    arrTime: `${arrH.toString().padStart(2, '0')}:${arrM.toString().padStart(2, '0')}`,
+                    vacancy: trainCount % 5 === 0 ? '▲' : (trainCount % 7 === 0 ? '×' : '○')
+                    });
+                    trainCount++;
+                }
+                }
+                return schedule;
+            };
+
+            const formatDateJP = (d) => d ? `${d.getMonth() + 1}月${d.getDate()}日(${WEEKDAYS[d.getDay()]})` : '';
+
+            // Handlers
+            const handleDateSelect = (date) => {
+                setSelectedDate(date);
+                setScreen('select_seat_type');
+            };
+
+            const handleSeatTypeSelect = (type) => {
+                setSeatType(type);
+                setScreen('select_route');
+            };
+
+            const handleStationSelect = (station, lineId, lineName) => {
+                const stationData = { ...station, lineId, lineName };
+                if (!depStation) {
+                setDepStation(stationData);
+                } else if (!arrStation) {
+                if (depStation.name === stationData.name) return;
+                setArrStation(stationData);
+                } else {
+                setDepStation(stationData);
+                setArrStation(null);
+                }
+            };
+
+            const confirmRoute = () => {
+                if (!depStation || !arrStation) return;
+
+                let basePrice = 0;
+                if (depStation.lineId === arrStation.lineId) {
+                basePrice = Math.abs(depStation.price - arrStation.price);
+                } else {
+                basePrice = depStation.price + arrStation.price;
+                }
+                if (basePrice < 800) basePrice = 800;
+
+                let finalPrice = basePrice;
+                if (seatType === '自由席') {
+                finalPrice -= 530;
+                }
+
+                setTotalPrice(finalPrice);
+                setRouteLineName(depStation.lineId === arrStation.lineId ? depStation.lineName : '新幹線（乗継）');
+                setRouteLineId(depStation.lineId);
+
+                if (seatType === '指定席') {
+                setScreen('select_time');
+                } else {
+                setSelectedTrain({ name: '自由席', depTime: '--:--', arrTime: '--:--' });
+                setScreen('confirm');
+                }
+            };
+
+            const handleTimeSelect = (train) => {
+                setSelectedTrain(train);
+                setScreen('confirm');
+            };
+
+            const handlePayment = () => {
+                setScreen('printing');
+                setTimeout(() => {
+                setScreen('done');
+                }, 3000);
+            };
+
+            const resetMachine = () => {
+                setScreen('home');
+                setDepStation(null);
+                setArrStation(null);
+                setSelectedDate(null);
+                setSelectedTrain(null);
+                setSeatType('');
+                setTotalPrice(0);
+            };
+
+            const QueueCounter = () => (
+                <div className="fixed bottom-2 left-2 bg-gray-900 text-white px-3 py-2 rounded shadow-2xl border-l-4 border-red-500 flex items-center gap-3 z-50 animate-pulse-slow">
+                <AlertCircle className="text-red-500" size={20} />
+                <div>
+                    <p className="text-[10px] text-gray-400">後ろで並んでいる人</p>
+                    <p className="text-lg font-bold font-mono leading-none">
+                    <span className="text-red-400 text-xl">{queueCount}</span> 人
+                    </p>
+                </div>
+                </div>
+            );
+
+            const btnBase = "transform active:scale-[0.98] transition-all duration-75 shadow-sm active:shadow-none rounded border select-none flex flex-col items-center justify-center";
+            const btnGreen = `${btnBase} bg-green-600 hover:bg-green-500 border-green-700 text-white`;
+            const btnWhite = `${btnBase} bg-white hover:bg-gray-50 border-gray-300 text-gray-800`;
+            const btnGray = `${btnBase} bg-gray-200 text-gray-400 border-gray-300 cursor-not-allowed`;
+            const btnBlue = `${btnBase} bg-blue-600 hover:bg-blue-500 border-blue-700 text-white`;
+
+            return (
+                <div className="min-h-screen flex flex-col items-center justify-center p-2 font-sans overflow-hidden text-sm md:text-base select-none">
+                
+                <div className="relative w-full max-w-4xl bg-gray-200 rounded-xl p-2 md:p-6 shadow-[0_10px_30px_rgba(0,0,0,0.4)] border-[3px] border-gray-400 flex flex-col h-[95vh] md:h-[800px]">
+                    
+                    {/* Top Panel */}
+                    <div className="bg-gray-800 text-white px-4 py-2 rounded-t-lg flex justify-between items-center mb-2 shadow-inner shrink-0">
+                    <div className="flex items-center gap-2">
+                        <div className="bg-green-500 px-2 py-0.5 rounded text-white font-bold text-xs italic">JR</div>
+                        <h1 className="text-base md:text-lg font-bold tracking-wider text-gray-100">多機能券売機</h1>
+                    </div>
+                    <div className="font-mono text-base text-green-400">
+                        {new Date().toLocaleTimeString('ja-JP', {hour: '2-digit', minute: '2-digit'})}
+                    </div>
+                    </div>
+
+                    {/* Main Screen */}
+                    <div className="flex-1 bg-slate-50 border-[6px] border-gray-600 rounded-lg relative overflow-hidden flex flex-col shadow-inner">
+                    
+                    {/* Dynamic Header */}
+                    {screen !== 'home' && screen !== 'done' && screen !== 'printing' && (
+                        <div className="bg-gradient-to-b from-green-600 to-green-700 text-white p-2 px-4 flex justify-between items-center shadow shrink-0 z-20">
+                        <h2 className="text-base md:text-lg font-bold flex items-center gap-2">
+                            {screen === 'select_date' && '① 乗車日を選択してください'}
+                            {screen === 'select_seat_type' && '② 座席の種類を選択してください'}
+                            {screen === 'select_route' && '③ 区間（乗車駅・降車駅）を選択'}
+                            {screen === 'select_time' && '④ ご希望の列車を選択'}
+                            {screen === 'confirm' && '内容確認'}
+                            {screen === 'payment' && 'お支払い'}
+                        </h2>
+                        <div className="flex gap-2">
+                            <button 
+                                onClick={resetMachine}
+                                className="bg-red-500 hover:bg-red-600 px-3 py-1 rounded text-xs font-bold shadow border-b-2 border-red-800 active:border-b-0 active:translate-y-[1px]"
+                            >
+                                とりけし
+                            </button>
+                        </div>
+                        </div>
+                    )}
+
+                    {/* Content Area */}
+                    <div className="flex-1 overflow-hidden relative flex flex-col">
+                        
+                        {/* --- STEP 0: HOME (Menu) --- */}
+                        {screen === 'home' && (
+                        <div className="h-full p-4 bg-slate-200">
+                            <h2 className="text-center text-xl font-bold text-gray-700 mb-6 bg-white/50 py-2 rounded">ご希望のお取引を選択してください</h2>
+                            <div className="grid grid-cols-2 md:grid-cols-3 gap-4 h-[80%]">
+                                
+                                {/* Active Button */}
+                                <button 
+                                    onClick={() => setScreen('select_date')}
+                                    className={`${btnGreen} text-xl font-bold gap-2 md:col-span-1 row-span-2 hover:brightness-110 shadow-lg border-4 border-green-600`}
+                                >
+                                    <Train size={64} />
+                                    <span className="text-2xl">新幹線</span>
+                                    <span className="text-sm font-normal bg-green-800/30 px-2 rounded">指定席・自由席</span>
+                                </button>
+
+                                {/* Dummy Buttons */}
+                                <button className={`${btnWhite} text-lg font-bold gap-2 opacity-70`}>
+                                    <MapPin size={40} className="text-gray-500"/>
+                                    <span>乗車券</span>
+                                    <span className="text-xs text-gray-500">在来線・近距離</span>
+                                </button>
+                                
+                                <button className={`${btnWhite} text-lg font-bold gap-2 opacity-70`}>
+                                    <Calendar size={40} className="text-gray-500"/>
+                                    <span>定期券</span>
+                                    <span className="text-xs text-gray-500">新規・継続</span>
+                                </button>
+
+                                <button className={`${btnWhite} text-lg font-bold gap-2 opacity-70`}>
+                                    <CreditCard size={40} className="text-gray-500"/>
+                                    <span>ICカード</span>
+                                    <span className="text-xs text-gray-500">チャージ・履歴</span>
+                                </button>
+
+                                <button className={`${btnGray} text-lg font-bold gap-2`}>
+                                    <Disc size={40} />
+                                    <span>入場券</span>
+                                </button>
+
+                                <button className={`${btnGray} text-lg font-bold gap-2`}>
+                                    <ArrowRight size={40} />
+                                    <span>えきねっと</span>
+                                    <span className="text-xs">受取</span>
+                                </button>
+                            </div>
+                        </div>
+                        )}
+
+                        {/* --- STEP 1: DATE --- */}
+                        {screen === 'select_date' && (
+                        <div className="h-full flex flex-col items-center justify-center p-4 bg-slate-50 overflow-y-auto">
+                            <div className="grid grid-cols-3 md:grid-cols-4 gap-4 w-full max-w-3xl">
+                                {getAvailableDates().map((date, idx) => {
+                                    const isToday = idx === 0;
+                                    const isSunday = date.getDay() === 0;
+                                    const isSaturday = date.getDay() === 6;
+                                    return (
+                                    <button
+                                        key={idx}
+                                        onClick={() => handleDateSelect(date)}
+                                        className={`${btnWhite} h-24 md:h-32 gap-1 relative`}
+                                    >
+                                        {isToday && <span className="absolute top-0 left-0 w-full bg-red-500 text-white text-xs font-bold py-1">本日</span>}
+                                        <span className={`text-2xl font-bold ${isSunday ? 'text-red-600' : isSaturday ? 'text-blue-600' : 'text-gray-800'} ${isToday ? 'mt-4' : ''}`}>
+                                            {date.getDate()}日
+                                        </span>
+                                        <span className={`text-lg font-bold ${isSunday ? 'text-red-600' : isSaturday ? 'text-blue-600' : 'text-gray-800'}`}>
+                                            ({WEEKDAYS[date.getDay()]})
+                                        </span>
+                                        <span className="text-xs text-gray-400">{date.getMonth() + 1}月</span>
+                                    </button>
+                                    )
+                                })}
+                            </div>
+                        </div>
+                        )}
+
+                        {/* --- STEP 2: SEAT TYPE --- */}
+                        {screen === 'select_seat_type' && (
+                        <div className="flex flex-col gap-6 h-full justify-center items-center bg-slate-50 p-4">
+                            <div className="bg-white border border-gray-300 px-6 py-2 rounded shadow-sm text-center">
+                                <div className="text-xs text-gray-500 font-bold">乗車日</div>
+                                <div className="font-bold text-lg">{formatDateJP(selectedDate)}</div>
+                            </div>
+
+                            <div className="grid grid-cols-2 gap-6 w-full max-w-2xl">
+                            <button
+                                onClick={() => handleSeatTypeSelect('自由席')}
+                                className={`${btnBlue} h-48 text-xl font-bold relative`}
+                            >
+                                <Armchair size={48} className="mb-2 opacity-80" />
+                                自由席
+                                <span className="text-xs font-normal mt-2 opacity-80">当日のどの列車でも可</span>
+                            </button>
+                            <button
+                                onClick={() => handleSeatTypeSelect('指定席')}
+                                className={`${btnGreen} h-48 text-xl font-bold`}
+                            >
+                                <CheckCircle size={48} className="mb-2 opacity-80" />
+                                指定席
+                                <span className="text-xs font-normal mt-2 opacity-80">座席確保・列車指定</span>
+                            </button>
+                            </div>
+                        </div>
+                        )}
+
+                        {/* --- STEP 3: ROUTE (Station) --- */}
+                        {screen === 'select_route' && (
+                        <div className="flex flex-col h-full">
+                            {/* Status Bar */}
+                            <div className="bg-gray-800 text-white p-2 shrink-0 flex justify-between items-center shadow-md z-10">
+                                <div className="flex items-center gap-2 flex-1 text-xs md:text-sm">
+                                    <span className="text-gray-400 hidden md:inline">{formatDateJP(selectedDate)} {seatType}</span>
+                                    <span className="text-gray-500 mx-1">|</span>
+                                    <div className={`flex flex-col px-2 py-1 rounded border ${depStation ? 'bg-white text-black border-green-500' : 'bg-gray-700 text-gray-400 border-gray-600 dashed'}`}>
+                                        <span className="text-[9px] font-bold text-gray-500">乗車駅</span>
+                                        <span className="font-bold min-w-[60px] text-center">{depStation ? depStation.name : '-'}</span>
+                                    </div>
+                                    <ArrowRight className="text-gray-500" size={16}/>
+                                    <div className={`flex flex-col px-2 py-1 rounded border ${arrStation ? 'bg-white text-black border-green-500' : 'bg-gray-700 text-gray-400 border-gray-600 dashed'}`}>
+                                        <span className="text-[9px] font-bold text-gray-500">降車駅</span>
+                                        <span className="font-bold min-w-[60px] text-center">{arrStation ? arrStation.name : '-'}</span>
+                                    </div>
+                                </div>
+                                <button 
+                                    onClick={confirmRoute}
+                                    disabled={!depStation || !arrStation}
+                                    className={`text-sm font-bold px-4 py-2 rounded border-b-4 active:border-b-0 active:translate-y-1 transition-all ${
+                                        depStation && arrStation ? 'bg-green-500 text-white border-green-700 animate-pulse' : 'bg-gray-500 text-gray-300 border-gray-600 opacity-50'
+                                    }`}
+                                >
+                                    次へ
+                                </button>
+                            </div>
+
+                            {/* Station List */}
+                            <div className="flex-1 overflow-y-auto p-2 bg-gray-100" ref={scrollRef}>
+                                <div className="space-y-4 pb-20">
+                                    {TRAIN_DATA.map((line) => (
+                                        <div key={line.id} className="bg-white rounded shadow-sm border border-gray-300 overflow-hidden">
+                                            <div className={`${line.color} text-white px-2 py-1 text-xs font-bold`}>{line.name}</div>
+                                            <div className={`p-1 grid grid-cols-4 md:grid-cols-5 gap-1 ${line.lightColor}`}>
+                                                {line.stations.map((station) => {
+                                                    const isDep = depStation?.name === station.name && depStation?.lineId === line.id;
+                                                    const isArr = arrStation?.name === station.name && arrStation?.lineId === line.id;
+                                                    let btnClass = "bg-white border-gray-300 text-gray-700 hover:bg-gray-50";
+                                                    if (isDep) btnClass = "bg-blue-600 border-blue-800 text-white z-10";
+                                                    else if (isArr) btnClass = "bg-orange-500 border-orange-700 text-white z-10";
+
+                                                    return (
+                                                        <button
+                                                            key={`${line.id}-${station.name}`}
+                                                            onClick={() => handleStationSelect(station, line.id, line.name)}
+                                                            className={`${btnBase} ${btnClass} h-12 md:h-14 p-0.5 relative`}
+                                                        >
+                                                            {isDep && <span className="absolute -top-1 left-1 bg-blue-800 text-white text-[8px] px-1 rounded">乗車</span>}
+                                                            {isArr && <span className="absolute -top-1 left-1 bg-orange-700 text-white text-[8px] px-1 rounded">降車</span>}
+                                                            <span className="font-bold text-xs md:text-sm">{station.name}</span>
+                                                        </button>
+                                                    );
+                                                })}
+                                            </div>
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
+                        </div>
+                        )}
+
+                        {/* --- STEP 4: TIME (Only for Reserved) --- */}
+                        {screen === 'select_time' && (
+                            <div className="flex flex-col h-full bg-slate-50">
+                                <div className="bg-gray-200 p-2 text-center border-b border-gray-300 text-sm font-bold flex justify-center items-center gap-2">
+                                    <Clock size={16}/>
+                                    {formatDateJP(selectedDate)} / {depStation.name} ➔ {arrStation.name}
+                                </div>
+                                <div className="flex-1 overflow-y-auto p-2 md:p-4">
+                                    <div className="grid grid-cols-1 gap-2 max-w-3xl mx-auto">
+                                        <div className="flex bg-gray-600 text-white text-xs md:text-sm font-bold p-2 rounded-t">
+                                            <div className="w-1/3 pl-2">列車名</div>
+                                            <div className="w-1/3 text-center">発着時刻</div>
+                                            <div className="w-1/3 text-center">空席状況</div>
+                                        </div>
+                                        {getTrainSchedule().length === 0 ? (
+                                            <div className="p-8 text-center text-gray-500 font-bold">
+                                                列車が見つかりません（本日終了）
+                                            </div>
+                                        ) : (
+                                            getTrainSchedule().map((train, idx) => (
+                                                <button
+                                                    key={idx}
+                                                    onClick={() => handleTimeSelect(train)}
+                                                    disabled={train.vacancy === '×'}
+                                                    className={`flex items-center p-2 md:p-3 h-16 md:h-20 border rounded hover:bg-green-50 transition-colors ${train.vacancy === '×' ? 'opacity-50 bg-gray-100 cursor-not-allowed' : 'bg-white border-gray-300'}`}
+                                                >
+                                                    <div className="w-1/3 text-left pl-2 font-bold text-gray-800">
+                                                        {train.name}
+                                                    </div>
+                                                    <div className="w-1/3 text-center flex flex-col items-center justify-center">
+                                                        <div className="text-lg font-bold leading-none">{train.depTime}</div>
+                                                        <div className="text-xs text-gray-400">➔ {train.arrTime}</div>
+                                                    </div>
+                                                    <div className="w-1/3 text-center font-bold text-lg">
+                                                        {train.vacancy === '○' ? <span className="text-green-600">○</span> : 
+                                                        train.vacancy === '▲' ? <span className="text-orange-500">▲</span> : 
+                                                        <span className="text-red-500">×</span>}
+                                                    </div>
+                                                </button>
+                                            ))
+                                        )}
+                                    </div>
+                                </div>
+                            </div>
+                        )}
+
+                        {/* --- CONFIRM --- */}
+                        {screen === 'confirm' && (
+                        <div className="h-full flex flex-col items-center justify-center bg-slate-100 p-4">
+                            <div className="bg-white w-full max-w-md border border-gray-300 shadow-lg mb-6">
+                                <div className="bg-gray-800 text-white text-center py-1 font-bold text-sm">購入内容確認</div>
+                                <div className="p-6 space-y-3 text-sm md:text-base">
+                                    <div className="flex justify-between border-b border-gray-200 pb-2">
+                                        <span className="text-gray-500 font-bold">乗車日</span>
+                                        <span className="font-bold text-lg">{formatDateJP(selectedDate)}</span>
+                                    </div>
+                                    <div className="flex justify-between border-b border-gray-200 pb-2">
+                                        <span className="text-gray-500 font-bold">区間</span>
+                                        <span className="font-bold">{depStation.name} ➔ {arrStation.name}</span>
+                                    </div>
+                                    <div className="flex justify-between border-b border-gray-200 pb-2">
+                                        <span className="text-gray-500 font-bold">列車・設備</span>
+                                        <div className="text-right">
+                                            <div className="font-bold">{selectedTrain?.name}</div>
+                                            <div className="text-sm text-gray-600">
+                                                {selectedTrain?.depTime !== '--:--' && `${selectedTrain?.depTime}発`} {seatType}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className="flex justify-between items-center pt-2">
+                                        <span className="text-gray-800 font-bold">お支払い金額</span>
+                                        <span className="text-3xl font-bold text-red-600 font-mono">¥{totalPrice.toLocaleString()}</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <button
+                            onClick={() => setScreen('payment')}
+                            className={`${btnGreen} w-full max-w-xs py-4 text-xl font-bold shadow-md`}
+                            >
+                            確認
+                            </button>
+                        </div>
+                        )}
+
+                        {/* --- PAYMENT --- */}
+                        {screen === 'payment' && (
+                        <div className="h-full flex flex-col items-center justify-center gap-8 bg-slate-100 p-4">
+                            <div className="bg-gray-800 text-yellow-400 px-8 py-4 rounded-full border-4 border-gray-600 font-mono text-3xl font-bold shadow-inner">
+                                ¥ {totalPrice.toLocaleString()}
+                            </div>
+                            <div className="grid grid-cols-2 gap-4 w-full max-w-md">
+                            <button onClick={handlePayment} className={`${btnBlue} h-24 md:h-32 gap-2 text-lg font-bold`}>
+                                <CreditCard size={32} /> クレジット
+                            </button>
+                            <button onClick={handlePayment} className={`${btnGreen} h-24 md:h-32 gap-2 text-lg font-bold`}>
+                                <span className="text-2xl border-2 border-white rounded-full w-8 h-8 flex items-center justify-center">¥</span> 現金
+                            </button>
+                            </div>
+                        </div>
+                        )}
+
+                        {/* --- DONE --- */}
+                        {(screen === 'printing' || screen === 'done') && (
+                        <div className="h-full flex flex-col items-center justify-center bg-slate-800 text-white">
+                            {screen === 'printing' ? (
+                                <div className="text-center">
+                                    <div className="inline-block animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-green-500 mb-4"></div>
+                                    <p className="text-xl font-bold animate-pulse">発券中...</p>
+                                </div>
+                            ) : (
+                                <div className="flex flex-col items-center w-full p-4 animate-slide-up">
+                                    <div className="bg-emerald-100 text-gray-900 w-full max-w-[400px] aspect-[2/1] rounded shadow-lg relative p-4 font-mono border border-gray-400 mb-8 select-text">
+                                        <div className="flex justify-between items-start">
+                                            <span className="text-xs font-bold border border-black px-1">乗車券・特急券</span>
+                                            <span className="text-[10px]">指定席券売機</span>
+                                        </div>
+                                        <div className="text-center mt-2">
+                                            <div className="text-2xl font-bold flex justify-center items-center gap-2 border-b border-dashed border-gray-400 pb-2">
+                                                {depStation.name} <ArrowRight size={20}/> {arrStation.name}
+                                            </div>
+                                        </div>
+                                        <div className="flex justify-between mt-2 text-sm md:text-base font-bold">
+                                            <div>{formatDateJP(selectedDate)}</div>
+                                            <div>{selectedTrain?.depTime === '--:--' ? '有効期間1日' : `${selectedTrain?.depTime} 発`}</div>
+                                        </div>
+                                        <div className="mt-1 flex justify-between items-center bg-white/50 px-2 rounded">
+                                            <span className="text-sm">{selectedTrain?.name}</span>
+                                            <span className="font-bold">{seatType}</span>
+                                        </div>
+                                        <div className="mt-4 text-right text-2xl font-bold">¥{totalPrice.toLocaleString()}.-</div>
+                                    </div>
+                                    <button onClick={resetMachine} className={`${btnBlue} px-8 py-3 font-bold`}>
+                                        最初の画面へ
+                                    </button>
+                                </div>
+                            )}
+                        </div>
+                        )}
+                    </div>
+                    </div>
+                    
+                    {/* Bottom Panel (Decorative) */}
+                    <div className="mt-2 px-4 flex justify-between items-center opacity-90">
+                        <div className="flex flex-col items-center">
+                            <div className="w-8 h-8 bg-gray-600 rounded-full mb-1"></div>
+                            <span className="text-[10px] font-bold text-gray-600">呼出</span>
+                        </div>
+                        <div className="bg-gray-800 w-32 h-10 rounded-t-lg relative">
+                            {screen === 'done' && (
+                                <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 bg-emerald-200 w-16 h-6 rounded-t text-[8px] text-center pt-1 animate-bounce border border-gray-500 shadow cursor-pointer" onClick={resetMachine}>きっぷ</div>
+                            )}
+                        </div>
+                        <div className="flex flex-col items-center">
+                            <div className="w-16 h-2 bg-gray-600 rounded mb-1"></div>
+                            <span className="text-[10px] font-bold text-gray-600">カード</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <QueueCounter />
+                </div>
+            );
+        };
+
+        ReactDOM.render(<ShinkansenTicketMachine />, document.getElementById('root'));
+    </script>
+</body>
+</html>
+
