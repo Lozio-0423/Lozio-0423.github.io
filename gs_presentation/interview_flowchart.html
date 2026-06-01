@@ -12,13 +12,6 @@
             font-family: 'Noto Sans JP', sans-serif;
             background-color: #f3f4f6;
         }
-        /* Custom scrollbar for details */
-        details > summary {
-            list-style: none;
-        }
-        details > summary::-webkit-details-marker {
-            display: none;
-        }
         .branch-line::before {
             content: '';
             position: absolute;
@@ -51,13 +44,8 @@
 <body class="text-gray-800 antialiased p-4 md:p-8">
 
     <div class="max-w-5xl mx-auto mb-10 text-center">
-        <h1 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">日本語教師向け 半構造化インタビューガイド</h1>
-        <p class="text-gray-600">中級日本語学習者に対するゲーム学習と生成AIの活用に関する質的研究</p>
-        <div class="mt-4 flex flex-wrap justify-center gap-2 text-sm">
-            <span class="px-3 py-1 bg-indigo-100 text-indigo-800 rounded-full"><i class="fas fa-tag mr-1"></i>RQ1: 学習者のニーズ・課題</span>
-            <span class="px-3 py-1 bg-emerald-100 text-emerald-800 rounded-full"><i class="fas fa-tag mr-1"></i>RQ2: AI利便性とゲームの価値</span>
-            <span class="px-3 py-1 bg-rose-100 text-rose-800 rounded-full"><i class="fas fa-tag mr-1"></i>RQ3: 実践の阻害要因</span>
-        </div>
+        <h1 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">インタビュー質問ガイド</h1>
+        <p class="text-gray-600">現役の日本語教師に対する半構造化インタビューの質問ガイド（スクリプト案）を作成しました。<br>実際のインタビューの流れに沿って、そのまま読み上げられる形式で構成しています。</p>
     </div>
 
     <div class="max-w-4xl mx-auto">
@@ -70,28 +58,22 @@
                 </div>
                 <div class="bg-white p-6 rounded-xl shadow-md border-t-4 border-blue-400">
                     <div class="flex justify-between items-start mb-4">
-                        <h2 class="text-xl font-bold text-gray-800">1. 導入（アイスブレイク・基本情報）</h2>
-                        <span class="text-xs font-semibold px-2 py-1 bg-gray-100 text-gray-600 rounded">前提把握</span>
+                        <h2 class="text-xl font-bold text-gray-800">導入（アイスブレイク・基本情報）</h2>
+                        <span class="text-xs font-semibold px-2 py-1 bg-gray-100 text-gray-600 rounded">全体への導入、RQ2の前提</span>
                     </div>
                     <div class="bg-gray-50 p-4 rounded-lg mb-4 text-sm text-gray-700 border-l-4 border-gray-300">
-                        <p class="italic">「本日はお忙しい中、インタビューにご協力いただきありがとうございます。このインタビューでは...（中略）...正解や間違いはありませんので、普段感じていらっしゃることをそのままお話しください。」</p>
+                        <p class="italic">「本日はお忙しい中、インタビューにご協力いただきありがとうございます。この調査は、AIの普及に伴う教材開発の変化や、現場での実践に関する先生方のリアルなお声を伺うことを目的としています。リラックスしてお話しいただければ幸いです。お話しいただいた内容は匿名で処理されますので、ご安心ください。録音を開始してもよろしいでしょうか？」</p>
                     </div>
                     
                     <div class="space-y-4">
                         <div class="border border-gray-200 rounded-lg p-4">
-                            <p class="font-semibold text-blue-900 mb-2"><span class="bg-blue-100 text-blue-800 px-2 py-0.5 rounded text-sm mr-2">Q1</span>先生が現在担当されているクラスの基本的な情報について教えていただけますか？</p>
-                            <p class="text-sm text-gray-600 mb-3">目標、人数、普段のメインの活動など</p>
+                            <p class="font-semibold text-blue-900 mb-2"><span class="bg-blue-100 text-blue-800 px-2 py-0.5 rounded text-sm mr-2">Q1. クラスの基本情報</span>「まずは、現在先生が主に担当されている中級クラスについて教えてください。クラスの目標や人数、これまでにどのような活動をされてきたか、具体的に教えていただけますか？」</p>
                             
-                            <details class="group cursor-pointer">
-                                <summary class="flex items-center text-sm font-medium text-indigo-600 hover:text-indigo-800 transition-colors">
-                                    <i class="fas fa-chevron-right mr-2 transition-transform group-open:rotate-90"></i>
-                                    深掘りプロンプトを表示
-                                </summary>
-                                <div class="mt-2 pl-6 py-2 border-l-2 border-indigo-200 text-sm text-gray-600 space-y-2">
-                                    <p>・「そのクラスの学習者の主な国籍やバックグラウンドはどのようなものですか？」</p>
-                                    <p>・「『〇〇の活動』とおっしゃいましたが、具体的にはどのような手順で行うことが多いですか？」</p>
-                                </div>
-                            </details>
+                            <blockquote class="mt-3 pl-4 py-3 bg-indigo-50 border-l-4 border-indigo-300 rounded-r-lg text-sm text-gray-700 space-y-2">
+                                <p class="font-semibold text-indigo-800 text-xs mb-1"><i class="fas fa-search-plus mr-1"></i>深掘りプロンプト</p>
+                                <p>「そのクラスの学生の国籍や学習目的（進学・就職など）にはどのような特徴がありますか？」</p>
+                                <p>「通常のテキストを使った授業以外に、何か特別な活動（ロールプレイやプロジェクトワークなど）は行っていますか？」</p>
+                            </blockquote>
                         </div>
                     </div>
                 </div>
@@ -104,50 +86,35 @@
                 </div>
                 <div class="bg-white p-6 rounded-xl shadow-md border-t-4 border-emerald-400">
                     <div class="flex justify-between items-start mb-4">
-                        <h2 class="text-xl font-bold text-gray-800">2. メインテーマ1（授業準備とAI認識）</h2>
-                        <span class="text-xs font-semibold px-2 py-1 bg-emerald-100 text-emerald-800 rounded">RQ2</span>
+                        <h2 class="text-xl font-bold text-gray-800">メインテーマ1（授業準備とAI認識）</h2>
+                        <span class="text-xs font-semibold px-2 py-1 bg-emerald-100 text-emerald-800 rounded">RQ2（授業準備の負担と生成AIの利便性認識）</span>
                     </div>
                     
                     <div class="space-y-4">
                         <!-- Q2 -->
                         <div class="border border-gray-200 rounded-lg p-4">
-                            <p class="font-semibold text-blue-900 mb-2"><span class="bg-blue-100 text-blue-800 px-2 py-0.5 rounded text-sm mr-2">Q2</span>授業を設計・教材作成する際、特に「こだわっている点」や「考慮している点」は何ですか？</p>
-                            <details class="group cursor-pointer">
-                                <summary class="flex items-center text-sm font-medium text-indigo-600 hover:text-indigo-800">
-                                    <i class="fas fa-chevron-right mr-2 transition-transform group-open:rotate-90"></i>深掘りプロンプト
-                                </summary>
-                                <div class="mt-2 pl-6 py-2 border-l-2 border-indigo-200 text-sm text-gray-600">
-                                    <p>・「学習者のモチベーションを維持するために工夫されていることはありますか？」</p>
-                                </div>
-                            </details>
+                            <p class="font-semibold text-blue-900 mb-2"><span class="bg-blue-100 text-blue-800 px-2 py-0.5 rounded text-sm mr-2">Q2. 授業準備の現状と課題</span>「普段の授業準備についてお伺いします。授業を設計する際や教材を作る際に、最も考慮している点や、逆に『ここが一番負担だ、課題だ』と感じているのはどのような部分でしょうか？」</p>
+                            <blockquote class="mt-3 pl-4 py-3 bg-indigo-50 border-l-4 border-indigo-300 rounded-r-lg text-sm text-gray-700 space-y-2">
+                                <p class="font-semibold text-indigo-800 text-xs mb-1"><i class="fas fa-search-plus mr-1"></i>深掘りプロンプト</p>
+                                <p>「それは時間的な負担ですか？ それともアイデアを出すための負担ですか？」</p>
+                            </blockquote>
                         </div>
 
                         <!-- Q3 -->
                         <div class="border border-gray-200 rounded-lg p-4">
-                            <p class="font-semibold text-blue-900 mb-2"><span class="bg-blue-100 text-blue-800 px-2 py-0.5 rounded text-sm mr-2">Q3</span>逆に、授業準備において「ここが負担だな」「もっと効率化したいな」と感じる課題はありますか？</p>
-                            <details class="group cursor-pointer">
-                                <summary class="flex items-center text-sm font-medium text-indigo-600 hover:text-indigo-800">
-                                    <i class="fas fa-chevron-right mr-2 transition-transform group-open:rotate-90"></i>深掘りプロンプト
-                                </summary>
-                                <div class="mt-2 pl-6 py-2 border-l-2 border-indigo-200 text-sm text-gray-600">
-                                    <p>・「一番時間がかかっている作業は具体的に何ですか？」</p>
+                            <p class="font-semibold text-blue-900 mb-2"><span class="bg-blue-100 text-blue-800 px-2 py-0.5 rounded text-sm mr-2">Q3. 生成AIの使用状況（プライベート・業務）</span>「最近、ChatGPTなどの生成AIが話題になっていますが、先生ご自身は生成AIをプライベートや日常生活で使われることはありますか？」</p>
+                            <blockquote class="mt-3 pl-4 py-3 bg-indigo-50 border-l-4 border-indigo-300 rounded-r-lg text-sm text-gray-700 space-y-3">
+                                <div>
+                                    <p class="font-semibold text-indigo-800 text-xs mb-1"><i class="fas fa-search-plus mr-1"></i>深掘りプロンプト（使っている場合）</p>
+                                    <p>「どのような用途で使っていますか？」</p>
+                                    <p>「では、授業準備や業務などの仕事面においてはいかがでしょうか？」</p>
+                                    <p class="mt-2">「具体的にどのような作業にAIを活用していますか？ AIを使うことで、先ほどおっしゃっていた『負担』は軽減されましたか？」</p>
                                 </div>
-                            </details>
-                        </div>
-
-                        <!-- Q4 -->
-                        <div class="border border-gray-200 rounded-lg p-4">
-                            <p class="font-semibold text-blue-900 mb-2"><span class="bg-blue-100 text-blue-800 px-2 py-0.5 rounded text-sm mr-2">Q4</span>生成AI（ChatGPTなど）をどの程度お使いになっていますか？</p>
-                            <p class="text-sm text-gray-600 mb-3">仕事（授業準備等）とプライベートの両面について</p>
-                            <details class="group cursor-pointer">
-                                <summary class="flex items-center text-sm font-medium text-indigo-600 hover:text-indigo-800">
-                                    <i class="fas fa-chevron-right mr-2 transition-transform group-open:rotate-90"></i>深掘りプロンプト
-                                </summary>
-                                <div class="mt-2 pl-6 py-2 border-l-2 border-indigo-200 text-sm text-gray-600 space-y-2">
-                                    <p>・「（使っている場合）具体的にどのようなプロンプト（指示）を出して教材を作っていますか？」</p>
-                                    <p>・「（使っていない場合）使ってみようと思ったことはありますか？ 何がハードルになっていますか？」</p>
+                                <div class="mt-3 pt-3 border-t border-indigo-200">
+                                    <p class="font-semibold text-indigo-800 text-xs mb-1"><i class="fas fa-search-plus mr-1"></i>深掘りプロンプト（使っていない場合）</p>
+                                    <p>「使っていない理由（例：必要性を感じない、使い方がわからない、情報の正確性が不安など）があれば教えていただけますか？」</p>
                                 </div>
-                            </details>
+                            </blockquote>
                         </div>
                     </div>
                 </div>
@@ -160,45 +127,33 @@
                 </div>
                 <div class="bg-white p-6 rounded-xl shadow-md border-t-4 border-indigo-400">
                     <div class="flex justify-between items-start mb-4">
-                        <h2 class="text-xl font-bold text-gray-800">3. メインテーマ2（学習者認識とゲーム学習）</h2>
-                        <div class="flex gap-1">
-                            <span class="text-xs font-semibold px-2 py-1 bg-indigo-100 text-indigo-800 rounded">RQ1</span>
-                            <span class="text-xs font-semibold px-2 py-1 bg-emerald-100 text-emerald-800 rounded">RQ2</span>
-                        </div>
+                        <h2 class="text-xl font-bold text-gray-800">メインテーマ2（学習者認識とゲーム学習）</h2>
+                        <span class="text-xs font-semibold px-2 py-1 bg-indigo-100 text-indigo-800 rounded">RQ1（学習者実態の把握）、RQ2（ゲーム学習の評価）</span>
                     </div>
                     
                     <div class="space-y-4 mb-6">
-                        <!-- Q5 -->
+                        <!-- Q4 -->
                         <div class="border border-gray-200 rounded-lg p-4 bg-indigo-50/30">
-                            <p class="font-semibold text-blue-900 mb-2"><span class="bg-blue-100 text-blue-800 px-2 py-0.5 rounded text-sm mr-2">Q5</span>中級学習者たちは、教室外での学習や日本語使用にどのような課題を感じていると思いますか？</p>
-                            <p class="text-sm text-gray-600 mb-3">双方向的な産出活動（話す・書く）へのニーズについて</p>
-                            <details class="group cursor-pointer">
-                                <summary class="flex items-center text-sm font-medium text-indigo-600 hover:text-indigo-800">
-                                    <i class="fas fa-chevron-right mr-2 transition-transform group-open:rotate-90"></i>深掘りプロンプト
-                                </summary>
-                                <div class="mt-2 pl-6 py-2 border-l-2 border-indigo-200 text-sm text-gray-600 space-y-2">
-                                    <p>・「学習者から、授業外の学習について直接相談を受けたことはありますか？」</p>
-                                    <p>・「教室外で日本語を使う機会が少ない学習者に対して、どのようなサポートが必要だとお考えですか？」</p>
-                                </div>
-                            </details>
+                            <p class="font-semibold text-blue-900 mb-2"><span class="bg-blue-100 text-blue-800 px-2 py-0.5 rounded text-sm mr-2">Q4. 学習者の授業外学習とニーズの把握</span>「次に、学習者についてお伺いします。先生から見て、学生たちは教室外でどのように日本語を学習したり、使ったりしていると認識されていますか？」</p>
+                            <blockquote class="mt-3 pl-4 py-3 bg-indigo-50 border-l-4 border-indigo-300 rounded-r-lg text-sm text-gray-700 space-y-2">
+                                <p class="font-semibold text-indigo-800 text-xs mb-1"><i class="fas fa-search-plus mr-1"></i>深掘りプロンプト</p>
+                                <p>「宿題以外の自律的な学習状況を、普段どのように把握されていますか？」</p>
+                                <p>「学生たちは、もっと双方向で話すような活動（アウトプット）を求めていると感じることはありますか？」</p>
+                            </blockquote>
                         </div>
 
-                        <!-- Q6 -->
+                        <!-- Q5 -->
                         <div class="border border-gray-200 rounded-lg p-4">
-                            <p class="font-semibold text-blue-900 mb-2"><span class="bg-blue-100 text-blue-800 px-2 py-0.5 rounded text-sm mr-2">Q6</span>「教育用のゲーム学習」と聞いて、どのようなものを想像されますか？ 中級学習者にとっての「教育的価値」は何だとお考えですか？</p>
-                            <details class="group cursor-pointer">
-                                <summary class="flex items-center text-sm font-medium text-indigo-600 hover:text-indigo-800">
-                                    <i class="fas fa-chevron-right mr-2 transition-transform group-open:rotate-90"></i>深掘りプロンプト
-                                </summary>
-                                <div class="mt-2 pl-6 py-2 border-l-2 border-indigo-200 text-sm text-gray-600">
-                                    <p>・「単なる『遊び』と『教育的価値のあるゲーム』の違いはどこにあると思いますか？」</p>
-                                </div>
-                            </details>
+                            <p class="font-semibold text-blue-900 mb-2"><span class="bg-blue-100 text-blue-800 px-2 py-0.5 rounded text-sm mr-2">Q5. ゲーム学習の教育的価値とイメージ</span>「中級学習者向けに、自発的な発話ややり取りを促す『ゲーム学習（ロールプレイなどの双方向な産出活動を含む）』を取り入れることについて、その教育的な価値をどのように評価されていますか？」</p>
+                            <blockquote class="mt-3 pl-4 py-3 bg-indigo-50 border-l-4 border-indigo-300 rounded-r-lg text-sm text-gray-700 space-y-2">
+                                <p class="font-semibold text-indigo-800 text-xs mb-1"><i class="fas fa-search-plus mr-1"></i>深掘りプロンプト</p>
+                                <p>「先生が『教育用のゲーム』と聞いたとき、どのようなものを想像されますか？」</p>
+                            </blockquote>
                         </div>
                         
-                        <!-- Q7 (Trigger for branch) -->
+                        <!-- Q6 (Trigger for branch) -->
                         <div class="border border-indigo-300 rounded-lg p-4 bg-indigo-50">
-                            <p class="font-bold text-indigo-900 mb-1"><span class="bg-indigo-600 text-white px-2 py-0.5 rounded text-sm mr-2">Q7</span>これまでの授業で「ゲーム学習」を実践されたことはありますか？</p>
+                            <p class="font-bold text-indigo-900 mb-1"><span class="bg-indigo-600 text-white px-2 py-0.5 rounded text-sm mr-2">Q6. ゲーム学習の実践状況と課題</span>「実際に、先生ご自身が授業（あるいは授業外の課題）として、そういったゲーム的な活動を実践されたことはありますか？」</p>
                             <p class="text-xs text-indigo-500 text-center mt-2"><i class="fas fa-arrow-down mr-1"></i> 以下の条件分岐へ</p>
                         </div>
                     </div>
@@ -212,35 +167,26 @@
                     
                     <!-- Branch A -->
                     <div class="flex-1 bg-white p-5 rounded-xl shadow-md border-t-4 border-amber-400 relative">
-                        <div class="absolute -top-3 left-1/2 transform -translate-x-1/2 bg-amber-400 text-white text-xs font-bold px-3 py-1 rounded-full">
+                        <div class="absolute -top-3 left-1/2 transform -translate-x-1/2 bg-amber-400 text-white text-xs font-bold px-3 py-1 rounded-full whitespace-nowrap">
                             YES: 実践したことがある
                         </div>
-                        <p class="mt-3 text-sm font-medium text-gray-800 mb-3">実際に実践してみていかがでしたか？ どのような効果や、限界・課題を感じましたか？</p>
-                        <details class="group cursor-pointer">
-                            <summary class="flex items-center text-xs font-medium text-amber-600 hover:text-amber-800">
-                                <i class="fas fa-chevron-right mr-2 transition-transform group-open:rotate-90"></i>深掘りプロンプト
-                            </summary>
-                            <div class="mt-2 pl-3 py-1 border-l-2 border-amber-200 text-xs text-gray-600 space-y-1">
-                                <p>・「準備にかかった時間や労力は見合うものでしたか？」</p>
-                                <p>・「学習者の反応で、予想外だったことはありますか？」</p>
-                            </div>
-                        </details>
+                        <p class="mt-3 text-sm font-medium text-gray-800 mb-3">「その際、どのようなゲームを実践されましたか？ また、実際にやってみてどのような課題や限界を感じましたか？」</p>
+                        <blockquote class="mt-3 pl-3 py-2 bg-amber-50 border-l-4 border-amber-300 rounded-r-md text-xs text-gray-700 space-y-1">
+                            <p class="font-semibold text-amber-800 mb-1"><i class="fas fa-search-plus mr-1"></i>深掘りプロンプト</p>
+                            <p>「準備にかかる時間や、学生の反応、評価の難しさなど、具体的なエピソードがあれば教えてください。」</p>
+                        </blockquote>
                     </div>
 
                     <!-- Branch B -->
                     <div class="flex-1 bg-white p-5 rounded-xl shadow-md border-t-4 border-gray-400 relative">
-                        <div class="absolute -top-3 left-1/2 transform -translate-x-1/2 bg-gray-500 text-white text-xs font-bold px-3 py-1 rounded-full">
+                        <div class="absolute -top-3 left-1/2 transform -translate-x-1/2 bg-gray-500 text-white text-xs font-bold px-3 py-1 rounded-full whitespace-nowrap">
                             NO: 実践したことがない
                         </div>
-                        <p class="mt-3 text-sm font-medium text-gray-800 mb-3">これまで実践に至らなかった理由や、使わなかった背景にはどのような事情がありましたか？</p>
-                        <details class="group cursor-pointer">
-                            <summary class="flex items-center text-xs font-medium text-gray-600 hover:text-gray-800">
-                                <i class="fas fa-chevron-right mr-2 transition-transform group-open:rotate-90"></i>深掘りプロンプト
-                            </summary>
-                            <div class="mt-2 pl-3 py-1 border-l-2 border-gray-300 text-xs text-gray-600 space-y-1">
-                                <p>・「時間がなかったのでしょうか、それとも適切なツールが見つからなかったのでしょうか？」</p>
-                            </div>
-                        </details>
+                        <p class="mt-3 text-sm font-medium text-gray-800 mb-3">「ゲーム学習の価値はあると感じつつも、これまで実践されなかった（できなかった）一番の理由は何でしょうか？」</p>
+                        <blockquote class="mt-3 pl-3 py-2 bg-gray-50 border-l-4 border-gray-300 rounded-r-md text-xs text-gray-700 space-y-1">
+                            <p class="font-semibold text-gray-700 mb-1"><i class="fas fa-search-plus mr-1"></i>深掘りプロンプト</p>
+                            <p>「作り方がわからない、授業時間に余裕がないなど、具体的な要因を教えていただけますか？」</p>
+                        </blockquote>
                     </div>
                 </div>
             </div>
@@ -252,56 +198,33 @@
                 </div>
                 <div class="bg-white p-6 rounded-xl shadow-md border-t-4 border-rose-400">
                     <div class="flex justify-between items-start mb-4">
-                        <h2 class="text-xl font-bold text-gray-800">4. メインテーマ3（実践の壁・阻害要因）</h2>
-                        <span class="text-xs font-semibold px-2 py-1 bg-rose-100 text-rose-800 rounded">RQ3</span>
-                    </div>
-                    
-                    <div class="bg-gray-50 p-4 rounded-lg mb-4 text-sm text-gray-700 border-l-4 border-rose-300">
-                        <p>「AIという便利なツールがあるにもかかわらず、ゲーム学習の実践が進まないのには、どのような理由があると思われますか？ 少し観点を分けてお聞きします。」</p>
+                        <h2 class="text-xl font-bold text-gray-800">メインテーマ3（実践の壁・阻害要因の深掘り）</h2>
+                        <span class="text-xs font-semibold px-2 py-1 bg-rose-100 text-rose-800 rounded">RQ3（AI環境下における実践の阻害要因）</span>
                     </div>
 
                     <div class="space-y-4">
-                        <!-- Q8 -->
+                        <!-- Q7 -->
                         <div class="border border-gray-200 rounded-lg p-4">
-                            <p class="font-semibold text-blue-900 mb-2"><span class="bg-blue-100 text-blue-800 px-2 py-0.5 rounded text-sm mr-2">Q8</span>【教師自身の信念や考え方】という点ではいかがでしょうか？</p>
-                            <details class="group cursor-pointer">
-                                <summary class="flex items-center text-sm font-medium text-indigo-600 hover:text-indigo-800">
-                                    <i class="fas fa-chevron-right mr-2 transition-transform group-open:rotate-90"></i>深掘りプロンプト
-                                </summary>
-                                <div class="mt-2 pl-6 py-2 border-l-2 border-indigo-200 text-sm text-gray-600 space-y-2">
-                                    <p>・「『ゲーム＝遊んでいるだけ』と見られてしまう不安などはありますか？」</p>
-                                    <p>・「教科書を終わらせなければならない、というプレッシャーは関係していますか？」</p>
+                            <p class="font-semibold text-blue-900 mb-2"><span class="bg-blue-100 text-blue-800 px-2 py-0.5 rounded text-sm mr-2">Q7. AIがあるのに実践が進まない理由の深掘り</span>「ここが本研究の核心部分になるのですが、現在、生成AIを使えば『ゲームのシナリオ』や『複雑なロールプレイの台本』を比較的簡単に、短時間で作れるようになっています。しかし、現実の教育現場では、AIを活用してそういった高度なゲーム学習を導入する動きはあまり広がっていません。先生は、この背景にどのような要因があるとお考えですか？」</p>
+                            
+                            <blockquote class="mt-4 pl-4 py-3 bg-indigo-50 border-l-4 border-indigo-300 rounded-r-lg text-sm text-gray-700 space-y-4">
+                                <div>
+                                    <p class="font-semibold text-indigo-800 text-xs mb-1"><i class="fas fa-search-plus mr-1"></i>深掘りプロンプト：教師の信念について</p>
+                                    <p>「先生ご自身の『教師としての役割』や『教育観』と、ゲームやAIを組み合わせることに、何かズレや抵抗感を感じることはありますか？」</p>
                                 </div>
-                            </details>
-                        </div>
-
-                        <!-- Q9 -->
-                        <div class="border border-gray-200 rounded-lg p-4">
-                            <p class="font-semibold text-blue-900 mb-2"><span class="bg-blue-100 text-blue-800 px-2 py-0.5 rounded text-sm mr-2">Q9</span>【スキルの面】や【AIに対する心理的なハードル】という観点ではいかがでしょうか？</p>
-                            <details class="group cursor-pointer">
-                                <summary class="flex items-center text-sm font-medium text-indigo-600 hover:text-indigo-800">
-                                    <i class="fas fa-chevron-right mr-2 transition-transform group-open:rotate-90"></i>深掘りプロンプト
-                                </summary>
-                                <div class="mt-2 pl-6 py-2 border-l-2 border-indigo-200 text-sm text-gray-600 space-y-2">
-                                    <p>・「『AIが間違った日本語を出力するかもしれない』という不安は強いですか？」</p>
-                                    <p>・「プロンプトを考えること自体が難しい、という感覚はありますか？」</p>
+                                <div class="pt-3 border-t border-indigo-200">
+                                    <p class="font-semibold text-indigo-800 text-xs mb-1"><i class="fas fa-search-plus mr-1"></i>深掘りプロンプト：スキル不足について</p>
+                                    <p>「AIに適切な指示を出す（プロンプトを書く）スキルや、ゲーム自体を設計するノウハウの不足が壁になっていると感じますか？」</p>
                                 </div>
-                            </details>
-                        </div>
-
-                        <!-- Q10 -->
-                        <div class="border border-gray-200 rounded-lg p-4">
-                            <p class="font-semibold text-blue-900 mb-2"><span class="bg-blue-100 text-blue-800 px-2 py-0.5 rounded text-sm mr-2">Q10</span>【組織のルールや環境（組織的制約）】という観点ではどうでしょうか？</p>
-                            <details class="group cursor-pointer">
-                                <summary class="flex items-center text-sm font-medium text-indigo-600 hover:text-indigo-800">
-                                    <i class="fas fa-chevron-right mr-2 transition-transform group-open:rotate-90"></i>深掘りプロンプト
-                                </summary>
-                                <div class="mt-2 pl-6 py-2 border-l-2 border-indigo-200 text-sm text-gray-600 space-y-2">
-                                    <p>・「学校の設備（Wi-Fiやデバイス）の制約は大きいですか？」</p>
-                                    <p>・「他の先生方との足並みを揃えなければならない、といった同調圧力のようなものはありますか？」</p>
-                                    <p>・「カリキュラムの自由度が低いことが影響していますか？」</p>
+                                <div class="pt-3 border-t border-indigo-200">
+                                    <p class="font-semibold text-indigo-800 text-xs mb-1"><i class="fas fa-search-plus mr-1"></i>深掘りプロンプト：心理的障壁について</p>
+                                    <p>「AIが作ったものをそのまま学生に提供することへの不安や、心理的なハードルはありますか？」</p>
                                 </div>
-                            </details>
+                                <div class="pt-3 border-t border-indigo-200">
+                                    <p class="font-semibold text-indigo-800 text-xs mb-1"><i class="fas fa-search-plus mr-1"></i>深掘りプロンプト：組織的制約について</p>
+                                    <p>「学校のシラバスの縛り、進学実績へのプレッシャー、あるいは同僚の先生方の目など、組織的なルールや風土が関係していると感じますか？」</p>
+                                </div>
+                            </blockquote>
                         </div>
                     </div>
                 </div>
@@ -313,11 +236,14 @@
                     <i class="fas fa-door-open text-xs"></i>
                 </div>
                 <div class="bg-white p-6 rounded-xl shadow-md border-t-4 border-gray-500">
-                    <h2 class="text-xl font-bold text-gray-800 mb-4">5. クロージング</h2>
+                    <div class="flex justify-between items-start mb-4">
+                        <h2 class="text-xl font-bold text-gray-800">クロージング</h2>
+                        <span class="text-xs font-semibold px-2 py-1 bg-gray-200 text-gray-700 rounded">全体</span>
+                    </div>
                     <div class="bg-gray-50 p-4 rounded-lg text-sm text-gray-700">
-                        <p class="mb-3">「私からお伺いしたかったことは以上になります。これまでお話しいただいたこと以外に、AIの活用やゲーム学習、あるいは現在の中級日本語教育について、先生が日頃から気になっていることや、付け加えておきたいことはございますか？」</p>
-                        <p class="text-gray-500 text-xs text-center my-2">（回答があれば傾聴・深掘り）</p>
-                        <p>「本日は大変貴重なお話を伺うことができ、私自身の研究にとって非常に有意義な時間となりました。改めて、ご協力いただき誠にありがとうございました。」</p>
+                        <p class="mb-3">「非常に興味深いお話をたくさん聞かせていただき、ありがとうございます。私の質問は以上になりますが、今日お話しいただいたことに関連して、言い残したことや、最後に付け加えておきたいことなどはございますか？」</p>
+                        <p class="text-gray-500 text-xs text-center my-2">（回答を聞く）</p>
+                        <p>「本日は貴重なお時間をいただき、本当にありがとうございました。頂戴したご意見は、今後の研究にしっかりと活かしてまいります。」</p>
                     </div>
                 </div>
             </div>
