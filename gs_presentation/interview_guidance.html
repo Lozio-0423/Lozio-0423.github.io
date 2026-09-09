@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>【調査へのご協力ありがとうございます】</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              50: '#f0f9ff',
+              100: '#e0f2fe',
+              200: '#bae6fd',
+              400: '#38bdf8',
+              500: '#0ea5e9',
+              600: '#0284c7',
+              700: '#0369a1',
+            },
+            pastel: {
+              rose: '#fff1f2',
+              roseBorder: '#fecdd3',
+              amber: '#fffbeb',
+              amberBorder: '#fde68a',
+              emerald: '#ecfdf5',
+              emeraldBorder: '#a7f3d0',
+              indigo: '#eef2ff',
+              indigoBorder: '#c7d2fe',
+            }
+          },
+          borderRadius: {
+            '4xl': '2rem',
+            '5xl': '2.5rem',
+          },
+          fontFamily: {
+            sans: ['"Hiragino Sans"', '"Hiragino Kaku Gothic ProN"', '"Noto Sans JP"', 'Meiryo', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    /* カスタムアニメーション＆スタイル */
+    @keyframes floatSlow {
+      0%, 100% { transform: translateY(0px) rotate(0deg); }
+      50% { transform: translateY(-10px) rotate(3deg); }
+    }
+    .animate-float {
+      animation: floatSlow 6s ease-in-out infinite;
+    }
+    
+    /* 印刷時のスタイル最適化 */
+    @media print {
+      body {
+        background: white !important;
+        color: #1f2937 !important;
+      }
+      .no-print {
+        display: none !important;
+      }
+      .print-break-inside {
+        break-inside: avoid;
+      }
+    }
+  </style>
+</head>
+<body class="bg-gradient-to-br from-sky-50 via-indigo-50/40 to-teal-50 text-slate-700 min-h-screen font-sans antialiased pb-16 selection:bg-sky-200">
+
+  <!-- 背景の丸い装飾バブル -->
+  <div class="fixed inset-0 overflow-hidden pointer-events-none -z-10">
+    <div class="absolute -top-24 -left-24 w-96 h-96 bg-sky-200/50 rounded-full blur-3xl"></div>
+    <div class="absolute top-1/3 -right-28 w-80 h-80 bg-rose-200/40 rounded-full blur-3xl"></div>
+    <div class="absolute bottom-10 left-1/4 w-96 h-96 bg-emerald-200/40 rounded-full blur-3xl"></div>
+  </div>
+
+  <!-- ナビゲーションバー (丸型フローティング) -->
+  <header class="sticky top-4 z-40 max-w-4xl mx-auto px-4 mb-6">
+    <div class="bg-white/90 backdrop-blur-md shadow-lg shadow-sky-900/5 border border-white/80 rounded-full px-6 py-3.5 flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <span class="w-10 h-10 rounded-full bg-gradient-to-tr from-sky-500 to-teal-400 flex items-center justify-center text-white font-bold shadow-md shadow-sky-500/20">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+          </svg>
+        </span>
+        <div>
+          <p class="text-xs text-slate-400 font-medium">早稲田大学大学院 日本語教育研究科 羅駿浩</p>
+          <h1 class="text-sm md:text-base font-bold text-slate-800">インタビューへのご協力、ありがとうございます！</h1>
+        </div>
+      </div>
+      <div class="flex items-center gap-2 no-print">
+        <button onclick="window.print()" class="hidden sm:inline-flex items-center gap-1.5 text-xs font-semibold px-4 py-2 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-700 transition">
+          <svg class="w-4 h-4 text-slate-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"></path>
+          </svg>
+          印刷・保存
+        </button>
+        <a href="#contact" class="inline-flex items-center gap-1.5 text-xs font-semibold px-4 py-2 rounded-full bg-gradient-to-r from-sky-500 to-blue-600 hover:from-sky-600 hover:to-blue-700 text-white shadow-md shadow-sky-500/25 transition">
+          お問い合わせ
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main class="max-w-4xl mx-auto px-4 space-y-8">
+
+    <!-- ヒーローセクション（メインバナー） -->
+    <section class="relative bg-gradient-to-br from-white/95 via-white/80 to-sky-50/90 backdrop-blur-md rounded-[2.5rem] p-6 sm:p-10 border border-white shadow-xl shadow-sky-950/5 overflow-hidden">
+      <!-- 装飾の丸 -->
+      <div class="absolute -right-12 -bottom-12 w-48 h-48 rounded-full bg-sky-100/60 pointer-events-none"></div>
+      <div class="absolute top-6 right-8 w-16 h-16 rounded-full bg-teal-100/70 pointer-events-none animate-float"></div>
+
+      <div class="relative z-10 space-y-4">
+        <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-sky-100/80 border border-sky-200 text-sky-700 text-xs font-bold tracking-wide">
+          <span class="w-2 h-2 rounded-full bg-sky-500 animate-pulse"></span>
+          協力者の皆様へ
+        </div>
+
+        <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-800 leading-snug">
+          中級日本語クラスにおける学習活動や教育ツールに関する<br class="hidden sm:inline">
+          <span class="bg-gradient-to-r from-sky-600 to-teal-600 bg-clip-text text-transparent">先生方の実践と率直なご認識</span>をお聞かせください
+        </h2>
+
+        <p class="text-sm sm:text-base text-slate-600 leading-relaxed max-w-2xl">
+          はじめまして。早稲田大学大学院の羅駿浩（ラ シュンコウ）と申します。<br>
+          本研究では、生成AIなどの新しいデジタル技術が普及しつつある中、日本語学校の中級クラスにおいてゲームを用いた学習活動がどのように受け止められ、位置づけられているのか、その実態と先生方の率直なご認識を伺うため、インタビュー調査を実施しております。
+        </p>
+
+        <!-- 3大ハイライト（丸型カード） -->
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-4">
+          <div class="bg-white/90 rounded-3xl p-4 border border-slate-100 shadow-sm flex items-center gap-3">
+            <div class="w-12 h-12 rounded-full bg-sky-100 flex-shrink-0 flex items-center justify-center text-sky-600">
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+              </svg>
+            </div>
+            <div>
+              <p class="text-xs text-slate-400 font-medium">所要時間</p>
+              <p class="text-sm font-bold text-slate-800">40〜60分 程度</p>
+            </div>
+          </div>
+
+          <div class="bg-white/90 rounded-3xl p-4 border border-slate-100 shadow-sm flex items-center gap-3">
+            <div class="w-12 h-12 rounded-full bg-emerald-100 flex-shrink-0 flex items-center justify-center text-emerald-600">
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+              </svg>
+            </div>
+            <div>
+              <p class="text-xs text-slate-400 font-medium">実施形式</p>
+              <p class="text-sm font-bold text-slate-800">オンライン</p>
+            </div>
+          </div>
+
+          <div class="bg-white/90 rounded-3xl p-4 border border-slate-100 shadow-sm flex items-center gap-3">
+            <div class="w-12 h-12 rounded-full bg-amber-100 flex-shrink-0 flex items-center justify-center text-amber-600">
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+              </svg>
+            </div>
+            <div>
+              <p class="text-xs text-slate-400 font-medium">ご協力の御礼</p>
+              <p class="text-sm font-bold text-slate-800">謝礼 1,000円</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- 調査の概要＆お聞きしたいこと -->
+    <section class="bg-white/80 backdrop-blur-md rounded-[2.5rem] p-6 sm:p-8 border border-white shadow-lg shadow-slate-200/50 space-y-6">
+      <div class="flex items-center gap-3">
+        <span class="w-9 h-9 rounded-full bg-sky-500 text-white flex items-center justify-center font-bold text-sm shadow-md shadow-sky-400/30">1</span>
+        <h3 class="text-lg sm:text-xl font-bold text-slate-800">どんな調査？</h3>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <!-- 目的 -->
+        <div class="bg-sky-50/70 border border-sky-100 rounded-3xl p-5 space-y-2">
+          <div class="flex items-center gap-2">
+            <span class="w-7 h-7 rounded-full bg-white flex items-center justify-center text-sky-600 shadow-sm">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+              </svg>
+            </span>
+            <h4 class="font-bold text-slate-800 text-sm">研究の目的</h4>
+          </div>
+          <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
+            教育現場において生成AIの利活用が注目される中、日本語学校の中級クラスにおけるゲーム学習の教育的実践や先生方の意識を伺い、現場の文脈に即したより良い学習支援のあり方を探ります。
+          </p>
+        </div>
+
+        <!-- お尋ねする内容 -->
+        <div class="bg-teal-50/70 border border-teal-100 rounded-3xl p-5 space-y-2">
+          <div class="flex items-center gap-2">
+            <span class="w-7 h-7 rounded-full bg-white flex items-center justify-center text-teal-600 shadow-sm">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path>
+              </svg>
+            </span>
+            <h4 class="font-bold text-slate-800 text-sm">インタビューでお伺いしたいこと</h4>
+          </div>
+          <ul class="text-xs sm:text-sm text-slate-600 space-y-2.5">
+            <li class="flex items-start gap-2">
+              <span class="text-teal-600 font-bold mt-0.5">●</span>
+              <span><strong>中級クラスでの活動：</strong>授業におけるゲームを用いた学習活動との関わりや実践経験、その教育的役割に対するお考え</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-teal-600 font-bold mt-0.5">●</span>
+              <span><strong>業務での生成AI活用：</strong>授業準備や校務等の現場業務における生成AIとの関わり方や率直な印象</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-teal-600 font-bold mt-0.5">●</span>
+              <span><strong>今後の意識や受け止め方：</strong>生成AIの普及を背景とした、ゲーム学習への取り組みに対する意識や実感（期待や難しさなど）</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- 実施方法の詳細（丸みバッジ） -->
+      <div class="bg-slate-50 border border-slate-200/80 rounded-3xl p-5 space-y-3">
+        <h4 class="font-bold text-slate-800 text-sm flex items-center gap-2">
+          <span class="w-2.5 h-2.5 rounded-full bg-emerald-500"></span>
+          インタビューの進め方とお願い
+        </h4>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs sm:text-sm text-slate-600">
+          <div class="flex items-start gap-2 bg-white p-3 rounded-2xl border border-slate-100">
+            <span class="text-sky-500 font-bold">●</span>
+            <span><strong>1対1の対話形式：</strong>オンライン会議（Zoom等）で、リラックスした雰囲気で行います。</span>
+          </div>
+          <div class="flex items-start gap-2 bg-white p-3 rounded-2xl border border-slate-100">
+            <span class="text-sky-500 font-bold">●</span>
+            <span><strong>録音・録画について：</strong>正確な記録のため、事前に許可をいただいた上で録音・録画いたします。</span>
+          </div>
+          <div class="flex items-start gap-2 bg-white p-3 rounded-2xl border border-slate-100 sm:col-span-2">
+            <span class="text-sky-500 font-bold">●</span>
+            <span><strong>環境についてのお願い：</strong>第三者の声や姿が入らないよう、お一人で過ごせる静かな個室環境からのご参加をお願いしております。</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 参加者様への４つのお約束（プライバシーと権利） -->
+    <section class="bg-white/80 backdrop-blur-md rounded-[2.5rem] p-6 sm:p-8 border border-white shadow-lg shadow-slate-200/50 space-y-6">
+      <div class="flex items-center gap-3">
+        <span class="w-9 h-9 rounded-full bg-emerald-500 text-white flex items-center justify-center font-bold text-sm shadow-md shadow-emerald-400/30">2</span>
+        <div>
+          <h3 class="text-lg sm:text-xl font-bold text-slate-800">安心してお話しいただくための４つのお約束</h3>
+          <p class="text-xs text-slate-500">先生方のプライバシーとお気持ちを最優先にお守りいたします。</p>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+
+        <!-- お約束1 -->
+        <div class="bg-gradient-to-br from-emerald-50/60 to-white border border-emerald-100 rounded-3xl p-5 space-y-2 relative overflow-hidden">
+          <span class="absolute -right-4 -bottom-4 text-emerald-100 font-black text-6xl select-none pointer-events-none">01</span>
+          <div class="flex items-center gap-2">
+            <div class="w-8 h-8 rounded-full bg-emerald-500 text-white flex items-center justify-center font-bold text-xs">✔</div>
+            <h4 class="font-bold text-slate-800 text-sm">参加・辞退はいつでも自由です</h4>
+          </div>
+          <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
+            ご参加は自由意志です。途中で答えづらい質問をパスしたり、いつでも中断・協力を取り消すことができます。不利益が生じることは一切ありません。
+          </p>
+        </div>
+
+        <!-- お約束2 -->
+        <div class="bg-gradient-to-br from-sky-50/60 to-white border border-sky-100 rounded-3xl p-5 space-y-2 relative overflow-hidden">
+          <span class="absolute -right-4 -bottom-4 text-sky-100 font-black text-6xl select-none pointer-events-none">02</span>
+          <div class="flex items-center gap-2">
+            <div class="w-8 h-8 rounded-full bg-sky-500 text-white flex items-center justify-center font-bold text-xs">✔</div>
+            <h4 class="font-bold text-slate-800 text-sm">完全な匿名化・個人情報の厳守</h4>
+          </div>
+          <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
+            お名前や所属機関名はすべてアルファベットや仮名に置き換えます。個人や学校が特定されるような形で公表されることは一切ありません。
+          </p>
+        </div>
+
+        <!-- お約束3 -->
+        <div class="bg-gradient-to-br from-indigo-50/60 to-white border border-indigo-100 rounded-3xl p-5 space-y-2 relative overflow-hidden">
+          <span class="absolute -right-4 -bottom-4 text-indigo-100 font-black text-6xl select-none pointer-events-none">03</span>
+          <div class="flex items-center gap-2">
+            <div class="w-8 h-8 rounded-full bg-indigo-500 text-white flex items-center justify-center font-bold text-xs">✔</div>
+            <h4 class="font-bold text-slate-800 text-sm">オフラインでの厳重データ管理</h4>
+          </div>
+          <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
+            録音・文字データはネットから遮断されたパスワード付き専用USBメモリ等で厳重管理します。アクセスできるのは調査者本人である私と指導教員、ゼミの学生のみです。
+          </p>
+        </div>
+
+        <!-- お約束4 -->
+        <div class="bg-gradient-to-br from-rose-50/60 to-white border border-rose-100 rounded-3xl p-5 space-y-2 relative overflow-hidden">
+          <span class="absolute -right-4 -bottom-4 text-rose-100 font-black text-6xl select-none pointer-events-none">04</span>
+          <div class="flex items-center gap-2">
+            <div class="w-8 h-8 rounded-full bg-rose-500 text-white flex items-center justify-center font-bold text-xs">✔</div>
+            <h4 class="font-bold text-slate-800 text-sm">文字起こしデータの事前確認OK</h4>
+          </div>
+          <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
+            ご希望に応じて、発表前にご自身の文字起こしデータを確認・チェックしていただけます。また、発話データの公表を差し止めることも可能です。
+          </p>
+        </div>
+
+      </div>
+
+      <!-- データ保管・利用範囲についての補足 -->
+      <div class="bg-amber-50/80 border border-amber-200/80 rounded-3xl p-4 text-xs sm:text-sm text-amber-900 flex items-start gap-3">
+        <span class="w-6 h-6 rounded-full bg-amber-200 text-amber-800 flex-shrink-0 flex items-center justify-center font-bold text-xs mt-0.5">ℹ</span>
+        <div>
+          <p class="font-bold mb-0.5">データの利用範囲と破棄について</p>
+          <p class="text-amber-800 leading-relaxed">
+            本調査のデータは修士論文、ゼミ発表、学会発表のみで使用し、研究目的以外には一切利用しません。規定の保管期間（10年間）経過後は、責任を持って完全に消去・破棄いたします。
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 謝礼について -->
+    <section class="bg-gradient-to-r from-amber-50 via-rose-50 to-amber-50 rounded-[2.5rem] p-6 sm:p-8 border border-amber-200/70 shadow-lg shadow-amber-200/30 space-y-4">
+      <div class="flex items-center gap-3">
+        <span class="w-9 h-9 rounded-full bg-amber-500 text-white flex items-center justify-center font-bold text-sm shadow-md shadow-amber-400/30">3</span>
+        <h3 class="text-lg sm:text-xl font-bold text-slate-800">謝礼（お礼）について</h3>
+      </div>
+
+      <div class="flex flex-col sm:flex-row items-center justify-between gap-6 bg-white/90 rounded-3xl p-6 border border-amber-100">
+        <div class="space-y-2 text-center sm:text-left">
+          <span class="inline-block px-3 py-1 rounded-full bg-amber-100 text-amber-800 text-xs font-bold">インタビュー完了後にお渡し</span>
+          <h4 class="text-2xl font-black text-slate-800">謝礼：1,000 円</h4>
+          <p class="text-xs sm:text-sm text-slate-600">
+            お忙しい中お時間をいただく感謝として、ご希望のお受け取り方法をお選びいただけます。
+          </p>
+        </div>
+
+        <!-- 選択可能な受取方法（丸型タグ） -->
+        <div class="flex flex-wrap justify-center gap-2">
+          <span class="px-4 py-2 rounded-full bg-slate-50 border border-slate-200 text-xs font-bold text-slate-700 flex items-center gap-1.5 shadow-sm">
+            <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+            PayPay 送金
+          </span>
+          <span class="px-4 py-2 rounded-full bg-slate-50 border border-slate-200 text-xs font-bold text-slate-700 flex items-center gap-1.5 shadow-sm">
+            <span class="w-2 h-2 rounded-full bg-amber-400"></span>
+            Amazon ギフト券
+          </span>
+          <span class="px-4 py-2 rounded-full bg-slate-50 border border-slate-200 text-xs font-bold text-slate-700 flex items-center gap-1.5 shadow-sm">
+            <span class="w-2 h-2 rounded-full bg-sky-400"></span>
+            現金
+          </span>
+        </div>
+      </div>
+      <p class="text-[11px] text-slate-500 text-center sm:text-left">※お渡しした謝礼についての返還要請は一切ございませんのでご安心ください。</p>
+    </section>
+
+    <!-- ご参加の流れ（ステップ） -->
+    <section class="bg-white/80 backdrop-blur-md rounded-[2.5rem] p-6 sm:p-8 border border-white shadow-lg shadow-slate-200/50 space-y-6">
+      <div class="flex items-center gap-3">
+        <span class="w-9 h-9 rounded-full bg-purple-500 text-white flex items-center justify-center font-bold text-sm shadow-md shadow-purple-400/30">4</span>
+        <h3 class="text-lg sm:text-xl font-bold text-slate-800">ご参加の流れ</h3>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-4 gap-3 relative">
+        
+        <!-- Step 1 (完了) -->
+        <div class="bg-slate-100/90 border border-slate-300 rounded-3xl p-4 text-center space-y-2">
+          <div class="relative w-11 h-11 mx-auto rounded-full bg-slate-800 text-slate-100 font-bold flex items-center justify-center text-sm shadow-md">
+            <span>1</span>
+            <span class="absolute -top-1.5 -right-1.5 w-5 h-5 bg-emerald-500 text-white rounded-full flex items-center justify-center text-xs font-black shadow">✓</span>
+          </div>
+          <h4 class="font-bold text-slate-700 text-sm">同意書の確認</h4>
+          <p class="text-xs text-slate-500 leading-relaxed">内容のご確認とご承諾をいただきます。</p>
+        </div>
+
+        <!-- Step 2 (完了) -->
+        <div class="bg-slate-100/90 border border-slate-300 rounded-3xl p-4 text-center space-y-2">
+          <div class="relative w-11 h-11 mx-auto rounded-full bg-slate-800 text-slate-100 font-bold flex items-center justify-center text-sm shadow-md">
+            <span>2</span>
+            <span class="absolute -top-1.5 -right-1.5 w-5 h-5 bg-emerald-500 text-white rounded-full flex items-center justify-center text-xs font-black shadow">✓</span>
+          </div>
+          <h4 class="font-bold text-slate-700 text-sm">ご連絡・日程調整</h4>
+          <p class="text-xs text-slate-500 leading-relaxed">メールやSNSにてご都合の良い日時をご相談します。</p>
+        </div>
+
+        <!-- Step 3 -->
+        <div class="bg-teal-50/60 border border-teal-100 rounded-3xl p-4 text-center space-y-2">
+          <div class="w-10 h-10 mx-auto rounded-full bg-teal-500 text-white font-bold flex items-center justify-center text-sm shadow-md shadow-teal-300">
+            3
+          </div>
+          <h4 class="font-bold text-slate-800 text-sm">インタビュー実施</h4>
+          <p class="text-xs text-slate-500 leading-relaxed">オンライン等で40〜60分ほどお話しします。</p>
+        </div>
+
+        <!-- Step 4 -->
+        <div class="bg-amber-50/60 border border-amber-100 rounded-3xl p-4 text-center space-y-2">
+          <div class="w-10 h-10 mx-auto rounded-full bg-amber-500 text-white font-bold flex items-center justify-center text-sm shadow-md shadow-amber-300">
+            4
+          </div>
+          <h4 class="font-bold text-slate-800 text-sm">謝礼のお受け取り</h4>
+          <p class="text-xs text-slate-500 leading-relaxed">ご希望の方法にて謝礼をお渡しいたします。</p>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- お問い合わせ・研究者情報（連絡先カード） -->
+    <section id="contact" class="bg-gradient-to-br from-slate-900 to-sky-950 text-white rounded-[2.5rem] p-6 sm:p-10 shadow-2xl space-y-6 relative overflow-hidden">
+      <!-- 丸型グロー効果 -->
+      <div class="absolute top-0 right-0 w-80 h-80 bg-sky-500/20 rounded-full blur-3xl pointer-events-none"></div>
+
+      <div class="relative z-10 space-y-4">
+        <span class="px-4 py-1.5 rounded-full bg-sky-500/20 text-sky-300 border border-sky-400/30 text-xs font-bold tracking-wider uppercase">Contact</span>
+        <h3 class="text-xl sm:text-2xl font-bold">お問い合わせ</h3>
+        <p class="text-xs sm:text-sm text-slate-300 leading-relaxed max-w-xl">
+          調査に関するご質問やご相談は、SNSまたは下記メールアドレスまでいつでもお気軽にご連絡ください。
+        </p>
+
+        <!-- 研究者プロフィール（丸型） -->
+        <div class="bg-white/10 backdrop-blur-md rounded-3xl p-5 border border-white/10 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+          <div class="flex items-center gap-3">
+            <div class="w-12 h-12 rounded-full bg-gradient-to-tr from-sky-400 to-teal-300 text-slate-900 font-black flex items-center justify-center text-base shadow-lg">
+              羅
+            </div>
+            <div>
+              <p class="text-xs text-sky-200">早稲田大学大学院 日本語教育研究科 宮崎里司研究室</p>
+              <h4 class="text-base font-bold text-white">羅 駿浩 <span class="text-xs font-normal text-slate-300">（ラ シュンコウ）</span></h4>
+            </div>
+          </div>
+
+          <!-- メールアドレスとコピー機能 -->
+          <div class="flex items-center gap-2 w-full sm:w-auto">
+            <a href="mailto:junhao_lo@toki.waseda.jp" class="flex-1 sm:flex-none text-center px-5 py-2.5 rounded-full bg-sky-500 hover:bg-sky-400 text-white text-xs font-bold shadow-lg shadow-sky-500/30 transition">
+              ✉ メールを送る
+            </a>
+            <button onclick="copyEmail()" class="px-4 py-2.5 rounded-full bg-white/10 hover:bg-white/20 text-slate-200 text-xs font-medium border border-white/20 transition flex items-center gap-1">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
+              </svg>
+              <span>アドレスをコピー</span>
+            </button>
+          </div>
+        </div>
+
+        <p class="text-[11px] text-slate-400 text-center sm:text-left">
+          メールアドレス： <span class="font-mono text-slate-200">junhao_lo@toki.waseda.jp</span>
+        </p>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- フッター -->
+  <footer class="max-w-4xl mx-auto px-4 mt-12 text-center text-xs text-slate-400 space-y-2">
+    <p>早稲田大学大学院 日本語教育研究科</p>
+    <p class="text-[11px]">調査者：羅駿浩</p>
+  </footer>
+
+  <!-- コピー完了トースト通知 (丸型) -->
+  <div id="toast" class="fixed bottom-6 left-1/2 transform -translate-x-1/2 bg-slate-900/90 text-white text-xs font-bold px-6 py-3 rounded-full shadow-2xl backdrop-blur-md opacity-0 pointer-events-none transition-all duration-300 flex items-center gap-2 z-50">
+    <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+    メールアドレスをコピーしました！
+  </div>
+
+  <script>
+    // メールアドレスのクリップボードコピー
+    function copyEmail() {
+      const email = "junhao_lo@toki.waseda.jp";
+      const tempInput = document.createElement("input");
+      tempInput.value = email;
+      document.body.appendChild(tempInput);
+      tempInput.select();
+      document.execCommand("copy");
+      document.body.removeChild(tempInput);
+
+      // トースト通知表示
+      const toast = document.getElementById('toast');
+      toast.classList.remove('opacity-0', 'pointer-events-none');
+      toast.classList.add('opacity-100');
+
+      setTimeout(() => {
+        toast.classList.remove('opacity-100');
+        toast.classList.add('opacity-0', 'pointer-events-none');
+      }, 2500);
+    }
+  </script>
+</body>
+</html>
