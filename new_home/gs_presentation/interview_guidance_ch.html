@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>【感谢您协助本次调查】</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              50: '#f0f9ff',
+              100: '#e0f2fe',
+              200: '#bae6fd',
+              400: '#38bdf8',
+              500: '#0ea5e9',
+              600: '#0284c7',
+              700: '#0369a1',
+            },
+            pastel: {
+              rose: '#fff1f2',
+              roseBorder: '#fecdd3',
+              amber: '#fffbeb',
+              amberBorder: '#fde68a',
+              emerald: '#ecfdf5',
+              emeraldBorder: '#a7f3d0',
+              indigo: '#eef2ff',
+              indigoBorder: '#c7d2fe',
+            }
+          },
+          borderRadius: {
+            '4xl': '2rem',
+            '5xl': '2.5rem',
+          },
+          fontFamily: {
+            sans: ['"Hiragino Sans"', '"Hiragino Kaku Gothic ProN"', '"Noto Sans JP"', 'Meiryo', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    /* 自定义动画与样式 */
+    @keyframes floatSlow {
+      0%, 100% { transform: translateY(0px) rotate(0deg); }
+      50% { transform: translateY(-10px) rotate(3deg); }
+    }
+    .animate-float {
+      animation: floatSlow 6s ease-in-out infinite;
+    }
+    
+    /* 打印时样式优化 */
+    @media print {
+      body {
+        background: white !important;
+        color: #1f2937 !important;
+      }
+      .no-print {
+        display: none !important;
+      }
+      .print-break-inside {
+        break-inside: avoid;
+      }
+    }
+  </style>
+</head>
+<body class="bg-gradient-to-br from-sky-50 via-indigo-50/40 to-teal-50 text-slate-700 min-h-screen font-sans antialiased pb-16 selection:bg-sky-200">
+
+  <!-- 背景圆形装饰气泡 -->
+  <div class="fixed inset-0 overflow-hidden pointer-events-none -z-10">
+    <div class="absolute -top-24 -left-24 w-96 h-96 bg-sky-200/50 rounded-full blur-3xl"></div>
+    <div class="absolute top-1/3 -right-28 w-80 h-80 bg-rose-200/40 rounded-full blur-3xl"></div>
+    <div class="absolute bottom-10 left-1/4 w-96 h-96 bg-emerald-200/40 rounded-full blur-3xl"></div>
+  </div>
+
+  <!-- 导航栏（圆角浮动） -->
+  <header class="sticky top-4 z-40 max-w-4xl mx-auto px-4 mb-6">
+    <div class="bg-white/90 backdrop-blur-md shadow-lg shadow-sky-900/5 border border-white/80 rounded-full px-6 py-3.5 flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <span class="w-10 h-10 rounded-full bg-gradient-to-tr from-sky-500 to-teal-400 flex items-center justify-center text-white font-bold shadow-md shadow-sky-500/20">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+          </svg>
+        </span>
+        <div>
+          <p class="text-xs text-slate-400 font-medium">早稻田大学大学院 日本语教育研究科 罗骏浩</p>
+          <h1 class="text-sm md:text-base font-bold text-slate-800">感谢您协助本次访谈！</h1>
+        </div>
+      </div>
+      <div class="flex items-center gap-2 no-print">
+        <button onclick="window.print()" class="hidden sm:inline-flex items-center gap-1.5 text-xs font-semibold px-4 py-2 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-700 transition">
+          <svg class="w-4 h-4 text-slate-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"></path>
+          </svg>
+          打印・保存
+        </button>
+        <a href="#contact" class="inline-flex items-center gap-1.5 text-xs font-semibold px-4 py-2 rounded-full bg-gradient-to-r from-sky-500 to-blue-600 hover:from-sky-600 hover:to-blue-700 text-white shadow-md shadow-sky-500/25 transition">
+          联系我们
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main class="max-w-4xl mx-auto px-4 space-y-8">
+
+    <!-- 主视觉区域（主横幅） -->
+    <section class="relative bg-gradient-to-br from-white/95 via-white/80 to-sky-50/90 backdrop-blur-md rounded-[2.5rem] p-6 sm:p-10 border border-white shadow-xl shadow-sky-950/5 overflow-hidden">
+      <!-- 装饰圆 -->
+      <div class="absolute -right-12 -bottom-12 w-48 h-48 rounded-full bg-sky-100/60 pointer-events-none"></div>
+      <div class="absolute top-6 right-8 w-16 h-16 rounded-full bg-teal-100/70 pointer-events-none animate-float"></div>
+
+      <div class="relative z-10 space-y-4">
+        <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-sky-100/80 border border-sky-200 text-sky-700 text-xs font-bold tracking-wide">
+          <span class="w-2 h-2 rounded-full bg-sky-500 animate-pulse"></span>
+          致各位协助者
+        </div>
+
+        <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-800 leading-snug">
+          关于中级日语课堂中的学习活动与教育工具，<br class="hidden sm:inline">
+          想请教<span class="bg-gradient-to-r from-sky-600 to-teal-600 bg-clip-text text-transparent">老师们的实践经验与真实看法</span>
+        </h2>
+
+        <p class="text-sm sm:text-base text-slate-600 leading-relaxed max-w-2xl">
+          您好。我是早稻田大学大学院的罗骏浩。<br>
+          本研究旨在探讨：在生成式AI等新兴数字技术逐渐普及的背景下，日语学校中级课堂中运用游戏的学习活动是如何被理解和定位的。为了解其实际情况以及老师们的真实想法，我们正在开展访谈调查。
+        </p>
+
+        <!-- 三大亮点（圆角卡片） -->
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-4">
+          <div class="bg-white/90 rounded-3xl p-4 border border-slate-100 shadow-sm flex items-center gap-3">
+            <div class="w-12 h-12 rounded-full bg-sky-100 flex-shrink-0 flex items-center justify-center text-sky-600">
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+              </svg>
+            </div>
+            <div>
+              <p class="text-xs text-slate-400 font-medium">所需时间</p>
+              <p class="text-sm font-bold text-slate-800">约 40〜60 分钟</p>
+            </div>
+          </div>
+
+          <div class="bg-white/90 rounded-3xl p-4 border border-slate-100 shadow-sm flex items-center gap-3">
+            <div class="w-12 h-12 rounded-full bg-emerald-100 flex-shrink-0 flex items-center justify-center text-emerald-600">
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+              </svg>
+            </div>
+            <div>
+              <p class="text-xs text-slate-400 font-medium">实施形式</p>
+              <p class="text-sm font-bold text-slate-800">线上进行</p>
+            </div>
+          </div>
+
+          <div class="bg-white/90 rounded-3xl p-4 border border-slate-100 shadow-sm flex items-center gap-3">
+            <div class="w-12 h-12 rounded-full bg-amber-100 flex-shrink-0 flex items-center justify-center text-amber-600">
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+              </svg>
+            </div>
+            <div>
+              <p class="text-xs text-slate-400 font-medium">协助谢礼</p>
+              <p class="text-sm font-bold text-slate-800">酬谢 1,000 日元</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- 调查概要 & 想了解的内容 -->
+    <section class="bg-white/80 backdrop-blur-md rounded-[2.5rem] p-6 sm:p-8 border border-white shadow-lg shadow-slate-200/50 space-y-6">
+      <div class="flex items-center gap-3">
+        <span class="w-9 h-9 rounded-full bg-sky-500 text-white flex items-center justify-center font-bold text-sm shadow-md shadow-sky-400/30">1</span>
+        <h3 class="text-lg sm:text-xl font-bold text-slate-800">这是什么调查？</h3>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <!-- 目的 -->
+        <div class="bg-sky-50/70 border border-sky-100 rounded-3xl p-5 space-y-2">
+          <div class="flex items-center gap-2">
+            <span class="w-7 h-7 rounded-full bg-white flex items-center justify-center text-sky-600 shadow-sm">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+              </svg>
+            </span>
+            <h4 class="font-bold text-slate-800 text-sm">研究目的</h4>
+          </div>
+          <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
+            在教育现场，生成式AI的应用日益受到关注。本研究旨在了解日语学校中级课堂中游戏学习的教育实践及老师们的意识，探索更贴合现场情境的学习支持方式。
+          </p>
+        </div>
+
+        <!-- 访谈内容 -->
+        <div class="bg-teal-50/70 border border-teal-100 rounded-3xl p-5 space-y-2">
+          <div class="flex items-center gap-2">
+            <span class="w-7 h-7 rounded-full bg-white flex items-center justify-center text-teal-600 shadow-sm">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path>
+              </svg>
+            </span>
+            <h4 class="font-bold text-slate-800 text-sm">访谈中想了解的内容</h4>
+          </div>
+          <ul class="text-xs sm:text-sm text-slate-600 space-y-2.5">
+            <li class="flex items-start gap-2">
+              <span class="text-teal-600 font-bold mt-0.5">●</span>
+              <span><strong>中级课堂中的活动：</strong>课堂中运用游戏的学习活动的参与情况与实践经验，以及对其教育作用的看法</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-teal-600 font-bold mt-0.5">●</span>
+              <span><strong>业务中的生成式AI应用：</strong>在备课、校务等现场业务中与生成式AI的接触方式及真实感受</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-teal-600 font-bold mt-0.5">●</span>
+              <span><strong>今后的意识与看法：</strong>在生成式AI普及的背景下，对游戏学习实践的意识与实感（如期待、困难等）</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- 实施方法详情（圆角徽章） -->
+      <div class="bg-slate-50 border border-slate-200/80 rounded-3xl p-5 space-y-3">
+        <h4 class="font-bold text-slate-800 text-sm flex items-center gap-2">
+          <span class="w-2.5 h-2.5 rounded-full bg-emerald-500"></span>
+          访谈流程与请求
+        </h4>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs sm:text-sm text-slate-600">
+          <div class="flex items-start gap-2 bg-white p-3 rounded-2xl border border-slate-100">
+            <span class="text-sky-500 font-bold">●</span>
+            <span><strong>一对一对话形式：</strong>通过线上会议（Zoom等）在轻松的氛围中进行。</span>
+          </div>
+          <div class="flex items-start gap-2 bg-white p-3 rounded-2xl border border-slate-100">
+            <span class="text-sky-500 font-bold">●</span>
+            <span><strong>关于录音・录像：</strong>为准确记录，会在事先获得许可后进行录音・录像。</span>
+          </div>
+          <div class="flex items-start gap-2 bg-white p-3 rounded-2xl border border-slate-100 sm:col-span-2">
+            <span class="text-sky-500 font-bold">●</span>
+            <span><strong>关于环境的请求：</strong>请在一个人的安静独立空间参加，以免有第三者的声音或身影进入。</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 对参与者的四项承诺（隐私与权利） -->
+    <section class="bg-white/80 backdrop-blur-md rounded-[2.5rem] p-6 sm:p-8 border border-white shadow-lg shadow-slate-200/50 space-y-6">
+      <div class="flex items-center gap-3">
+        <span class="w-9 h-9 rounded-full bg-emerald-500 text-white flex items-center justify-center font-bold text-sm shadow-md shadow-emerald-400/30">2</span>
+        <div>
+          <h3 class="text-lg sm:text-xl font-bold text-slate-800">让您安心讲述的四项承诺</h3>
+          <p class="text-xs text-slate-500">我们将最优先保护老师们的隐私与感受。</p>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+
+        <!-- 承诺1 -->
+        <div class="bg-gradient-to-br from-emerald-50/60 to-white border border-emerald-100 rounded-3xl p-5 space-y-2 relative overflow-hidden">
+          <span class="absolute -right-4 -bottom-4 text-emerald-100 font-black text-6xl select-none pointer-events-none">01</span>
+          <div class="flex items-center gap-2">
+            <div class="w-8 h-8 rounded-full bg-emerald-500 text-white flex items-center justify-center font-bold text-xs">✔</div>
+            <h4 class="font-bold text-slate-800 text-sm">参加・退出随时自由</h4>
+          </div>
+          <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
+            参加基于自由意愿。中途可以跳过难以回答的问题，也可以随时中断或取消协助。不会因此产生任何不利影响。
+          </p>
+        </div>
+
+        <!-- 承诺2 -->
+        <div class="bg-gradient-to-br from-sky-50/60 to-white border border-sky-100 rounded-3xl p-5 space-y-2 relative overflow-hidden">
+          <span class="absolute -right-4 -bottom-4 text-sky-100 font-black text-6xl select-none pointer-events-none">02</span>
+          <div class="flex items-center gap-2">
+            <div class="w-8 h-8 rounded-full bg-sky-500 text-white flex items-center justify-center font-bold text-xs">✔</div>
+            <h4 class="font-bold text-slate-800 text-sm">完全匿名化・严守个人信息</h4>
+          </div>
+          <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
+            姓名和所属机构名称将全部替换为字母或假名。绝不会以能识别个人或学校的形式公开。
+          </p>
+        </div>
+
+        <!-- 承诺3 -->
+        <div class="bg-gradient-to-br from-indigo-50/60 to-white border border-indigo-100 rounded-3xl p-5 space-y-2 relative overflow-hidden">
+          <span class="absolute -right-4 -bottom-4 text-indigo-100 font-black text-6xl select-none pointer-events-none">03</span>
+          <div class="flex items-center gap-2">
+            <div class="w-8 h-8 rounded-full bg-indigo-500 text-white flex items-center justify-center font-bold text-xs">✔</div>
+            <h4 class="font-bold text-slate-800 text-sm">离线严格数据管理</h4>
+          </div>
+          <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
+            录音・文字数据将通过断网、带密码的专用USB等严格管理。可访问的仅限调查者本人、指导教授及研讨班学生。
+          </p>
+        </div>
+
+        <!-- 承诺4 -->
+        <div class="bg-gradient-to-br from-rose-50/60 to-white border border-rose-100 rounded-3xl p-5 space-y-2 relative overflow-hidden">
+          <span class="absolute -right-4 -bottom-4 text-rose-100 font-black text-6xl select-none pointer-events-none">04</span>
+          <div class="flex items-center gap-2">
+            <div class="w-8 h-8 rounded-full bg-rose-500 text-white flex items-center justify-center font-bold text-xs">✔</div>
+            <h4 class="font-bold text-slate-800 text-sm">文字稿可事先确认</h4>
+          </div>
+          <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
+            如您希望，可在发表前确认・核对您本人的文字稿。此外，也可以要求不公开您的发言数据。
+          </p>
+        </div>
+
+      </div>
+
+      <!-- 数据保管・使用范围补充说明 -->
+      <div class="bg-amber-50/80 border border-amber-200/80 rounded-3xl p-4 text-xs sm:text-sm text-amber-900 flex items-start gap-3">
+        <span class="w-6 h-6 rounded-full bg-amber-200 text-amber-800 flex-shrink-0 flex items-center justify-center font-bold text-xs mt-0.5">ℹ</span>
+        <div>
+          <p class="font-bold mb-0.5">关于数据使用范围与销毁</p>
+          <p class="text-amber-800 leading-relaxed">
+            本调查数据仅用于硕士论文、研讨班发表、学会发表，绝不用于研究目的以外的用途。规定的保管期限（10年）届满后，将负责任地完全删除・销毁。
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 关于谢礼 -->
+    <section class="bg-gradient-to-r from-amber-50 via-rose-50 to-amber-50 rounded-[2.5rem] p-6 sm:p-8 border border-amber-200/70 shadow-lg shadow-amber-200/30 space-y-4">
+      <div class="flex items-center gap-3">
+        <span class="w-9 h-9 rounded-full bg-amber-500 text-white flex items-center justify-center font-bold text-sm shadow-md shadow-amber-400/30">3</span>
+        <h3 class="text-lg sm:text-xl font-bold text-slate-800">关于谢礼</h3>
+      </div>
+
+      <div class="flex flex-col sm:flex-row items-center justify-between gap-6 bg-white/90 rounded-3xl p-6 border border-amber-100">
+        <div class="space-y-2 text-center sm:text-left">
+          <span class="inline-block px-3 py-1 rounded-full bg-amber-100 text-amber-800 text-xs font-bold">访谈完成后赠送</span>
+          <h4 class="text-2xl font-black text-slate-800">谢礼：1,000 日元</h4>
+          <p class="text-xs sm:text-sm text-slate-600">
+            作为占用您宝贵时间的感谢，您可以选择希望接收的方式。
+          </p>
+        </div>
+
+        <!-- 可选择接收方式（圆角标签） -->
+        <div class="flex flex-wrap justify-center gap-2">
+          <span class="px-4 py-2 rounded-full bg-slate-50 border border-slate-200 text-xs font-bold text-slate-700 flex items-center gap-1.5 shadow-sm">
+            <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+            PayPay 转账
+          </span>
+          <span class="px-4 py-2 rounded-full bg-slate-50 border border-slate-200 text-xs font-bold text-slate-700 flex items-center gap-1.5 shadow-sm">
+            <span class="w-2 h-2 rounded-full bg-amber-400"></span>
+            Amazon 礼品卡
+          </span>
+          <span class="px-4 py-2 rounded-full bg-slate-50 border border-slate-200 text-xs font-bold text-slate-700 flex items-center gap-1.5 shadow-sm">
+            <span class="w-2 h-2 rounded-full bg-sky-400"></span>
+            现金
+          </span>
+        </div>
+      </div>
+      <p class="text-[11px] text-slate-500 text-center sm:text-left">※已赠送的谢礼绝不会要求返还，请放心。</p>
+    </section>
+
+    <!-- 参加流程（步骤） -->
+    <section class="bg-white/80 backdrop-blur-md rounded-[2.5rem] p-6 sm:p-8 border border-white shadow-lg shadow-slate-200/50 space-y-6">
+      <div class="flex items-center gap-3">
+        <span class="w-9 h-9 rounded-full bg-purple-500 text-white flex items-center justify-center font-bold text-sm shadow-md shadow-purple-400/30">4</span>
+        <h3 class="text-lg sm:text-xl font-bold text-slate-800">参加流程</h3>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-4 gap-3 relative">
+        
+        <!-- Step 1 (已完成) -->
+        <div class="bg-slate-100/90 border border-slate-300 rounded-3xl p-4 text-center space-y-2">
+          <div class="relative w-11 h-11 mx-auto rounded-full bg-slate-800 text-slate-100 font-bold flex items-center justify-center text-sm shadow-md">
+            <span>1</span>
+            <span class="absolute -top-1.5 -right-1.5 w-5 h-5 bg-emerald-500 text-white rounded-full flex items-center justify-center text-xs font-black shadow">✓</span>
+          </div>
+          <h4 class="font-bold text-slate-700 text-sm">确认同意书</h4>
+          <p class="text-xs text-slate-500 leading-relaxed">确认内容并给予同意。</p>
+        </div>
+
+        <!-- Step 2 (已完成) -->
+        <div class="bg-slate-100/90 border border-slate-300 rounded-3xl p-4 text-center space-y-2">
+          <div class="relative w-11 h-11 mx-auto rounded-full bg-slate-800 text-slate-100 font-bold flex items-center justify-center text-sm shadow-md">
+            <span>2</span>
+            <span class="absolute -top-1.5 -right-1.5 w-5 h-5 bg-emerald-500 text-white rounded-full flex items-center justify-center text-xs font-black shadow">✓</span>
+          </div>
+          <h4 class="font-bold text-slate-700 text-sm">联系・调整日程</h4>
+          <p class="text-xs text-slate-500 leading-relaxed">通过邮件或社交软件协商您方便的时间。</p>
+        </div>
+
+        <!-- Step 3 -->
+        <div class="bg-teal-50/60 border border-teal-100 rounded-3xl p-4 text-center space-y-2">
+          <div class="w-10 h-10 mx-auto rounded-full bg-teal-500 text-white font-bold flex items-center justify-center text-sm shadow-md shadow-teal-300">
+            3
+          </div>
+          <h4 class="font-bold text-slate-800 text-sm">实施访谈</h4>
+          <p class="text-xs text-slate-500 leading-relaxed">通过线上等方式交谈约40〜60分钟。</p>
+        </div>
+
+        <!-- Step 4 -->
+        <div class="bg-amber-50/60 border border-amber-100 rounded-3xl p-4 text-center space-y-2">
+          <div class="w-10 h-10 mx-auto rounded-full bg-amber-500 text-white font-bold flex items-center justify-center text-sm shadow-md shadow-amber-300">
+            4
+          </div>
+          <h4 class="font-bold text-slate-800 text-sm">领取谢礼</h4>
+          <p class="text-xs text-slate-500 leading-relaxed">按您希望的方式赠送谢礼。</p>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- 联系方式・研究者信息（联系卡片） -->
+    <section id="contact" class="bg-gradient-to-br from-slate-900 to-sky-950 text-white rounded-[2.5rem] p-6 sm:p-10 shadow-2xl space-y-6 relative overflow-hidden">
+      <!-- 圆形光晕效果 -->
+      <div class="absolute top-0 right-0 w-80 h-80 bg-sky-500/20 rounded-full blur-3xl pointer-events-none"></div>
+
+      <div class="relative z-10 space-y-4">
+        <span class="px-4 py-1.5 rounded-full bg-sky-500/20 text-sky-300 border border-sky-400/30 text-xs font-bold tracking-wider uppercase">Contact</span>
+        <h3 class="text-xl sm:text-2xl font-bold">联系方式</h3>
+        <p class="text-xs sm:text-sm text-slate-300 leading-relaxed max-w-xl">
+          如有关于调查的疑问或咨询，欢迎随时通过社交软件或以下邮箱联系。
+        </p>
+
+        <!-- 研究者简介（圆角） -->
+        <div class="bg-white/10 backdrop-blur-md rounded-3xl p-5 border border-white/10 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+          <div class="flex items-center gap-3">
+            <div class="w-12 h-12 rounded-full bg-gradient-to-tr from-sky-400 to-teal-300 text-slate-900 font-black flex items-center justify-center text-base shadow-lg">
+              罗
+            </div>
+            <div>
+              <p class="text-xs text-sky-200">早稻田大学大学院 日本语教育研究科 宫崎里司研究室</p>
+              <h4 class="text-base font-bold text-white">罗 骏浩 <span class="text-xs font-normal text-slate-300">（ラ シュンコウ）</span></h4>
+            </div>
+          </div>
+
+          <!-- 邮箱与复制功能 -->
+          <div class="flex items-center gap-2 w-full sm:w-auto">
+            <a href="mailto:junhao_lo@toki.waseda.jp" class="flex-1 sm:flex-none text-center px-5 py-2.5 rounded-full bg-sky-500 hover:bg-sky-400 text-white text-xs font-bold shadow-lg shadow-sky-500/30 transition">
+              ✉ 发送邮件
+            </a>
+            <button onclick="copyEmail()" class="px-4 py-2.5 rounded-full bg-white/10 hover:bg-white/20 text-slate-200 text-xs font-medium border border-white/20 transition flex items-center gap-1">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
+              </svg>
+              <span>复制邮箱</span>
+            </button>
+          </div>
+        </div>
+
+        <p class="text-[11px] text-slate-400 text-center sm:text-left">
+          邮箱： <span class="font-mono text-slate-200">junhao_lo@toki.waseda.jp</span>
+        </p>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- 页脚 -->
+  <footer class="max-w-4xl mx-auto px-4 mt-12 text-center text-xs text-slate-400 space-y-2">
+    <p>早稻田大学大学院 日本语教育研究科</p>
+    <p class="text-[11px]">调查者：罗骏浩</p>
+  </footer>
+
+  <!-- 复制完成提示浮层（圆角） -->
+  <div id="toast" class="fixed bottom-6 left-1/2 transform -translate-x-1/2 bg-slate-900/90 text-white text-xs font-bold px-6 py-3 rounded-full shadow-2xl backdrop-blur-md opacity-0 pointer-events-none transition-all duration-300 flex items-center gap-2 z-50">
+    <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+    邮箱已复制！
+  </div>
+
+  <script>
+    // 复制邮箱到剪贴板
+    function copyEmail() {
+      const email = "junhao_lo@toki.waseda.jp";
+      const tempInput = document.createElement("input");
+      tempInput.value = email;
+      document.body.appendChild(tempInput);
+      tempInput.select();
+      document.execCommand("copy");
+      document.body.removeChild(tempInput);
+
+      // 显示提示浮层
+      const toast = document.getElementById('toast');
+      toast.classList.remove('opacity-0', 'pointer-events-none');
+      toast.classList.add('opacity-100');
+
+      setTimeout(() => {
+        toast.classList.remove('opacity-100');
+        toast.classList.add('opacity-0', 'pointer-events-none');
+      }, 2500);
+    }
+  </script>
+</
