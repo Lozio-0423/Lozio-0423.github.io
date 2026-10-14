@@ -1,0 +1,761 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>生成AI普及を背景とした日本語学校におけるゲームを用いた学習活動の課題分析</title>
+  <style>
+    :root {
+      --primary: #2563eb;
+      --primary-light: #eff6ff;
+      --secondary: #0d9488;
+      --secondary-light: #f0fdfa;
+      --dark: #1e293b;
+      --light-bg: #f8fafc;
+      --card-bg: #ffffff;
+      --border: #e2e8f0;
+      --text: #334155;
+      --text-muted: #64748b;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN", "Yu Gothic", sans-serif;
+      line-height: 1.65;
+      color: var(--text);
+      background-color: var(--light-bg);
+    }
+    header {
+      background: linear-gradient(135deg, #1e3a8a, #0284c7);
+      color: white;
+      padding: 2.5rem 1.5rem 2rem;
+      text-align: center;
+    }
+    header h1 {
+      font-size: 1.65rem;
+      line-height: 1.4;
+      margin-bottom: 0.5rem;
+      font-weight: 700;
+    }
+    header p {
+      font-size: 0.95rem;
+      opacity: 0.9;
+    }
+
+    /* スクロールしても上部に追従・固定されるタブナビゲーション */
+    .tab-sticky-wrapper {
+      position: -webkit-sticky;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background-color: rgba(248, 250, 252, 0.95);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      padding: 0.75rem 0;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+      border-bottom: 1px solid var(--border);
+    }
+    .tab-container {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 0 1rem;
+    }
+    .tab-nav {
+      display: flex;
+      gap: 0.5rem;
+      background: #e2e8f0;
+      padding: 0.35rem;
+      border-radius: 10px;
+      overflow-x: auto;
+    }
+    .tab-btn {
+      flex: 1;
+      min-width: 110px;
+      padding: 0.75rem 0.8rem;
+      border: none;
+      background: transparent;
+      color: var(--text-muted);
+      font-size: 0.92rem;
+      font-weight: 600;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      text-align: center;
+      white-space: nowrap;
+    }
+    .tab-btn:hover {
+      color: var(--dark);
+      background: rgba(255, 255, 255, 0.6);
+    }
+    .tab-btn.active {
+      background: var(--card-bg);
+      color: var(--primary);
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+    }
+
+    /* コンテンツエリア */
+    .main-content {
+      max-width: 960px;
+      margin: 1.5rem auto 3rem;
+      padding: 0 1rem;
+    }
+    .tab-pane {
+      display: none;
+    }
+    .tab-pane.active {
+      display: block;
+      animation: fadeIn 0.25s ease-in-out;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(4px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* カード・ブロック */
+    .card {
+      background: var(--card-bg);
+      border-radius: 12px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
+      border: 1px solid var(--border);
+      padding: 1.75rem;
+      margin-bottom: 1.5rem;
+    }
+    .section-title {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-size: 1.25rem;
+      color: var(--dark);
+      margin-bottom: 1rem;
+      border-bottom: 2px solid var(--border);
+      padding-bottom: 0.5rem;
+    }
+    .section-badge {
+      background: var(--primary);
+      color: white;
+      font-size: 0.8rem;
+      padding: 0.15rem 0.55rem;
+      border-radius: 5px;
+      font-weight: bold;
+    }
+    .point-box {
+      background: #f8fafc;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      padding: 1rem 1.25rem;
+      margin-bottom: 1rem;
+    }
+    .point-box h4 {
+      font-size: 0.98rem;
+      color: var(--dark);
+      margin-bottom: 0.35rem;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+    .point-box p {
+      font-size: 0.9rem;
+      color: var(--text);
+    }
+    .highlight-box {
+      background: var(--primary-light);
+      border-left: 4px solid var(--primary);
+      padding: 1.25rem;
+      border-radius: 0 8px 8px 0;
+      margin: 1.25rem 0;
+    }
+    .highlight-box h4 {
+      color: var(--primary);
+      font-size: 0.95rem;
+      margin-bottom: 0.35rem;
+    }
+    .highlight-box p {
+      font-size: 0.98rem;
+      font-weight: 500;
+      color: #1e3a8a;
+      line-height: 1.6;
+    }
+    .rq-list {
+      list-style: none;
+      margin-top: 0.75rem;
+    }
+    .rq-item {
+      background: #ffffff;
+      border: 1px solid var(--border);
+      border-left: 4px solid var(--secondary);
+      border-radius: 6px;
+      padding: 0.85rem 1rem;
+      margin-bottom: 0.6rem;
+      font-weight: 600;
+      font-size: 0.92rem;
+      color: var(--dark);
+    }
+    .rq-tag {
+      background: var(--secondary);
+      color: white;
+      font-size: 0.75rem;
+      padding: 0.1rem 0.4rem;
+      border-radius: 4px;
+      margin-right: 0.4rem;
+    }
+
+    /* グリッドカード */
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1rem;
+    }
+    @media (min-width: 640px) {
+      .grid-2 { grid-template-columns: repeat(2, 1fr); }
+    }
+    .mini-card {
+      background: #ffffff;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1rem;
+    }
+    .mini-card h5 {
+      font-size: 0.92rem;
+      color: var(--dark);
+      margin-bottom: 0.3rem;
+      font-weight: 700;
+    }
+    .mini-card p {
+      font-size: 0.86rem;
+      color: var(--text-muted);
+    }
+
+    /* インタビュー分析用スタイル */
+    .teacher-card {
+      background: #ffffff;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+    }
+    .teacher-header {
+      margin-bottom: 0.9rem;
+      border-bottom: 2px solid var(--border);
+      padding-bottom: 0.6rem;
+    }
+    .teacher-title {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--dark);
+    }
+    .sub-section-title {
+      font-size: 0.93rem;
+      font-weight: 700;
+      color: var(--dark);
+      margin: 0.8rem 0 0.35rem;
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+    }
+    .quote-box {
+      background: #f8fafc;
+      border-left: 3px solid #64748b;
+      padding: 0.75rem 1rem;
+      margin: 0.4rem 0 0.85rem;
+      font-size: 0.88rem;
+      color: #1e293b;
+      line-height: 1.6;
+    }
+    .analysis-desc {
+      font-size: 0.9rem;
+      color: var(--text);
+      line-height: 1.65;
+    }
+
+    /* 参考文献スタイル */
+    .ref-category {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--dark);
+      margin: 1.5rem 0 0.75rem;
+      padding-bottom: 0.35rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .ref-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.65rem;
+    }
+    .ref-item {
+      font-size: 0.88rem;
+      line-height: 1.6;
+      color: var(--text);
+      padding-left: 1.5rem;
+      text-indent: -1.5rem;
+      word-break: break-word;
+    }
+    .ref-item a {
+      color: var(--primary);
+      text-decoration: none;
+    }
+    .ref-item a:hover {
+      text-decoration: underline;
+    }
+
+    footer {
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 0.8rem;
+      padding: 1rem 0 2rem;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>生成AI普及を背景とした日本語学校における<br>ゲームを用いた学習活動の課題分析</h1>
+    <p>中級クラスの教師へのインタビューに注目して</p>
+  </header>
+
+  <!-- スクロール追従タブバー -->
+  <div class="tab-sticky-wrapper" id="stickyTab">
+    <div class="tab-container">
+      <nav class="tab-nav">
+        <button class="tab-btn active" onclick="switchTab(event, 'tab1')">第1章 序論</button>
+        <button class="tab-btn" onclick="switchTab(event, 'tab2')">第2章 先行研究</button>
+        <button class="tab-btn" onclick="switchTab(event, 'tab3')">第3章 研究方法</button>
+        <button class="tab-btn" onclick="switchTab(event, 'tab4')">インタビュー分析</button>
+        <button class="tab-btn" onclick="switchTab(event, 'tab5')">参考文献</button>
+      </nav>
+    </div>
+  </div>
+
+  <main class="main-content">
+
+    <!-- ==================== 第1章 序論 ==================== -->
+    <div id="tab1" class="tab-pane active">
+
+      <!-- 1.1 研究背景 -->
+      <section class="card">
+        <div class="section-title">
+          <span class="section-badge">1.1</span>
+          <h3>研究背景の要点</h3>
+        </div>
+        <div class="point-box">
+          <h4>1.1.1 留学者数の増加から見える自律学習の重要性</h4>
+          <p>外国人留学生数が40万人を突破し（2025年5月時点で408,069人）、ネパールやミャンマー等の非漢字圏や専修学校志向が急増するなど受入れ構造が変動している（日本学生支援機構，2026）。学習目的やスタイルが多様化する中、画一的な一斉授業には物理的・時間的限界があり、文化庁（2021）「日本語教育の参照枠」が示す「自律学習」の環境整備が急務となっている。</p>
+        </div>
+        <div class="point-box">
+          <h4>1.1.2 留学生と日本語学校</h4>
+          <p>日本語学校は進学・試験指導を行う「予備教育」と見なされがちであるが、留学生が来日後に最初に身を置く「最初のコミュニティ（社会参入の足場）」である（文化庁，2024）。教室内に留まらず、学習者が自ら学習内容と方法をデザインできる環境を支える役割が求められている。</p>
+        </div>
+        <div class="point-box">
+          <h4>1.1.3 筆者自身の問題意識</h4>
+          <p>市販ゲームを通じた対話や協働的な課題解決によって運用能力・学習動機づけが向上した筆者自身の原体験に対し、日本語学校現場はJLPTや日本留学試験（EJU）対策の文法・読解・聴解指導に偏り、学習者の自発的な日本語使用を促す取り組みが極めて限定的であるというギャップに着目した。</p>
+        </div>
+        <div class="point-box">
+          <h4>1.1.4 自律学習におけるゲームを用いた学習活動の有効性</h4>
+          <p>文部科学省（2021）が重視する「個別最適な学びと協働的な学びの一体的充実」やWong & Yunus（2021）のレビューに基づき、ゲームは共通のゴール・ルールと「失敗が許容される安全な枠組み」を提供し、対人不安を和らげてフラットな対話や協働を自然に誘発するため、自律学習への移行を後押しする有効な媒体となる。</p>
+        </div>
+      </section>
+
+      <!-- 1.2 研究目的・RQ -->
+      <section class="card">
+        <div class="section-title">
+          <span class="section-badge">1.2</span>
+          <h3>研究目的およびリサーチクエスチョン</h3>
+        </div>
+
+        <div class="point-box">
+          <h4>問題意識から研究目的への接続（舘岡，2021）</h4>
+          <p>生成AIの普及により作業負担の軽減や教師との授業タスク共創が可能となったにもかかわらず中級クラスで実践が拡大しない理由は、時間や情報の不足（桑戸ほか，2016）といった物理的・情報的制約のみには帰着できない。教育実践の形態は、教師が何を重視するかという「教育観」と実際のフィールドの「空間」に強く関係しているためである（舘岡，2021）。</p>
+        </div>
+
+        <!-- 研究目的 -->
+        <div class="highlight-box">
+          <h4>【研究目的】</h4>
+          <p>本研究の目的は、生成AIの普及により教材開発の効率化が可能となっているにもかかわらず、日本語学校における中級クラスにおいてゲームを用いた学習活動の実践が依然として拡大していないことに着目し、ゲームを用いた学習活動の実施課題を明らかにすることである。</p>
+        </div>
+
+        <!-- 4つのRQ -->
+        <h4 style="font-size: 0.98rem; margin: 1rem 0 0.5rem; color: var(--dark);">【4つのリサーチクエスチョン（RQ）】</h4>
+        <ul class="rq-list">
+          <li class="rq-item"><span class="rq-tag">RQ1</span>RQ1：日本語学校に勤務する日本語教師はゲームを用いた学習活動とどのように関わったことがあるか？</li>
+          <li class="rq-item"><span class="rq-tag">RQ2</span>RQ2：日本語学校に勤務する日本語教師は業務上どのように生成AIと関わったことがあるか？</li>
+          <li class="rq-item"><span class="rq-tag">RQ3</span>RQ3：生成AIに注目し、日本語学校に勤務する日本語教師はゲームを用いた学習活動への取り組みに対してどう意識しているか？</li>
+          <li class="rq-item"><span class="rq-tag">RQ4</span>RQ4：日本語学校の授業において、ゲームを用いた学習活動にはどのような課題があるか？</li>
+        </ul>
+      </section>
+
+      <!-- 1.3 研究意義 -->
+      <section class="card">
+        <div class="section-title">
+          <span class="section-badge">1.3</span>
+          <h3>研究意義（学術的意義・実践的意義）</h3>
+        </div>
+        <div class="grid-2">
+          <div class="mini-card">
+            <h5>第一：学術的意義</h5>
+            <p>大学中心のゲーム研究（桑戸ほか，2016）や高等教育のライティング・教材作成効率化に偏る生成AI研究（片桐，2026）に対し、日本語学校の中級クラスにおける教師の認識と実施課題という未開拓の視点を加え、基礎的知見を提供する。</p>
+          </div>
+          <div class="mini-card">
+            <h5>第二：実践的意義</h5>
+            <p>ゲームを用いた学習活動の実施課題を、教師の教育観や日本語学校現場の文脈を含めて整理することで、教師が自律学習を支援する環境を設計する際の示唆と授業実践の検討材料を提供する。</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- 1.4 重要用語の定義 -->
+      <section class="card">
+        <div class="section-title">
+          <span class="section-badge">1.4</span>
+          <h3>重要用語の定義</h3>
+        </div>
+        <div class="grid-2">
+          <div class="mini-card">
+            <h5>1.4.1 中級学習者（桑原, 2009／福島, 2011）</h5>
+            <p>主にJLPT N3〜N2（CEFR B1〜B2）の日本語レベルを持ち、日常生活の社会参入時期を脱し、身近な話題から抽象的・概念的な話題へと移行し、論理的に自らの意見を語ったり文章を書いたりしながら他者と協働していく過渡期にある学習者。</p>
+          </div>
+          <div class="mini-card">
+            <h5>1.4.2 自律学習（Holec, 1981／梅田, 2005）</h5>
+            <p>自らの目標やニーズに基づき、学習の計画立案、方略の選択、進捗のモニタリングおよび評価を主体的にコントロール・調整するプロセスであり、孤立した独学ではなく他者との協働や多様な学習リソースとの相互作用をしながら学習を遂行するプロセス。</p>
+          </div>
+          <div class="mini-card">
+            <h5>1.4.3 ゲームを用いた学習活動（スーツ, 1978／藤本, 2015, 2017）</h5>
+            <p>学習目標の達成に向けて、日常の文脈から切り離されたゴールやルールといった障壁に対し、学習者が自発的な意志で取り組み、自身の行動や判断に対する可視化されたフィードバックを得ながら進行する活動（独立したゲーム構造と、授業の一部にゲーム要素を組み込んだものの双方を含む）。</p>
+          </div>
+          <div class="mini-card">
+            <h5>1.4.4 生成AI（総務省, 2024）</h5>
+            <p>テキスト、画像、音声などを自律的に生成できるAI技術の総称であり、2022年のOpenAIによる対話型AI「ChatGPT」の発表を契機に広く普及し、ChatGPTやGemini、Claude等の主流モデルを包括する技術。</p>
+          </div>
+        </div>
+      </section>
+
+    </div>
+
+    <!-- ==================== 第2章 先行研究 ==================== -->
+    <div id="tab2" class="tab-pane">
+
+      <!-- 2.1 ゲームと学習 -->
+      <section class="card">
+        <div class="section-title">
+          <span class="section-badge">2.1</span>
+          <h3>ゲームと学習に関する理論・実態</h3>
+        </div>
+        <div class="point-box">
+          <h4>2.1.1 ゲーム学習の歴史（藤本, 2024／井上, 2014）</h4>
+          <p>①デジタル化以前（The Landlord's Gameや江戸時代の絵双六・百人一首等）、②1970〜1990年代のエデュテインメント（教育と娯楽の融合）、③2000年代のシリアスゲーム（非娯楽目的のゲーム）、④2010年代のゲーミフィケーション（既存の対象へのゲーム要素の付加）の4時期を整理する。本研究はゲーム自体を用いる活動と要素を付加する活動の双方を対象とする。</p>
+        </div>
+        <div class="point-box">
+          <h4>2.1.2 ゲーム学習のデザイン指針（Talak, 2010）</h4>
+          <p>構成主義的な教室環境を創出するため、「優れたゲームデザインの特徴（明確な学習目標、自己決定権、達成可能な挑戦、実用性、多様な相互作用、全員参加の保証等）」と「運用ガイドライン（意図的チーム編成、心理的安全性の維持等）」を提示している。本研究ではこれらを授業設計・運用を検討する参照枠として位置づける。</p>
+        </div>
+        <div class="point-box">
+          <h4>2.1.3 ゲーム学習の評価方法（Ifenthalerら, 2012／藤本, 2024）</h4>
+          <p>評価手法は「ゲームスコアリング」「外部評価」「組み込み型評価」の3つに大別されるが、学習過程を捉える組み込み型評価は複雑な開発が必要で確立しておらず、効果検証の方法はいまだ発展途上にあり、教師が導入判断に参照できる根拠は限られている。</p>
+        </div>
+        <div class="point-box">
+          <h4>2.1.4 日本語教育とゲーム（品川, 2001／桑戸ほか, 2016／岩本, 2019／王・大山, 2026）</h4>
+          <p>品川（2001）はゲームを3基準（活動形態・交渉の仕方・情報との関わり方）から5類型に分類し、教師は産出型・双方向型に期待しつつ、実際の使用は初級・語彙や受容型・一方向型（クイズ等）および周辺的な雰囲気作りに偏っていることを示した。桑戸ほか（2016）の中・上級調査でも、教師の86.9%が学習促進効果を認めながら使用頻度は低く、「時間がない」「適したゲームがない」「試験対策と合わない」「他の活動の優先」が障壁となっている。近年の実践（岩本, 2019；王・大山, 2026）も大学中心・小規模にとどまっている。</p>
+        </div>
+      </section>
+
+      <!-- 2.2 生成AIの教育利用 -->
+      <section class="card">
+        <div class="section-title">
+          <span class="section-badge">2.2</span>
+          <h3>生成AIの教育利用に関する動向と偏り</h3>
+        </div>
+        <div class="point-box">
+          <h4>2.2.1 インストラクショナルデザインにおける動向（市川ほか, 2025）</h4>
+          <p>海外学術誌のレビュー（17件）から、生成AIが教材・授業設計の助けになりうる一方、教師のAI受容・活用には個人の認識だけでなく学校環境等の組織的文脈が関わること、生成AIが個々の教師の教育観や現場の文脈を理解するには限界があることが指摘されている。</p>
+        </div>
+        <div class="point-box">
+          <h4>2.2.2 言語教育における生成AI利用（片桐, 2026）</h4>
+          <p>片桐（2026）が整理しているように、言語教育における生成AI活用の先行レビュー研究では、個別化された学習や自律性の強化、教材・課題作成の効率化といった可能性が報告される一方、生成AIの限界や学習者の不正、批判的思考力の低下といった悪影響も懸念されている。また、研究対象が「英語・高等教育（大学）・ライティング指導・ChatGPT」に過度に偏重しており、明確な理論的枠組みを持たない探索的な研究が先行している段階にある。</p>
+        </div>
+        <div class="point-box">
+          <h4>2.2.3 日本語教育における生成AI利用（片桐, 2026）</h4>
+          <p>国内論文28件のレビューでも、高等教育の中級以上のライティング支援に偏重している。教師を利用主体とする研究は「教材開発（例文作成等）」と「評価」に限られ、語彙の誤用や文脈の不自然さから教師の確認・修正が不可欠であり、シラバスや教案作成、授業活動の選択といった教師の意思決定に関する研究は限定的である。</p>
+        </div>
+      </section>
+
+      <!-- 2.3 先行研究のギャップ -->
+      <section class="card" style="border-left: 4px solid var(--secondary);">
+        <div class="section-title">
+          <span class="section-badge" style="background:var(--secondary)">2.3</span>
+          <h3>生成AIの普及を背景とした日本語学校におけるゲームを用いた学習活動</h3>
+        </div>
+        <div class="highlight-box" style="background: var(--secondary-light); border-left-color: var(--secondary);">
+          <h4 style="color: var(--secondary);">💡 先行研究の空白（リサーチ・ギャップ）と本研究の位置づけ</h4>
+          <p style="color: #134e4a;">
+            来日直後の留学生にとって「最初のコミュニティ」となる日本語学校の中級クラスでは、他者と協働し社会参入の基礎を育むゲーム活動に大きな意義がある。また、生成AIによって教材や活動案を「ゼロから」作成する負担が軽減され（片桐，2026）、対話を通じて授業アイデアを実現する基盤も整いつつある（市川ほか，2025）。<br>
+            それにもかかわらず、従来のゲーム研究や生成AI研究は大学等の高等教育機関が中心であり、<strong>進学指導を担う日本語学校の中級クラスを対象に、教師の視点からゲームを用いた学習活動の実施課題を検討した研究は見当たらない</strong>。ここに本研究が取り組むべき学術的・実践的空白が存在する。
+          </p>
+        </div>
+      </section>
+
+    </div>
+
+    <!-- ==================== 第3章 研究方法 ==================== -->
+    <div id="tab3" class="tab-pane">
+
+      <!-- 3.1 調査方法 -->
+      <section class="card">
+        <div class="section-title">
+          <span class="section-badge">3.1</span>
+          <h3>調査手法と分析デザイン</h3>
+        </div>
+        <div class="point-box">
+          <h4>3.1.1 調査手法：半構造化インタビュー</h4>
+          <p>教師の教育実践を単一の客観的事実ではなく意味づけと相互作用から捉えるため、実証主義ではなく解釈主義・社会構成主義の立場に立ち、半構造化インタビューを採用する。パイロット調査を経てフェイスシートと4つのRQに対応するインタビューガイドを整備し、「一定の統制と柔軟性の両立」を図りながら教師の教育観と現場の文脈を深掘りする。</p>
+        </div>
+        <div class="point-box">
+          <h4>3.1.2 調査協力者の選定基準とサンプリング</h4>
+          <p>中級クラスの担当経験があり、年齢・性別・日本語教育経験年数が異なる現役教師<strong>5名</strong>を選定した。東京都新宿区の日本語学校の教員との信頼関係（ラポール）を基点とした<strong>スノーボール・サンプリング</strong>を採用することで、忖度や防衛的回答を抑え、組織的ルールや負担感といった現場の本音を引き出す。</p>
+        </div>
+        <div class="point-box">
+          <h4>3.1.3 データ分析方法：SCAT（大谷, 2008, 2011）</h4>
+          <p>プロセスの理論化や大規模な理論的飽和を要するM-GTA（木下，1999, 2003）や、仮説のない探索的図解に適したKJ法（川喜田，1967）と比較検討した結果、小規模データに対応可能であり、実態（RQ1・2）→意識（RQ3）→課題（RQ4）へと明示的な4ステップ（〈1〉注目語句→〈2〉言い換え→〈3〉説明語句→〈4〉テーマ・構成概念）でストーリーラインと理論記述を導出できる<strong>SCAT</strong>を採用した。</p>
+        </div>
+        <div class="point-box">
+          <h4>3.1.4 概念的枠組み：TPACK-SAMR 統合モデル（Kihoza et al., 2016）</h4>
+          <p>利用意図のみを問う技術受容モデル（TAM）やミクロな授業設計の粒度が粗い活動理論の限界を踏まえ、教師の3つの知識領域と複合領域を捉える<strong>TPACKモデル</strong>（Mishra & Koehler，2006）と、技術導入による実践変革の4段階（代替・拡張・変容・再定義）を測る<strong>SAMRモデル</strong>（Puentedura，2006）を統合する。「教師がどの知識領域を働かせることで、教育実践にどのレベルの変革がもたらされているか（あるいは移行が阻まれているか）」を解像度高く分析する。</p>
+        </div>
+      </section>
+
+      <!-- 3.2 倫理的配慮 -->
+      <section class="card">
+        <div class="section-title">
+          <span class="section-badge">3.2</span>
+          <h3>調査実施における倫理的配慮</h3>
+        </div>
+        <div class="grid-2">
+          <div class="mini-card">
+            <h5>3.2.1 インフォームド・コンセントの手続き</h5>
+            <p>「調査協力依頼書」「個人情報保護に関する誓約書兼調査同意書」および事前アンケートを配布・口頭説明した。自由意志による参加、不利益なき拒否・撤回・中止の権利を明記し、同意書2部に署名を取り交わして双方で保管した。</p>
+          </div>
+          <div class="mini-card">
+            <h5>3.2.2 インタビュー実施での再確認</h5>
+            <p>開始直前にも趣旨と権利を口頭で再説明し、オンライン会議ツールまたはレコーダーアプリによる録音・録画の明示的許諾を取得した。希望者への文字起こしデータの事後共有と公表差し止め請求権を保障した。</p>
+          </div>
+          <div class="mini-card">
+            <h5>3.2.3 個人情報の保護と匿名化</h5>
+            <p>収集データの目的外使用を禁じ、公表に際しては氏名・勤務先機関名等の特定情報をすべて記号化・仮名化して完全な匿名化処理を実施した。</p>
+          </div>
+          <div class="mini-card">
+            <h5>3.2.4 データの厳重な保管・破棄</h5>
+            <p>外部ネットワークから遮断された個人ストレージ（USBメモリ等）にファイルごとのパスワードを設定して保管した。アクセス権を調査者と研究指導関係者に限定し、保管期間経過後は復元不可能な方法で破棄する。</p>
+          </div>
+        </div>
+      </section>
+
+    </div>
+
+    <!-- ==================== インタビュー分析 ==================== -->
+    <div id="tab4" class="tab-pane">
+
+      <!-- 4.1 各教師の発言と簡単な分析・印象 -->
+      <section class="card">
+        <div class="section-title">
+          <span class="section-badge">4.1</span>
+          <h3>調査協力者別 印象的な発言</h3>
+        </div>
+
+        <!-- 教師A ブロック -->
+        <div class="teacher-card">
+          <div class="teacher-header">
+            <div class="teacher-title">教師A（専任・指導歴3年・元職：日中翻訳の校閲者）</div>
+          </div>
+
+          <div class="sub-section-title">💬 印象的な発言</div>
+          <div class="quote-box">
+            「その自己調整学習の本を読んだときに、えーっと、なんか自己効力感とかを、あの、ま、を高めるためには、ま、自分で目標設定して、で、それに対して、あの、達成できたかどうか感じられるのが大事ってあったので、あの、そうですね、えーっと、ま、こういう、あの、ディクテの達人っていう、ま、ゲーム、そのディクテーションちょっとゲーム化しまして」
+          </div>  
+          <div class="quote-box">
+            「私の授業の裏テーマは、遊んでるうちに勉強しちゃったっていうのが理想」
+          </div>
+          <div class="quote-box">
+            「授業工夫するところはちょっと自分の頭でやりたいなっていうのがあるので、工夫以外のところ（例文20個作成など）はAIにやってもらう……そこはちょっと、AIに渡したくないなっていうところですかね」
+          </div>
+
+          <div class="sub-section-title">📝 印象</div>
+          <p class="analysis-desc">
+            小テストを音楽ゲームの段位認定に見立てて自作・改良するなど、ゲームを取り入れることへの意欲や工夫する力が非常に高い教師という印象である。一方で、「授業の面白さや工夫を自分の頭で考えることこそが教師のやりがい」という強いこだわりを持っているため、AIには単純作業（例文作成など）だけを任せ、授業のアイデア出しそのものはAIに委ねたくないという心理が見られる。また、自作したゲームを同僚に共有しても「うちのクラスではやらない」と消極的な反応をされた経験があり、せっかくの工夫が学校全体に広がらず個人の中で完結してしまっている様子がうかがえる。
+          </p>
+        </div>
+
+        <!-- 教師B ブロック -->
+        <div class="teacher-card">
+          <div class="teacher-header">
+            <div class="teacher-title">教師B（専任・指導歴10年・元職：飲食店のホール）</div>
+          </div>
+
+          <div class="sub-section-title">💬 印象的な発言</div>
+          <div class="quote-box">
+            「結局そのゲーム学習ってなった時に、私たち教師自身が日本語に関するゲームがどんなものがあるとか、そういうのを多分まず詳しく知らない。知らないから、それを授業に取り入れようっていうことにまずならないっていうのが第1段階の問題かな」
+          </div>
+          <div class="quote-box">
+            「学生同士で何かするっていう時間は、やっぱりどうしても目標が試験に合格っていうのだからちょっと難しい」
+          </div>
+
+          <div class="sub-section-title">📝 印象</div>
+          <p class="analysis-desc">
+            JLPT合格という目標が最優先されており、普段の授業は文法解説や過去問演習といったインプット中心で進められている。ゲーム学習自体に抵抗はないものの、「そもそも中級クラスで使えるゲームにどんなものがあるか知らない」ため、授業に取り入れる発想自体が生まれにくいという率直な現状を語っている。また、複数担任制（4人の教員で1クラスを担当）のため、「自分だけ活動を入れて進度がずれると他の先生に迷惑がかかる」という組織的な遠慮も強く働いている印象である。
+          </p>
+        </div>
+
+        <!-- 教師C ブロック -->
+        <div class="teacher-card">
+          <div class="teacher-header">
+            <div class="teacher-title">教師C（専任・指導歴1年強・新社会人）</div>
+          </div>
+
+          <div class="sub-section-title">💬 印象的な発言</div>
+          <div class="quote-box">
+            「うーん、いや、AIを使った授業をもっとしたいです。でも使い方が分かりませんっていうのですね（笑）。日本語教師向けに、どういう風にAIを使ってゲームの案や内容を作っていけばいいのか、もう少し情報が欲しい」
+          </div>
+          <div class="quote-box">
+            「その、そのKahoot!は、その、例えば、何だ、まあ、例えばその「出願」だったら、「出願」っていう漢字がポンって出ます。下に4つ選択肢があって、正しいのを選んでくださいっていう問題、ひらがなが4つある、「しゅつがん」なのか「しょうがん」なのか、みたいな、「しゅうがん」なのか、みたいなのを、その中で正しいのを選んだらポイントがどんどん溜まっていって、最後ランキングになって、1位から順番になっていくっていう。」
+          </div>
+          <div class="quote-box">
+            「その学校の認定校っていうのでも会話の授業を取り入れなきゃいけないとか、なんか形が変わっていくと思うんですけど、私はそういうのにすごく賛成だなとは思います。なので日本語学校は、ま、特に[勤務校]は進学をしたい、大学に行きたい、大学院に行きたいっていう学生が多いので、どうしても日本のスタイル、講義型になってしまうので、私はできるだけ会話の時間を増やして、学生とコミュニケーションを取るっていう姿勢が、ま、考え方っていうか、がずっと意識はしてるというか、そういう授業の仕方をしてる先生はすごく私は憧れるというか。」
+          </div>
+
+          <div class="sub-section-title">📝 印象</div>
+          <p class="analysis-desc">
+            『Kahoot!』などのデジタルツールやAIを使った授業に前向きで意欲的な若手の教師である。しかし、実際にAIを使ってみると「どう指示を出せばいいかわからない」「AIが出した不自然な日本語や間違いを直すのにかえって時間がかかる」という壁に直面している。そのため、不確かなAIに聞くよりも「経験豊富な先輩の先生に直接相談してアドバイスをもらう方が確実で安心」と感じており、周囲の同僚を頼りにしながら試行錯誤している様子が印象的である。
+          </p>
+        </div>
+
+        <!-- 教師D ブロック -->
+        <div class="teacher-card">
+          <div class="teacher-header">
+            <div class="teacher-title">教師D（中国籍・主任・指導歴16年・元職：日本企業の生産管理）</div>
+          </div>
+
+          <div class="sub-section-title">💬 印象的な発言</div>
+          <div class="quote-box">
+            「一番の懸念は、量的に保証がない。吸収力がある（勉強できる）学生にとっては、ゲームで勉強すると量が足りない、物足りない結果になる。……勉強嫌いな学生に教える選択肢という認識がある」
+          </div>
+          <div class="quote-box">
+            「これって、ま、なんだろう、自律学習ですので、あんまりにもその、授業以外の、自分が教えた範囲以外の事ですので、まあ学生の自由のなかでやってることなので、あんまりにもランダムですね。追跡調査しても、何ができることもないし、フォローすることもできないし。」
+          </div>
+          <div class="quote-box">
+            「まあ昔だった、ひと昔だったらパワーポイントを作ることが、ちょっと時間かかったりとかしますけど、まあ最近は、えー、AIを使って、Claudeを今、その、課金して作って、使ってます。Claudeのコアワークって呼んでる。」
+          </div>
+
+          <div class="sub-section-title">📝 印象</div>
+          <p class="analysis-desc">
+            有料の生成AIを使いこなしてスライド作成を自動化するなど、4人の中で最もAIスキルが高いベテランの教師である。しかし、「ゲームは学習量が少なくなり、真面目で優秀な学生には物足りないもの（勉強嫌いな学生向けの選択肢）」という明確な線引きを持っている。そのため、普段の受験対策期にはゲームを一切入れず、受験やJLPTがすべて終わった冬学期（1〜3月）の「余った時間・息抜き」としてのみゲームを検討するという、時期によって割り切った運用をしている点が特徴的である。
+          </p>
+        </div>
+      </section>
+
+      <!-- 4.2 全体を通じた共通点 -->
+      <section class="card" style="border-left: 4px solid var(--primary);">
+        <div class="section-title">
+          <span class="section-badge">4.2</span>
+          <h3>4人の語りから見えてきた共通の印象・課題</h3>
+        </div>
+
+        <div class="point-box">
+          <h4>① 「中級クラスでどんなゲームができるのか」という具体像の不足</h4>
+          <p>ほぼ全員に共通していたのは、教師自身が「中級レベルに適したゲームの具体例ややり方」を知らないという点である。ゲームというと「初級のかるた・ジェスチャー」や「単なる4択クイズ」のイメージにとどまっており、中級の学習内容に合った活動のノウハウが現場に共有されていない。</p>
+        </div>
+
+        <div class="point-box">
+          <h4>② 「試験合格・進学」の最優先と、複数担任制による進度の調整</h4>
+          <p>日本語学校の中級クラスでは「JLPT N2合格」や「進学対策」が真っ先の目標となっており、学習量が目に見えにくいゲーム活動は優先順位が下げられている。また、複数の教員で1つのクラスを受け持つ体制では「他の教員と進度を合わせなければならない」という意識が強く、独自の活動を差し挟む余裕がなくなっている。</p>
+        </div>
+
+        <div class="point-box">
+          <h4>③ 生成AIは「作業の時短」に使われ、新しい活動づくりには繋がっていない</h4>
+          <p>教師は生成AIを「例文作り」「小テスト作成」「翻訳」といった普段の準備を効率化するために使っている。しかし、「使い方がよくわからない・手直しが大変（教師C）」「授業の工夫は自分の頭でしたい（教師A）」「そもそもゲームのアイデアがない（教師B・D）」といった理由から、AIを活用して新しいゲーム活動を創出する段階には至っていない。</p>
+        </div>
+
+        <div class="point-box">
+          <h4>④ 試験が終わった「1月〜3月」や「余り時間」への限定</h4>
+          <p>普段は進度確認の相談しか行われない教師間でも、受験やJLPTがすべて終わった冬学期（1〜3月）だけは「どうやって授業の間を持たせるか」という話題からゲームや活動が模索されており、ゲームが「受験が終わった後のイベント・息抜き」として位置づけられていることがうかがえる。</p>
+        </div>
+      </section>
+
+    </div>
+
+    <!-- ==================== 第5章 参考文献 ==================== -->
+    <div id="tab5" class="tab-pane">
+      <section class="card">
+        <div class="section-title">
+          <span class="section-badge">Ref</span>
+          <h3>参考文献</h3>
+        </div>
+
+        <ul class="ref-list">
+          <li class="ref-item">市川尚・根本淳子・市村由起・阿部真由美（2025）「インストラクショナルデザインとAIの研究動向」『日本教育工学会研究報告集』2025(1) pp.243-248.</li>
+          <li class="ref-item">井上明人（2014）「ゲーミフィケーションとは何か:デザイン史との比較から」『デザイン学研究特集号』21(2) pp.2-7.</li>
+          <li class="ref-item">岩本穣志（2019）「日本語教育におけるゲーミフィケーションの試み―教室外での目標言語使用の活性化を目指して―」『APU言語研究論叢』4 pp.1-17.</li>
+          <li class="ref-item">梅田康子（2005）「学習者の自律性を重視した日本語教育コースにおける教師の役割--学部留学生に対する自律学習コース展開の可能性を探る」『言語と文化 : 愛知大学語学教育研究室紀要』39(12) pp.59-77.</li>
+          <li class="ref-item">王海辰・大山牧子（2026）「中上級日本語学習者を対象としたアニメ風AIゲーム教材の開発と試行―生成AIを用いたキャラクター対話の導入―」『日本教育工学会研究報告集』2026(2) pp.358-365.</li>
+          <li class="ref-item">大谷尚（2008）「4 ステップコーディングによる質的データ分析手法 SCAT の提案―着手しやすく小規模データにも適用可能な理論化の手続き―」『名古屋大学大学院教育発達科学研究科紀要（教育科学）』54(2) pp.27-44.</li>
+          <li class="ref-item">大谷尚（2011）「SCAT：Steps for Coding and Theorization ―明示的手続きで着手しやすく小規模データに適用可能な質的データ分析手法―」『感性工学』10(3) pp.155-160.</li>
+          <li class="ref-item">カイヨワ（1958）著 多田道太郎・塚崎幹夫訳（1990）『遊びと人間』講談社学術文庫.</li>
+          <li class="ref-item">片桐準二（2026）「日本語教育における生成AI活用研究のスコーピングレビュー」『大学教育研究年報』31 pp.52-75.</li>
+          <li class="ref-item">川喜田二郎（1967）『発想法―創造性開発のために』中央公論社.</li>
+          <li class="ref-item">木下康仁（1999）『グラウンデッド・セオリー・アプローチ―質的実証研究の再生』弘文堂.</li>
+          <li class="ref-item">木下康仁（2003）『グラウンデッド・セオリー・アプローチの実践―質的研究への誘い』弘文堂.</li>
+          <li class="ref-item">桑戸孝子・岩下真澄・夛田美有紀・松本一見（2016）「日本語教育におけるゲームの使用について―学習者と教師を対象とした質問紙調査から―」『長崎総合科学大学紀要』55(2) pp.104-112.</li>
+          <li class="ref-item">桑原直子（2009）「日本語教育における中級に関する一考察--中級の定義と中級教科書の分類」『倉敷芸術科学大学紀要』14 pp.213-222.</li>
+          <li class="ref-item">品川直美（2001）「日本語教育におけるゲームに対する教師の意識と使用実態」『日本語教育』110 pp.101-109.</li>
+          <li class="ref-item">スーツ（1978）著 川谷茂樹・山田貴裕訳（2015）『キリギリスの哲学―ゲームプレイと理想の人生―』ナカニシヤ出版.</li>
+          <li class="ref-item">総務省（2024）『令和 6 年版 情報通信白書』日経印刷株式会社 pp.37.</li>
+          <li class="ref-item">舘岡洋子（2021）「第6章『専門性の三位一体モデル』の提案－動態性をもった専門性を考える枠組み―」舘岡洋子編『日本語教師の専門性を考える』ここ出版 pp.97-110.</li>
+          <li class="ref-item">日本学生支援機構（2026）「2025（令和７）年度 外国人留学生在籍状況調査結果」<a href="https://www.studyinjapan.go.jp/ja/_mt/2026/05/data2025z.pdf" target="_blank" rel="noopener noreferrer">https://www.studyinjapan.go.jp/ja/_mt/2026/05/data2025z.pdf</a>（最終閲覧日：2026年9月8日）.</li>
+          <li class="ref-item">福島青史（2011）「社会参加のための日本語教育とその課題―EDC、CEFR、日本語能力試験の比較検討から―」『早稲田日本語教育学』10 pp.1-19.</li>
+          <li class="ref-item">藤本徹（2015）「ゲーム要素を取り入れた授業デザイン枠組の開発と実践」『日本教育工学会論文誌』38(4) pp.351-361.</li>
+          <li class="ref-item">藤本徹（2017）「第1章 教育工学分野におけるゲーム研究」藤本徹・森田裕介編著『ゲームと教育・学習』ミネルヴァ書房 pp.1-15.</li>
+          <li class="ref-item">藤本徹（2024）「ゲーム学習研究の動向と今後の課題」『コンピュータ＆エデュケーション』56 pp.12-17.</li>
+          <li class="ref-item">文化庁（2021）「日本語教育の参照枠（報告）」文化審議会国語分科会.</li>
+          <li class="ref-item">文化庁（2024）「『日本語教育の参照枠』の見直しのために検討すべき課題について −ヨーロッパ言語共通参照枠 補遺版を踏まえて−」<a href="https://www.bunka.go.jp/seisaku/bunkashingikai/kokugo/nihongo/nihongo_124/pdf/94009301_01.pdf" target="_blank" rel="noopener noreferrer">https://www.bunka.go.jp/seisaku/bunkashingikai/kokugo/nihongo/nihongo_124/pdf/94009301_01.pdf</a>（最終閲覧日：2026年9月8日）.</li>
+          <li class="ref-item">文部科学省（2021）「学習指導要領の趣旨の実現に向けた個別最適な学びと協働的な学びの一体的な充実に関する参考資料」<a href="https://www.mext.go.jp/content/210330-mxt_kyoiku01-000013731_09.pdf" target="_blank" rel="noopener noreferrer">https://www.mext.go.jp/content/210330-mxt_kyoiku01-000013731_09.pdf</a>（最終閲覧日：2026年9月8日）.</li>
+        </ul>
+
+        <ul class="ref-list">
+          <li class="ref-item">Holec, H. (1981) <em>Autonomy and Foreign Language Learning</em>. Oxford/New York: Pergamon Press.</li>
+          <li class="ref-item">Ifenthaler, D., Eseryel, D., &amp; Ge, X. (2012) Assessment for game-based learning. In <em>Assessment in game-based learning: Foundations, innovations, and perspectives</em>. Springer. pp.1-8.</li>
+          <li class="ref-item">Kihoza, P., Zlotnikova, I., Bada, J., &amp; Kalegele, K. (2016) Classroom ICT Integration in Tanzania: Opportunities and Challenges from the Perspectives of TPACK and SAMR Models. <em>Journal of Education and Development Using Information and Communication Technology</em>, 12, pp.107-128.</li>
+          <li class="ref-item">Mishra, P., &amp; Koehler, M. J. (2006) Technological Pedagogical Content Knowledge: A Framework for Teacher Knowledge. <em>Teachers College Record</em>, 108(6), pp.1017–1054.</li>
+          <li class="ref-item">Puentedura, R. R. (2006) Transformation, Technology, and Education. <a href="http://hippasus.com/resources/tte/" target="_blank" rel="noopener noreferrer">http://hippasus.com/resources/tte/</a>（最終閲覧日：2026年9月14日）.</li>
+          <li class="ref-item">Talak-Kiryk, A. (2010) Using Games In A Foreign Language Classroom. <em>MA TESOL Collection</em>, 484. <a href="https://digitalcollections.sit.edu/ipp_collection/484" target="_blank" rel="noopener noreferrer">https://digitalcollections.sit.edu/ipp_collection/484</a>.</li>
+          <li class="ref-item">Wong, C. H. T., &amp; Yunus, M. M. (2021) Board Games in Improving Pupils’ Speaking Skills: A Systematic Review. <em>Sustainability</em>, 13(16), pp.8772.</li>
+        </ul>
+      </section>
+    </div>
+
+  </main>
+
+  <footer>
+
+  </footer>
+
+  <script>
+    function switchTab(event, tabId) {
+      // 全タブボタンから active を除去
+      const buttons = document.querySelectorAll('.tab-btn');
+      buttons.forEach(btn => btn.classList.remove('active'));
+
+      // 全パネルを非表示
+      const panes = document.querySelectorAll('.tab-pane');
+      panes.forEach(pane => pane.classList.remove('active'));
+
+      // クリックされたタブとパネルをアクティブ化
+      event.currentTarget.classList.add('active');
+      document.getElementById(tabId).classList.add('active');
+
+      // スクロール位置がタブより下にある場合は、タブの直下にスムーズに戻す
+      const stickyTab = document.getElementById('stickyTab');
+      if (window.scrollY > stickyTab.offsetTop) {
+        window.scrollTo({
+          top: stickyTab.offsetTop,
+          behavior: 'smooth'
+        });
+      }
+    }
+  </script>
+</body>
+</html>
