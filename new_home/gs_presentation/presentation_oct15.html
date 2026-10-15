@@ -298,6 +298,24 @@
       text-decoration: underline;
     }
 
+
+    /* モデル説明図 */
+    .fig-wrap { margin-top: 1rem; display: flex; flex-direction: column; gap: 1.25rem; }
+    .model-figure {
+      background: #ffffff;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1rem 1rem 0.85rem;
+      margin: 0;
+    }
+    .model-figure svg { display: block; width: 100%; height: auto; max-width: 640px; margin: 0 auto; }
+    .model-figure figcaption { margin-top: 0.75rem; font-size: 0.84rem; line-height: 1.6; color: var(--text); }
+    .model-figure figcaption .fig-title { font-weight: 700; color: var(--dark); font-size: 0.9rem; }
+    .model-figure figcaption .fig-source { display: block; margin-top: 0.25rem; color: var(--text-muted); }
+    .fig-legend { list-style: none; display: grid; grid-template-columns: 1fr; gap: 0.3rem 1.25rem; margin: 0.75rem 0 0; font-size: 0.84rem; color: var(--text); }
+    @media (min-width: 640px) { .fig-legend { grid-template-columns: repeat(2, 1fr); } }
+    .fig-legend b { color: var(--dark); }
+
     footer {
       text-align: center;
       color: var(--text-muted);
@@ -464,11 +482,11 @@
         </div>
         <div class="point-box">
           <h4>2.2.1 インストラクショナルデザインにおける動向（市川ほか, 2025）</h4>
-          <p>海外学術誌のレビュー（17件）から、生成AIが教材・授業設計の助けになりうる一方、教師のAI受容・活用には個人の認識だけでなく学校環境等の組織的文脈が関わること、生成AIが個々の教師の教育観や現場の文脈を理解するには限界があることが指摘されている。</p>
+          <p>海外学術誌のレビュー（17件）から、生成AIが教材や授業設計の手助けになりうることや、インストラクショナルデザイナーの役割が変化していること、教師の利用には個人の認識だけでなく学校の環境といった組織的な文脈が関わること、そして生成AIが個々の教師の教育観や現場の文脈への理解に限界があることが課題となることの4点は本研究の立場と重なる。</p>
         </div>
         <div class="point-box">
           <h4>2.2.2 言語教育における生成AI利用（片桐, 2026）</h4>
-          <p>片桐（2026）が整理しているように、言語教育における生成AI活用の先行レビュー研究では、個別化された学習や自律性の強化、教材・課題作成の効率化といった可能性が報告される一方、生成AIの限界や学習者の不正、批判的思考力の低下といった悪影響も懸念されている。また、研究対象が「英語・高等教育（大学）・ライティング指導・ChatGPT」に過度に偏重しており、明確な理論的枠組みを持たない探索的な研究が先行している段階にある。</p>
+          <p>片桐（2026）が整理しているように、言語教育における生成AI活用の先行レビュー研究では、個別化された学習や自律性の強化、教材・課題作成の効率化といった可能性が報告される一方、研究対象が「英語・高等教育（大学）・ライティング指導・ChatGPT」に過度に偏重しており、明確な理論的枠組みを持たない探索的な研究が先行している段階にある。</p>
         </div>
         <div class="point-box">
           <h4>2.2.3 日本語教育における生成AI利用（片桐, 2026）</h4>
@@ -483,10 +501,10 @@
           <h3>生成AIの普及を背景とした日本語学校におけるゲームを用いた学習活動</h3>
         </div>
         <div class="highlight-box" style="background: var(--secondary-light); border-left-color: var(--secondary);">
-          <h4 style="color: var(--secondary);">💡 先行研究の空白（リサーチ・ギャップ）と本研究の位置づけ</h4>
+          <h4 style="color: var(--secondary);">💡 先行研究から見る本研究の位置づけ</h4>
           <p style="color: #134e4a;">
-            来日直後の留学生にとって「最初のコミュニティ」となる日本語学校の中級クラスでは、他者と協働し社会参入の基礎を育むゲーム活動に大きな意義がある。また、生成AIによって教材や活動案を「ゼロから」作成する負担が軽減され（片桐，2026）、対話を通じて授業アイデアを実現する基盤も整いつつある（市川ほか，2025）。<br>
-            それにもかかわらず、従来のゲーム研究や生成AI研究は大学等の高等教育機関が中心であり、<strong>進学指導を担う日本語学校の中級クラスを対象に、教師の視点からゲームを用いた学習活動の実施課題を検討した研究は見当たらない</strong>。ここに本研究が取り組むべき学術的・実践的空白が存在する。
+            来日直後の留学生にとって「最初のコミュニティ」となる日本語学校の中級クラスでは、他者と協働し社会参入の基礎を育むゲーム活動に意義がある。また、生成AIによって教材や活動案を「ゼロから」作成する負担が軽減され、対話を通じて授業アイデアを実現する基盤も整いつつある。<br>
+            それにもかかわらず、従来のゲーム研究や生成AI研究は大学等の高等教育機関が中心であり、<strong>進学指導を担う日本語学校の中級クラスを対象に、教師の視点からゲームを用いた学習活動の実施課題を検討した研究は調べる限りでは見当たらない</strong>。
           </p>
         </div>
       </section>
@@ -504,7 +522,7 @@
         </div>
         <div class="point-box">
           <h4>3.1.1 調査手法：半構造化インタビュー</h4>
-          <p>教師の教育実践を単一の客観的事実ではなく意味づけと相互作用から捉えるため、実証主義ではなく解釈主義・社会構成主義の立場に立ち、半構造化インタビューを採用する。パイロット調査を経てフェイスシートと4つのRQに対応するインタビューガイドを整備し、「一定の統制と柔軟性の両立」を図りながら教師の教育観と現場の文脈を深掘りする。</p>
+          <p>解釈主義・社会構成主義の立場に立ち、半構造化インタビューを採用する。パイロット調査を経てフェイスシートと4つのRQに対応するインタビューガイドを準備し、「一定の統制と柔軟性の両立」を図りながら教師の教育観と現場の文脈を深掘りする。</p>
         </div>
         <div class="point-box">
           <h4>3.1.2 調査協力者の選定基準とサンプリング</h4>
@@ -517,6 +535,92 @@
         <div class="point-box">
           <h4>3.1.4 概念的枠組み：TPACK-SAMR 統合モデル（Kihoza et al., 2016）</h4>
           <p>利用意図のみを問う技術受容モデル（TAM）やミクロな授業設計の粒度が粗い活動理論の限界を踏まえ、教師の3つの知識領域と複合領域を捉える<strong>TPACKモデル</strong>（Mishra & Koehler，2006）と、技術導入による実践変革の4段階（代替・拡張・変容・再定義）を測る<strong>SAMRモデル</strong>（Puentedura，2006）を統合する。「教師がどの知識領域を働かせることで、教育実践にどのレベルの変革がもたらされているか（あるいは移行が阻まれているか）」を解像度高く分析する。</p>
+
+          <p style="margin-top:0.75rem;">各モデルの構成を図3-1、図3-2に示す。</p>
+          <div class="fig-wrap">
+            <figure class="model-figure">
+              <svg viewBox="0 0 520 440" role="img" aria-labelledby="tpackT tpackD" xmlns="http://www.w3.org/2000/svg" font-family="'Hiragino Kaku Gothic ProN','Yu Gothic','Noto Sans CJK JP',sans-serif">
+  <title id="tpackT">TPACKモデルの構成図</title>
+  <desc id="tpackD">内容知識CK、教授法知識PK、テクノロジー知識TKの3つの円が重なり、重なり部分にPCK、TCK、TPK、中心にTPACKが位置する図</desc>
+  <circle cx="190" cy="170" r="115" fill="#2563eb" fill-opacity="0.28" stroke="#2563eb" stroke-width="2"/>
+  <circle cx="330" cy="170" r="115" fill="#0d9488" fill-opacity="0.28" stroke="#0d9488" stroke-width="2"/>
+  <circle cx="260" cy="290" r="115" fill="#f59e0b" fill-opacity="0.28" stroke="#d97706" stroke-width="2"/>
+  <g text-anchor="middle" fill="#1e293b">
+    <text x="143" y="140" font-size="14" font-weight="700">教授内容に</text>
+    <text x="143" y="158" font-size="14" font-weight="700">関する知識</text>
+    <text x="143" y="178" font-size="14">(CK)</text>
+    <text x="377" y="140" font-size="14" font-weight="700">教授法に</text>
+    <text x="377" y="158" font-size="14" font-weight="700">関する知識</text>
+    <text x="377" y="178" font-size="14">(PK)</text>
+    <text x="260" y="343" font-size="14" font-weight="700">テクノロジーに</text>
+    <text x="260" y="361" font-size="14" font-weight="700">関する知識</text>
+    <text x="260" y="381" font-size="14">(TK)</text>
+    <text x="260" y="124" font-size="15" font-weight="700">PCK</text>
+    <text x="190" y="258" font-size="15" font-weight="700">TCK</text>
+    <text x="330" y="258" font-size="15" font-weight="700">TPK</text>
+    <text x="260" y="205" font-size="17" font-weight="800" fill="#7c2d12">TPACK</text>
+  </g>
+</svg>
+              <figcaption>
+                <span class="fig-title">図3-1　TPACKモデルの構成</span>
+                <span class="fig-source">出典：Mishra &amp; Koehler（2006）のTPACKモデルに基づき筆者が作成。<br>Mishra, P., &amp; Koehler, M. J. (2006) Technological Pedagogical Content Knowledge: A Framework for Teacher Knowledge. <em>Teachers College Record</em>, 108(6), pp.1017–1054.</span>
+              </figcaption>
+              <ul class="fig-legend">
+                <li><b>CK</b>：教授内容に関する知識（Content Knowledge）</li>
+                <li><b>PK</b>：教授法に関する知識（Pedagogical Knowledge）</li>
+                <li><b>TK</b>：テクノロジーに関する知識（Technological Knowledge）</li>
+                <li><b>PCK／TCK／TPK</b>：上記2領域の複合領域</li>
+                <li><b>TPACK</b>：3領域すべてを統合した知識</li>
+              </ul>
+            </figure>
+            <figure class="model-figure">
+              <svg viewBox="0 0 640 350" role="img" aria-labelledby="samrT samrD" xmlns="http://www.w3.org/2000/svg" font-family="'Hiragino Kaku Gothic ProN','Yu Gothic','Noto Sans CJK JP',sans-serif">
+  <title id="samrT">SAMRモデルの4段階</title>
+  <desc id="samrD">代替、拡張、変容、再定義の4段階が階段状に上昇し、代替と拡張が強化、変容と再定義が変革に区分される図</desc>
+  <g fill="none" stroke-width="2">
+    <path d="M30 78 V68 H320 V78" stroke="#0d9488"/>
+    <path d="M330 78 V68 H620 V78" stroke="#2563eb"/>
+  </g>
+  <g text-anchor="middle" font-size="14" font-weight="700">
+    <text x="175" y="56" fill="#0f766e">強化（Enhancement）</text>
+    <text x="475" y="56" fill="#1d4ed8">変革（Transformation）</text>
+  </g>
+  <rect x="30"  y="210" width="140" height="90"  rx="6" fill="#ccfbf1" stroke="#0d9488" stroke-width="2"/>
+  <rect x="180" y="170" width="140" height="130" rx="6" fill="#99f6e4" stroke="#0d9488" stroke-width="2"/>
+  <rect x="330" y="130" width="140" height="170" rx="6" fill="#bfdbfe" stroke="#2563eb" stroke-width="2"/>
+  <rect x="480" y="90"  width="140" height="210" rx="6" fill="#93c5fd" stroke="#2563eb" stroke-width="2"/>
+  <g text-anchor="middle" fill="#1e293b">
+    <text x="100" y="246" font-size="26" font-weight="800">S</text>
+    <text x="100" y="268" font-size="15" font-weight="700">代替</text>
+    <text x="100" y="286" font-size="11">Substitution</text>
+    <text x="250" y="206" font-size="26" font-weight="800">A</text>
+    <text x="250" y="228" font-size="15" font-weight="700">拡張</text>
+    <text x="250" y="246" font-size="11">Augmentation</text>
+    <text x="400" y="166" font-size="26" font-weight="800">M</text>
+    <text x="400" y="188" font-size="15" font-weight="700">変容</text>
+    <text x="400" y="206" font-size="11">Modification</text>
+    <text x="550" y="126" font-size="26" font-weight="800">R</text>
+    <text x="550" y="148" font-size="15" font-weight="700">再定義</text>
+    <text x="550" y="166" font-size="11">Redefinition</text>
+  </g>
+  <g stroke="#64748b" stroke-width="1.5" fill="none">
+    <path d="M30 316 H620"/>
+    <path d="M612 311 L620 316 L612 321" />
+  </g>
+  <text x="325" y="340" text-anchor="middle" font-size="12" fill="#64748b">実践の変革の度合い</text>
+</svg>
+              <figcaption>
+                <span class="fig-title">図3-2　SAMRモデルの4段階</span>
+                <span class="fig-source">出典：Puentedura（2006）のSAMRモデルに基づき筆者が作成。<br>Puentedura, R. R. (2006) Transformation, Technology, and Education. http://hippasus.com/resources/tte/（最終閲覧日：2026年9月14日）</span>
+              </figcaption>
+              <ul class="fig-legend">
+                <li><b>代替</b>：テクノロジーが従来の道具の代わりとなるが、機能の変化はない。</li>
+                <li><b>拡張</b>：従来の道具の代わりとなり、機能的な改善が加わる。</li>
+                <li><b>変容</b>：テクノロジーによって課題が大幅に再設計される。</li>
+                <li><b>再定義</b>：テクノロジーなしには考えられなかった新たな課題が可能になる。</li>
+              </ul>
+            </figure>
+          </div>
         </div>
       </section>
 
